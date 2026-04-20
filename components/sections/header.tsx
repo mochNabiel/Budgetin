@@ -4,7 +4,7 @@ import { Bell, ChevronDown } from "lucide-react"
 
 import { createClient } from "@/lib/supabase/server"
 
-const Navbar = async () => {
+const Header = async () => {
   const supabase = await createClient()
 
   const {
@@ -14,7 +14,7 @@ const Navbar = async () => {
   const avatar = user?.user_metadata?.avatar_url
 
   return (
-    <section className="z-10 flex h-16 w-full items-center justify-between p-4">
+    <section className="z-10 flex h-16 w-full items-center justify-between">
       <div className="relative h-10 w-10 rounded-full border-2 border-primary">
         <Image
           src={avatar}
@@ -23,22 +23,14 @@ const Navbar = async () => {
           className="rounded-full object-cover"
         />
       </div>
-      <Button
-        variant="ghost"
-        size="sm"
-        className="bg-card/40 text-xs backdrop-blur-sm"
-      >
+      <Button size="sm" className="text-card font-medium">
         November 2021 <ChevronDown className="ml-2 h-4 w-4" />
       </Button>
-      <Button
-        size="icon"
-        variant="ghost"
-        className="h-10 w-10 bg-card/40 backdrop-blur-sm"
-      >
+      <Button size="icon" className="h-10 w-10">
         <Bell />
       </Button>
     </section>
   )
 }
 
-export default Navbar
+export default Header
