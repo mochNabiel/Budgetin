@@ -2,6 +2,7 @@ import LoginButton from "@/components/login-button"
 import { Metadata } from "next"
 import { createClient } from "@/lib/supabase/server"
 import { LogoutButton } from "@/components/logout-button"
+import Image from "next/image"
 
 export const metadata: Metadata = {
   title: "Budgetin - Smart Money Tracking",
@@ -17,8 +18,16 @@ export default async function Page() {
       <div className="w-full max-w-md space-y-6 text-center">
         {/* Headline */}
         <div className="space-y-3">
-          <h1 className="text-3xl font-bold tracking-tight text-card-foreground">
-            Budget<span className="text-primary">In</span> is cooking 🍳
+          <span className="align-middle relative inline-block h-8 w-8">
+            <Image
+              src="../assets/icons/logo.svg"
+              alt="budgetin logo"
+              fill
+              className="object-contain"
+            />
+          </span>
+          <h1 className="text-3xl font-semibold tracking-tight text-card-foreground">
+            Budgetin is cooking 🍳
           </h1>
           <p className="text-sm text-muted-foreground">
             We’re crafting a smarter way to track your money. Clean, simple, and
@@ -27,7 +36,7 @@ export default async function Page() {
         </div>
 
         {/* Status Badge */}
-        <div className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-xs backdrop-blur">
+        <div className="inline-flex items-center gap-2 rounded-full border border-primary bg-primary/10 px-4 py-1.5 text-xs backdrop-blur">
           🚧 Work in progress
         </div>
 

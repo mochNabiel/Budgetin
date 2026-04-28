@@ -1,16 +1,13 @@
-import { Geist, Geist_Mono, Inter, Outfit, Figtree } from "next/font/google"
+import { Poppins } from "next/font/google"
 
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/utils"
 
-const outfitHeading = Outfit({subsets:['latin'],variable:'--font-heading'});
-
-const figtree = Figtree({subsets:['latin'],variable:'--font-sans'})
-
-const fontMono = Geist_Mono({
+const poppins = Poppins({
   subsets: ["latin"],
-  variable: "--font-mono",
+  variable: "--font-sans",
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
 })
 
 export default function RootLayout({
@@ -19,12 +16,8 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html
-      lang="en"
-      suppressHydrationWarning
-      className={cn("antialiased", fontMono.variable, "font-sans", figtree.variable, outfitHeading.variable)}
-    >
-      <body>
+    <html lang="en" suppressHydrationWarning>
+      <body className={cn("antialiased", poppins.className, "font-sans")}>
         <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
