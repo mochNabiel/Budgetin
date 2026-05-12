@@ -1,14 +1,11 @@
-import { Poppins } from "next/font/google"
+import { Poppins, Figtree } from "next/font/google"
 
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import { cn } from "@/lib/utils"
+import { Toaster } from "@/components/ui/sonner"
 
-const poppins = Poppins({
-  subsets: ["latin"],
-  variable: "--font-sans",
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-})
+const figtree = Figtree({ subsets: ["latin"], variable: "--font-sans" })
 
 export default function RootLayout({
   children,
@@ -16,9 +13,14 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={cn("antialiased", poppins.className, "font-sans")}>
+    <html
+      lang="en"
+      suppressHydrationWarning
+      className={cn("font-sans", figtree.variable)}
+    >
+      <body className={cn("antialiased", figtree.className, "font-sans")}>
         <ThemeProvider>{children}</ThemeProvider>
+        <Toaster position="top-center" richColors />
       </body>
     </html>
   )

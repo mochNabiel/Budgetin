@@ -14,5 +14,5 @@ export function LogoutButton() {
     router.refresh()
   }
 
-  return <Button variant="destructive" onClick={logout}>Logout</Button>
+  return <Button className="w-full" variant="destructive" onClick={logout}>Logout</Button>
 }
