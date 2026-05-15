@@ -2,21 +2,21 @@ import {
   Eye,
   TrendingUp,
   ArrowUpRight,
-  ArrowDownRight,
+  ArrowDownLeft,
 } from "lucide-react"
 
 import { Card, CardContent } from "@/components/ui/card"
 import { cn } from "@/lib/utils"
 
-export function StatsSection() {
+export default function StatsSection() {
   return (
-    <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+    <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
       {/* BALANCE */}
-      <Card className="border-0 bg-linear-to-br from-primary via-primary to-primary/60 text-primary-foreground shadow-md">
-        <CardContent className="p-5 sm:p-6">
+      <Card size="sm" className="bg-linear-to-br from-primary via-primary to-primary/60 text-primary-foreground">
+        <CardContent>
           <div className="mb-5 flex items-center justify-between">
-            <span className="text-sm font-medium text-primary-foreground/80">
-              Total Balance
+            <span className="text-sm font-medium text-primary-foreground">
+              Total Saldo
             </span>
 
             <button className="text-primary-foreground/70 transition-colors hover:text-primary-foreground">
@@ -33,7 +33,7 @@ export function StatsSection() {
 
             <span className="font-medium">+12.5%</span>
 
-            <span className="text-primary-foreground/70">from last month</span>
+            <span className="text-primary-foreground/70">dari bulan lalu</span>
           </div>
         </CardContent>
       </Card>
@@ -41,8 +41,8 @@ export function StatsSection() {
       {/* INCOME + EXPENSE */}
       <div className="grid grid-cols-2 gap-4">
         {/* INCOME */}
-        <Card className="border-border bg-foreground shadow-sm">
-          <CardContent className="p-4 sm:p-5 lg:p-6">
+        <Card size="sm" className="bg-foreground shadow-sm">
+          <CardContent>
             <div className="mb-4 flex items-center gap-3">
               <div
                 className={cn(
@@ -68,14 +68,14 @@ export function StatsSection() {
                 +12.5%
               </span>
 
-              <span className="text-muted-foreground">from last month</span>
+              <span className="text-muted-foreground">dari bulan lalu</span>
             </div>
           </CardContent>
         </Card>
 
         {/* EXPENSE */}
-        <Card className="border-border bg-foreground shadow-sm">
-          <CardContent className="p-4 sm:p-5 lg:p-6">
+        <Card size="sm" className="bg-foreground shadow-sm">
+          <CardContent>
             <div className="mb-4 flex items-center gap-3">
               <div
                 className={cn(
@@ -84,7 +84,7 @@ export function StatsSection() {
                   "dark:bg-primary dark:text-foreground"
                 )}
               >
-                <ArrowDownRight className="size-4 sm:size-5" />
+                <ArrowDownLeft className="size-4 sm:size-5" />
               </div>
 
               <span className="text-base font-medium tracking-wide text-primary">
@@ -101,7 +101,7 @@ export function StatsSection() {
                 -8.1%
               </span>
 
-              <span className="text-muted-foreground">from last month</span>
+              <span className="text-muted-foreground">dari bulan lalu</span>
             </div>
           </CardContent>
         </Card>

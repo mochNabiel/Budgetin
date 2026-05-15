@@ -1,8 +1,11 @@
-import { Header } from "./header"
-import { StatsSection } from "./stats-section"
-import { SpendingOverview } from "./spending-overview"
-import { SpendingTrend } from "./spending-trend"
 import { Metadata } from "next"
+
+import { Header } from "./header"
+import StatsSection from "./stats-section"
+import Allocation from "./allocation"
+import FinancialTrend from "./financial-trend"
+import AiInsight from "./ai-insight"
+import RecentTransactions from "./recent-transactions"
 
 export const metadata: Metadata = {
   title: "Budgetin - Home",
@@ -11,14 +14,16 @@ export const metadata: Metadata = {
 
 export default function Page() {
   return (
-    <div className="w-full space-y-4">
+    <div className="w-full p-2">
       <Header />
       <main className="space-y-4">
         <StatsSection />
-        <section className="grid w-full grid-cols-1 md:grid-cols-2 gap-4">
-          <SpendingOverview />
-          <SpendingTrend />
-        </section>
+        <div className="grid w-full grid-cols-1 gap-4 lg:grid-cols-2">
+          <FinancialTrend />
+          <AiInsight />
+          <RecentTransactions />
+          <Allocation />
+        </div>
       </main>
     </div>
   )

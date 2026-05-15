@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils"
 import { Toaster } from "@/components/ui/sonner"
 import { TooltipProvider } from "@/components/ui/tooltip"
 
-const figtree = Figtree({subsets:['latin'],variable:'--font-sans'})
+const figtree = Figtree({ subsets: ["latin"], variable: "--font-sans" })
 const poppins = Poppins({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
@@ -22,7 +22,12 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={cn("font-sans", figtree.variable, poppins.variable)}
+      className={cn(
+        "font-sans",
+        figtree.variable,
+        poppins.variable,
+        "scrollbar-thumb-primary scrollbar-gutter-both"
+      )}
     >
       <body className={cn("antialiased", figtree.className, "font-sans")}>
         <ThemeProvider>

@@ -1,12 +1,10 @@
 "use client"
 
 import { useMemo, useState } from "react"
-import { ChevronDown } from "lucide-react"
+import { BarChartBig } from "lucide-react"
 import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from "recharts"
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-
-import { Button } from "@/components/ui/button"
 
 import {
   ChartContainer,
@@ -29,7 +27,7 @@ const chartConfig = {
   },
 }
 
-export function SpendingTrend() {
+export default function FinancialTrend() {
   const [activeTab, setActiveTab] = useState<"all" | "income" | "expense">(
     "all"
   )
@@ -48,45 +46,46 @@ export function SpendingTrend() {
   }, [activeTab])
 
   return (
-    <Card className="border-border shadow-sm gap-2 py-4">
-      <CardHeader className="flex flex-row items-center justify-between">
-        <CardTitle className="text-base font-semibold">
-          Spending Trend
-        </CardTitle>
-
-        <Button
-          variant="ghost"
-          size="sm"
-          className="h-8 gap-1 text-xs text-muted-foreground"
-        >
-          This Month <ChevronDown className="h-3 w-3" />
-        </Button>
-      </CardHeader>
-
-      <CardContent>
-        {/* Tabs */}
+    <Card size="sm" className="space-y-4">
+      <CardHeader className="flex flex-row items-center justify-between gap-4">
+        <div className="flex items-center gap-2">
+          <BarChartBig className="size-4 lg:size-5" />
+          <CardTitle className="text-sm leading-none font-semibold lg:text-base">
+            Tren Keuangan
+          </CardTitle>
+        </div>
         <Tabs
           value={activeTab}
           onValueChange={(v) => setActiveTab(v as "all" | "income" | "expense")}
-          className="mb-4"
         >
           <TabsList>
-            <TabsTrigger value="all" className="rounded-full px-4 text-xs">
-              All
+            <TabsTrigger
+              value="all"
+              className="rounded-full px-2 text-xs lg:px-4"
+            >
+              Semua
             </TabsTrigger>
 
-            <TabsTrigger value="income" className="rounded-full px-4 text-xs">
+            <TabsTrigger
+              value="income"
+              className="rounded-full px-2 text-xs lg:px-4"
+            >
               Income
             </TabsTrigger>
 
-            <TabsTrigger value="expense" className="rounded-full px-4 text-xs">
+            <TabsTrigger
+              value="expense"
+              className="rounded-full px-2 text-xs lg:px-4"
+            >
               Expense
             </TabsTrigger>
           </TabsList>
         </Tabs>
+      </CardHeader>
 
+      <CardContent>
         {/* Chart */}
-        <ChartContainer config={chartConfig} className="w-full h-52">
+        <ChartContainer config={chartConfig} className="h-64 w-full">
           <BarChart
             data={spendingTrendData}
             margin={{
@@ -145,7 +144,7 @@ export function SpendingTrend() {
         </ChartContainer>
 
         {/* Legend */}
-        <div className="mt-4 flex items-center gap-5">
+        <div className="mt-4 flex items-center justify-center gap-5">
           <div className="flex items-center gap-2">
             <span className="h-2.5 w-2.5 rounded-full bg-primary" />
 

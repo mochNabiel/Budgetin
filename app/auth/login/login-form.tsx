@@ -67,7 +67,7 @@ export function LoginForm() {
             <Button type="submit" disabled={isOtpPending}>
               {isOtpPending ? "Memuat..." : "Lanjutkan"}
             </Button>
-            <FieldError>{otpMessage}</FieldError>
+            <FieldError className="text-center">{otpMessage}</FieldError>
           </Field>
         </FieldGroup>
       </form>
@@ -80,7 +80,7 @@ export function LoginForm() {
             <FaGoogle />
             {isGooglePending ? "Memuat..." : "Masuk dengan Google"}
           </Button>
-          <FieldError>{googleMessage}</FieldError>
+          <FieldError className="text-center">{googleMessage}</FieldError>
         </Field>
       </form>
 

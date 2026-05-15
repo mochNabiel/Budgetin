@@ -1,15 +1,15 @@
 "use client"
 
-import * as React from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { usePathname } from "next/navigation"
 
-import { Home, Sparkles, LayoutGrid, UserRound } from "lucide-react"
+import { Home, Sparkles, LayoutGrid, UserRound, Crown, Wallet } from "lucide-react"
 
 import {
   Sidebar,
   SidebarContent,
+  SidebarFooter,
   SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
@@ -17,27 +17,39 @@ import {
   SidebarTrigger,
   useSidebar,
 } from "@/components/ui/sidebar"
+import { Card } from "@/components/ui/card"
+import { Button } from "@/components/ui/button"
 
 const items = [
   {
-    title: "Home",
+    title: "Beranda",
     url: "/home",
     icon: Home,
   },
   {
-    title: "Assistant",
+    title: "Transaksi",
+    url: "/transaction",
+    icon: Wallet,
+  },
+  {
+    title: "Asisten AI",
     url: "/assistant",
     icon: Sparkles,
   },
   {
-    title: "Preferences",
+    title: "Personalisasi",
     url: "/preferences",
     icon: LayoutGrid,
   },
   {
-    title: "Account",
+    title: "Pengaturan Akun",
     url: "/account",
     icon: UserRound,
+  },
+  {
+    title: "Langganan",
+    url: "/plan",
+    icon: Crown,
   },
 ]
 
@@ -102,6 +114,28 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           })}
         </SidebarMenu>
       </SidebarContent>
+      <SidebarFooter className="p-2">
+        {state !== "collapsed" && (
+          <Card className="via-primary-10 flex flex-col gap-2 bg-linear-to-br from-primary/10 to-chart-2/10 p-4">
+            <div className="flex items-center gap-2">
+              <div className="flex size-8 items-center justify-center rounded-2xl bg-background shadow-sm">
+                <Crown className="size-4 text-[#FFD700]" fill="#FFD700" />
+              </div>
+              <h3 className="text-base font-semibold text-primary">
+                Budgetin Pro
+              </h3>
+            </div>
+
+            <p className="text-xs leading-5 text-muted-foreground">
+              Unlock AI insights, voice input, AI assistant and more.
+            </p>
+
+            <Link href="/plan" className="w-full">
+              <Button className="w-full">Upgrade to Pro</Button>
+            </Link>
+          </Card>
+        )}
+      </SidebarFooter>
     </Sidebar>
   )
 }

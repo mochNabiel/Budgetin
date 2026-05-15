@@ -1,6 +1,6 @@
 "use client"
 
-import * as React from "react"
+import {useState} from "react"
 import { format } from "date-fns"
 import { ChevronDown, ChevronLeft, ChevronRight, RotateCcw } from "lucide-react"
 
@@ -10,6 +10,8 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover"
+import { useMonthStore } from "@/stores/use-month-store"
+import { id } from "date-fns/locale"
 
 const months = [
   "Jan",
@@ -29,11 +31,11 @@ const months = [
 const today = new Date()
 
 export function MonthPicker() {
-  const [open, setOpen] = React.useState(false)
+  const [open, setOpen] = useState<boolean>(false)
 
-  const [selectedDate, setSelectedDate] = React.useState(today)
-
-  const [displayYear, setDisplayYear] = React.useState(today.getFullYear())
+  const {selectedDate, setSelectedDate} = useMonthStore()
+  
+  const [displayYear, setDisplayYear] = useState<number>(today.getFullYear())
 
   const currentMonth = selectedDate.getMonth()
   const currentYear = selectedDate.getFullYear()
@@ -44,7 +46,6 @@ export function MonthPicker() {
   const isNextYearDisabled = displayYear >= today.getFullYear()
 
   function handleSelectMonth(monthIndex: number) {
-    // prevent selecting future month
     const isFutureMonth =
       displayYear === today.getFullYear() && monthIndex > today.getMonth()
 
@@ -66,7 +67,9 @@ export function MonthPicker() {
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
         <Button variant="outline">
-          {format(selectedDate, "MMMM yyyy")}
+          {format(selectedDate, "MMMM yyyy", {
+            locale: id
+          })}
           <ChevronDown className="size-4" />
         </Button>
       </PopoverTrigger>

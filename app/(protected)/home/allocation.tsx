@@ -1,12 +1,9 @@
 "use client"
 
 import { useMemo, useState } from "react"
-import { ChevronDown } from "lucide-react"
 import { Pie, PieChart } from "recharts"
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-
-import { Button } from "@/components/ui/button"
 
 import {
   ChartContainer,
@@ -17,6 +14,8 @@ import {
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
 import { spendingCategories } from "@/lib/data"
+import { Wallet } from "lucide-react"
+import { Separator } from "@/components/ui/separator"
 
 const chartConfig = spendingCategories.reduce(
   (acc, item) => ({
@@ -29,7 +28,7 @@ const chartConfig = spendingCategories.reduce(
   {}
 )
 
-export function SpendingOverview() {
+export default function Allocation() {
   const [activeTab, setActiveTab] = useState<"income" | "expense">("income")
 
   const filteredData = useMemo(() => {
@@ -43,26 +42,17 @@ export function SpendingOverview() {
   }, [filteredData])
 
   return (
-    <Card className="border-border shadow-sm gap-2 py-4">
-      <CardHeader className="flex flex-row items-center justify-between">
-        <CardTitle className="text-base font-semibold">
-          Spending Overview
-        </CardTitle>
-
-        <Button
-          variant="ghost"
-          size="sm"
-          className="h-8 gap-1 text-xs text-muted-foreground"
-        >
-          This Month <ChevronDown className="h-3 w-3" />
-        </Button>
-      </CardHeader>
-
-      <CardContent>
+    <Card size="sm">
+      <CardHeader className="flex flex-row items-center justify-between gap-4">
+        <div className="flex items-center gap-2">
+          <Wallet className="size-4 lg:size-5" />
+          <CardTitle className="text-sm leading-none font-semibold lg:text-base">
+            Alokasi
+          </CardTitle>
+        </div>
         <Tabs
           value={activeTab}
           onValueChange={(v) => setActiveTab(v as "expense" | "income")}
-          className="mb-5"
         >
           <TabsList className="h-9 rounded-full bg-muted p-1">
             <TabsTrigger value="income" className="rounded-full px-4 text-xs">
@@ -73,9 +63,11 @@ export function SpendingOverview() {
             </TabsTrigger>
           </TabsList>
         </Tabs>
+      </CardHeader>
 
-        <div className="flex-1 flex items-center gap-4">
-          <div className="h-40 w-40 shrink-0">
+      <CardContent>
+        <div className="flex flex-1 flex-col items-center gap-4 lg:flex-row">
+          <div className="h-52 w-52 shrink-0">
             <ChartContainer
               config={chartConfig}
               className="aspect-square h-full w-full"
@@ -90,8 +82,8 @@ export function SpendingOverview() {
                   data={filteredData}
                   dataKey="percent"
                   nameKey="name"
-                  innerRadius={45}
-                  outerRadius={68}
+                  innerRadius={56}
+                  outerRadius={92}
                   strokeWidth={2}
                   stroke="var(--background)"
                 />
@@ -100,7 +92,7 @@ export function SpendingOverview() {
           </div>
 
           {/* Legend */}
-          <div className="flex-1 space-y-2.5">
+          <div className="w-full flex-1 space-y-2.5">
             {filteredData.map((cat) => (
               <div key={cat.name} className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
@@ -130,8 +122,10 @@ export function SpendingOverview() {
           </div>
         </div>
 
-        {/* Footer */}
-        <div className="mt-4 flex items-center justify-between border-t border-border pt-4">
+        <Separator className="my-4" />
+
+        {/* Total Allocation */}
+        <div className="flex w-full items-center justify-between">
           <div>
             <p className="text-xs text-muted-foreground">
               Total {activeTab === "expense" ? "Expenses" : "Income"}
@@ -145,15 +139,13 @@ export function SpendingOverview() {
           <div className="text-right">
             <p
               className={`text-sm font-semibold ${
-                activeTab === "expense"
-                  ? "text-primary"
-                  : "text-chart-2"
+                activeTab === "expense" ? "text-primary" : "text-chart-2"
               }`}
             >
               {activeTab === "expense" ? "-8.1%" : "+12.4%"}
             </p>
 
-            <p className="text-xs text-muted-foreground">from last month</p>
+            <p className="text-xs text-muted-foreground">dari bulan lalu</p>
           </div>
         </div>
       </CardContent>

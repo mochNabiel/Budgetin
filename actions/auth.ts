@@ -1,10 +1,11 @@
 "use server"
+
 import { createClient } from "@/lib/supabase/server"
 import { redirect } from "next/navigation"
 
 interface FormState {
   success: boolean
-  message: string
+  message?: string
 }
 
 const signInWithGoogle = async () => {
@@ -14,7 +15,7 @@ const signInWithGoogle = async () => {
     provider: "google",
     options: {
       redirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/auth/oauth?next=/home`,
-      skipBrowserRedirect: true, // <-- server doesn't have window, so we return the URL instead
+      skipBrowserRedirect: true,
     },
   })
 

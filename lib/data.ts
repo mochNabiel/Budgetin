@@ -1,60 +1,43 @@
-export const stats = [
-  {
-    label: "Income",
-    value: "$8,250.00",
-    change: "+12.5%",
-    changeType: "positive" as const,
-    icon: "income",
-  },
-  {
-    label: "Expenses",
-    value: "$2,250.00",
-    change: "-8.1%",
-    changeType: "negative" as const,
-    icon: "expenses",
-  },
-]
-
 export const spendingCategories = [
   // EXPENSE
   {
     type: "expense",
-    name: "Food & Dining",
+    name: "Makanan",
     amount: "$785.00",
     percent: 28,
     fill: "#60a5fa",
   },
   {
     type: "expense",
-    name: "Transportation",
+    name: "Transportasi",
     amount: "$540.00",
     percent: 19,
     fill: "#f97316",
   },
   {
     type: "expense",
-    name: "Shopping",
+    name: "Belanja",
     amount: "$360.00",
     percent: 13,
     fill: "#facc15",
   },
   {
     type: "expense",
-    name: "Bills & Utilities",
+    name: "Tagihan",
     amount: "$270.00",
     percent: 10,
     fill: "#a78bfa",
   },
   {
     type: "expense",
-    name: "Entertainment",
+    name: "Hiburan",
     amount: "$180.00",
     percent: 6,
     fill: "#34d399",
   },
   {
     type: "expense",
-    name: "Healthcare",
+    name: "Kesehatan",
     amount: "$145.00",
     percent: 5,
     fill: "#fb7185",
@@ -68,7 +51,7 @@ export const spendingCategories = [
   },
   {
     type: "expense",
-    name: "Others",
+    name: "Lainnya",
     amount: "$115.00",
     percent: 8,
     fill: "#94a3b8",
@@ -77,7 +60,7 @@ export const spendingCategories = [
   // INCOME
   {
     type: "income",
-    name: "Salary",
+    name: "Gaji",
     amount: "$4,200.00",
     percent: 58,
     fill: "#3b82f6",
@@ -91,21 +74,21 @@ export const spendingCategories = [
   },
   {
     type: "income",
-    name: "Investments",
+    name: "Investasi",
     amount: "$620.00",
     percent: 9,
     fill: "#f59e0b",
   },
   {
     type: "income",
-    name: "Business",
+    name: "Bisnis",
     amount: "$480.00",
     percent: 7,
     fill: "#8b5cf6",
   },
   {
     type: "income",
-    name: "Others",
+    name: "Lainnya",
     amount: "$250.00",
     percent: 3,
     fill: "#64748b",
@@ -122,89 +105,6 @@ export const spendingTrendData = [
   { day: "31 May", expense: 1100, income: 850 },
 ]
 
-export const recentTransactions = [
-  {
-    id: 1,
-    name: "Google Workspace",
-    subtitle: "Work Subscription",
-    category: "Bills & Utilities",
-    amount: "-$30.00",
-    type: "expense" as const,
-    time: "Today, 14:35",
-    icon: "google",
-  },
-  {
-    id: 2,
-    name: "Netflix",
-    subtitle: "Entertainment",
-    category: "Entertainment",
-    amount: "-$20.00",
-    type: "expense" as const,
-    time: "Today, 10:23",
-    icon: "netflix",
-  },
-  {
-    id: 3,
-    name: "Salary from PT Nextin",
-    subtitle: "May Salary",
-    category: "Income",
-    amount: "+$8,250.00",
-    type: "income" as const,
-    time: "Yesterday, 09:00",
-    icon: "salary",
-  },
-  {
-    id: 4,
-    name: "ChatGPT Plus",
-    subtitle: "AI Subscription",
-    category: "Bills & Utilities",
-    amount: "-$40.00",
-    type: "expense" as const,
-    time: "Yesterday, 17:35",
-    icon: "chatgpt",
-  },
-  {
-    id: 5,
-    name: "GoJek",
-    subtitle: "Transportation",
-    category: "Transportation",
-    amount: "-$15.00",
-    type: "expense" as const,
-    time: "Yesterday, 08:15",
-    icon: "gojek",
-  },
-]
-
-export const budgetGoals = [
-  {
-    id: 1,
-    name: "New Laptop",
-    current: 650,
-    target: 1500,
-    dueIn: "45 days",
-    icon: "laptop",
-    color: "#ef4444",
-  },
-  {
-    id: 2,
-    name: "Japan Trip",
-    current: 2750,
-    target: 5000,
-    dueIn: "120 days",
-    icon: "plane",
-    color: "#ef4444",
-  },
-  {
-    id: 3,
-    name: "Emergency Fund",
-    current: 1250,
-    target: 3000,
-    dueIn: null,
-    icon: "shield",
-    color: "#ef4444",
-  },
-]
-
 export const categories = [
   { name: "Food & Dining", percent: 33, color: "#ef4444", icon: "utensils" },
   { name: "Transportation", percent: 24, color: "#f97316", icon: "car" },
@@ -214,14 +114,33 @@ export const categories = [
   { name: "Others", percent: 69, color: "#94a3b8", icon: "more-horizontal" },
 ]
 
-export const navItems = [
-  { label: "Overview", icon: "layout-dashboard", active: true },
-  { label: "Transactions", icon: "receipt" },
-  { label: "Categories", icon: "grid-2x2" },
-  { label: "Goals", icon: "target" },
-  { label: "Insights", icon: "bar-chart-2" },
-  { label: "AI Assistant", icon: "bot" },
-  { label: "Reports", icon: "file-bar-chart" },
-  { label: "Subscriptions", icon: "repeat" },
-  { label: "Settings", icon: "settings" },
+export const transactionsItem = [
+  {
+    id: 1,
+    name: "Netflix",
+    category: "Entertainment",
+    amount: -120000,
+    date: "Hari ini, 10:23",
+  },
+  {
+    id: 2,
+    name: "Gojek",
+    category: "Transportasi",
+    amount: -45000,
+    date: "Hari ini, 08:12",
+  },
+  {
+    id: 3,
+    name: "Gaji Bulanan",
+    category: "Pemasukan",
+    amount: 8500000,
+    date: "Kemarin",
+  },
+  {
+    id: 4,
+    name: "ChatGPT Plus",
+    category: "Langganan",
+    amount: -320000,
+    date: "Kemarin",
+  },
 ]
