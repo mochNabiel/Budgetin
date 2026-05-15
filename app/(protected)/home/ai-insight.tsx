@@ -20,6 +20,7 @@ import {
   PiggyBank,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
+import Link from "next/link"
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -130,12 +131,15 @@ export default function AiInsight() {
   }
 
   return (
-    <Card size="sm" className="gap-3 overflow-hidden border-border py-4 shadow-sm">
+    <Card
+      size="sm"
+      className="gap-3 overflow-hidden border-border py-4 shadow-sm"
+    >
       {/* ── Header ── */}
       <CardHeader className="flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <Sparkles className="size-4 lg:size-5 animate-pulse text-primary" />
-          <CardTitle className="text-sm lg:text-base leading-none font-semibold">
+          <Sparkles className="size-4 animate-pulse text-primary lg:size-5" />
+          <CardTitle className="text-sm leading-none font-semibold lg:text-base">
             <span className="bg-linear-to-br from-primary to-chart-2 bg-clip-text text-transparent">
               Insight Cerdas
             </span>
@@ -205,14 +209,16 @@ export default function AiInsight() {
 
       {/* ── Footer ── */}
       <CardFooter>
-        <Button
-          className="w-full gap-2 bg-linear-to-r from-primary to-chart-2 py-4.5 text-xs text-primary-foreground shadow-sm transition-opacity hover:opacity-90"
-          size="sm"
-        >
-          <Lightbulb className="size-3.5" />
-          Chat dengan Asisten AI
-          <Send className="ml-auto size-3" />
-        </Button>
+        <Link href="/assistant" className="w-full">
+          <Button
+            className="w-full gap-2 bg-linear-to-r from-primary to-chart-2 py-4.5 text-xs text-primary-foreground shadow-sm transition-opacity hover:opacity-90"
+            size="sm"
+          >
+            <Lightbulb className="size-3.5" />
+            Chat dengan Asisten AI
+            <Send className="ml-auto size-3" />
+          </Button>
+        </Link>
       </CardFooter>
     </Card>
   )
