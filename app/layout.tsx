@@ -4,8 +4,14 @@ import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import { cn } from "@/lib/utils"
 import { Toaster } from "@/components/ui/sonner"
+import { TooltipProvider } from "@/components/ui/tooltip"
 
-const figtree = Figtree({ subsets: ["latin"], variable: "--font-sans" })
+const figtree = Figtree({subsets:['latin'],variable:'--font-sans'})
+const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-poppins",
+})
 
 export default function RootLayout({
   children,
@@ -16,10 +22,12 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={cn("font-sans", figtree.variable)}
+      className={cn("font-sans", figtree.variable, poppins.variable)}
     >
       <body className={cn("antialiased", figtree.className, "font-sans")}>
-        <ThemeProvider>{children}</ThemeProvider>
+        <ThemeProvider>
+          <TooltipProvider>{children}</TooltipProvider>
+        </ThemeProvider>
         <Toaster position="top-center" richColors />
       </body>
     </html>

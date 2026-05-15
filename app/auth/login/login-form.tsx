@@ -39,12 +39,13 @@ export function LoginForm() {
     <div className="flex flex-col gap-6">
       <form action={otpAction}>
         <FieldGroup>
-          <div className="flex flex-col items-center gap-2 text-center">
+          <div className="flex flex-col items-center text-center">
             <Image
-              src="/assets/icons/logo.png"
+              src="/assets/icons/logo.svg"
               alt="logo"
               width={24}
               height={24}
+              className="mb-2"
             />
             <h1 className="text-xl font-bold">
               Yuk mulai bareng <span className="text-primary">Budgetin</span>

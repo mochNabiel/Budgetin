@@ -1,11 +1,12 @@
-import BottomNav from "@/components/bottom-nav"
+import { AppSidebar } from "@/app/(protected)/app-sidebar"
+import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar"
 
 const ProtectedLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div className="min-h-dvh">
-      <main>{children}</main>
-      <BottomNav />
-    </div>
+    <SidebarProvider>
+      <AppSidebar />
+      <SidebarInset className="py-2 ps-2 pe-4">{children}</SidebarInset>
+    </SidebarProvider>
   )
 }
 
