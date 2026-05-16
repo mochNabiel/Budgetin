@@ -5,56 +5,56 @@ export const spendingCategories = [
     name: "Makanan",
     amount: "$785.00",
     percent: 28,
-    fill: "#60a5fa",
+    fill: "#5B8DEF",
   },
   {
     type: "expense",
     name: "Transportasi",
     amount: "$540.00",
     percent: 19,
-    fill: "#f97316",
+    fill: "#7C6CF2",
   },
   {
     type: "expense",
     name: "Belanja",
     amount: "$360.00",
     percent: 13,
-    fill: "#facc15",
+    fill: "#38BDF8",
   },
   {
     type: "expense",
     name: "Tagihan",
     amount: "$270.00",
     percent: 10,
-    fill: "#a78bfa",
+    fill: "#6366F1",
   },
   {
     type: "expense",
     name: "Hiburan",
     amount: "$180.00",
     percent: 6,
-    fill: "#34d399",
+    fill: "#14B8A6",
   },
   {
     type: "expense",
     name: "Kesehatan",
     amount: "$145.00",
     percent: 5,
-    fill: "#fb7185",
+    fill: "#F43F5E",
   },
   {
     type: "expense",
     name: "Travel",
     amount: "$310.00",
     percent: 11,
-    fill: "#2dd4bf",
+    fill: "#0EA5E9",
   },
   {
     type: "expense",
     name: "Lainnya",
     amount: "$115.00",
     percent: 8,
-    fill: "#94a3b8",
+    fill: "#94A3B8",
   },
 
   // INCOME
@@ -63,35 +63,35 @@ export const spendingCategories = [
     name: "Gaji",
     amount: "$4,200.00",
     percent: 58,
-    fill: "#3b82f6",
+    fill: "#2563EB",
   },
   {
     type: "income",
     name: "Freelance",
     amount: "$1,650.00",
     percent: 23,
-    fill: "#10b981",
+    fill: "#06B6D4",
   },
   {
     type: "income",
     name: "Investasi",
     amount: "$620.00",
     percent: 9,
-    fill: "#f59e0b",
+    fill: "#8B5CF6",
   },
   {
     type: "income",
     name: "Bisnis",
     amount: "$480.00",
     percent: 7,
-    fill: "#8b5cf6",
+    fill: "#EC4899",
   },
   {
     type: "income",
     name: "Lainnya",
     amount: "$250.00",
     percent: 3,
-    fill: "#64748b",
+    fill: "#64748B",
   },
 ]
 
@@ -103,15 +103,6 @@ export const spendingTrendData = [
   { day: "21 May", expense: 750, income: 700 },
   { day: "26 May", expense: 900, income: 800 },
   { day: "31 May", expense: 1100, income: 850 },
-]
-
-export const categories = [
-  { name: "Food & Dining", percent: 33, color: "#ef4444", icon: "utensils" },
-  { name: "Transportation", percent: 24, color: "#f97316", icon: "car" },
-  { name: "Shopping", percent: 16, color: "#facc15", icon: "shopping-bag" },
-  { name: "Bills & Utilities", percent: 12, color: "#3b82f6", icon: "zap" },
-  { name: "Entertainment", percent: 8, color: "#a855f7", icon: "tv" },
-  { name: "Others", percent: 69, color: "#94a3b8", icon: "more-horizontal" },
 ]
 
 export const transactionsItem = [

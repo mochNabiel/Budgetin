@@ -75,7 +75,53 @@ export default function Allocation() {
               <PieChart>
                 <ChartTooltip
                   cursor={false}
-                  content={<ChartTooltipContent hideLabel />}
+                  content={({ active, payload }) => {
+                    if (!active || !payload?.length) return null
+
+                    const item = payload[0]
+                    const data = item.payload
+
+                    return (
+                      <div className="min-w-44 rounded-2xl border bg-background/95 p-3 shadow-xl backdrop-blur">
+                        {/* Header */}
+                        <div className="mb-3 flex items-center gap-2">
+                          <span
+                            className="size-2.5 rounded-full"
+                            style={{
+                              backgroundColor: data.fill,
+                            }}
+                          />
+
+                          <p className="text-sm font-semibold text-foreground">
+                            {data.name}
+                          </p>
+                        </div>
+
+                        {/* Content */}
+                        <div className="space-y-2">
+                          <div className="flex items-center justify-between gap-6">
+                            <span className="text-xs text-muted-foreground">
+                              Persentase
+                            </span>
+
+                            <span className="text-sm font-semibold text-primary">
+                              {data.percent}%
+                            </span>
+                          </div>
+
+                          <div className="flex items-center justify-between gap-6">
+                            <span className="text-xs text-muted-foreground">
+                              Total
+                            </span>
+
+                            <span className="text-sm font-medium text-foreground">
+                              {data.amount}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    )
+                  }}
                 />
 
                 <Pie

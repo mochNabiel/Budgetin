@@ -4,6 +4,7 @@ import { createClient } from "@/lib/supabase/server"
 import Image from "next/image"
 import { MonthPicker } from "@/components/home/month-picker"
 import Link from "next/link"
+import { HeaderClient } from "@/components/home/header-client"
 
 export async function Header() {
   const supabase = await createClient()
@@ -12,7 +13,7 @@ export async function Header() {
   const user = data?.claims.user_metadata
 
   return (
-    <header className="sticky top-2 z-10 w-full rounded-xl bg-background/70 py-3 px-2 backdrop-blur-xl">
+    <HeaderClient>
       <div className="flex items-center justify-between gap-3">
         {/* LEFT */}
         <div className="flex min-w-0 items-center gap-3">
@@ -49,6 +50,6 @@ export async function Header() {
           </Link>
         </div>
       </div>
-    </header>
+    </HeaderClient>
   )
 }

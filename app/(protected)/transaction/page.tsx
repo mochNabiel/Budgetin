@@ -1,5 +1,12 @@
+import { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "Budgetin - Riwayat Transaksi",
+  description: "Riwayat Transaksi",
+}
+
 export default function page() {
   return (
-    <div>Here's Transaction Page</div>
+    <div>Riwayat Transaksi</div>
   )
 }

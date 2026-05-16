@@ -127,11 +127,11 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             </div>
 
             <p className="text-xs leading-5 text-muted-foreground">
-              Unlock AI insights, voice input, AI assistant and more.
+              Dapatkan fitur lengkap: smart insight AI, input suara, asisten AI dan lebih banyak lagi.
             </p>
 
             <Link href="/plan" className="w-full">
-              <Button className="w-full">Upgrade to Pro</Button>
+              <Button className="w-full">Upgrade ke Pro</Button>
             </Link>
           </Card>
         )}

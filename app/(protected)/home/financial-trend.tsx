@@ -114,15 +114,60 @@ export default function FinancialTrend() {
             />
 
             <ChartTooltip
-              cursor={false}
-              content={
-                <ChartTooltipContent
-                  formatter={(value, name) => [
-                    `$${value}`,
-                    chartConfig[name as keyof typeof chartConfig]?.label,
-                  ]}
-                />
-              }
+              cursor={{
+                fill: "hsl(var(--primary) / 0.06)",
+              }}
+              content={({ active, payload, label }) => {
+                if (!active || !payload?.length) return null
+
+                return (
+                  <div className="min-w-40 rounded-2xl border bg-background/95 p-3 shadow-xl backdrop-blur">
+                    {/* Header */}
+                    <div className="mb-3">
+                      <p className="text-xs font-medium text-muted-foreground">
+                        Minggu
+                      </p>
+
+                      <p className="text-sm font-semibold">{label}</p>
+                    </div>
+
+                    {/* Items */}
+                    <div className="space-y-2">
+                      {payload.map((item) => {
+                        const isIncome = item.dataKey === "income"
+
+                        return (
+                          <div
+                            key={String(item.dataKey)}
+                            className="flex items-center justify-between gap-6"
+                          >
+                            <div className="flex items-center gap-2">
+                              <span
+                                className="size-2 rounded-full"
+                                style={{
+                                  backgroundColor: item.color,
+                                }}
+                              />
+
+                              <span className="text-xs text-muted-foreground">
+                                {isIncome ? "Income" : "Expense"}
+                              </span>
+                            </div>
+
+                            <span
+                              className={`text-sm font-semibold ${
+                                isIncome ? "text-chart-1" : "text-primary"
+                              }`}
+                            >
+                              ${item.value}
+                            </span>
+                          </div>
+                        )
+                      })}
+                    </div>
+                  </div>
+                )
+              }}
             />
 
             {visibleBars.includes("income") && (
