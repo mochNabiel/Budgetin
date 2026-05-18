@@ -24,7 +24,7 @@ import Link from "next/link"
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
-type InsightSeverity = "positive" | "warning" | "danger" | "tip"
+type InsightSeverity = "positive" | "warning" | "danger"
 
 interface InsightItem {
   id: string
@@ -79,35 +79,25 @@ const insights: InsightItem[] = [
 
 const severityConfig: Record<
   InsightSeverity,
-  { badge: string; border: string; bg: string; icon: string; dot: string }
+  { badge: string; bg: string; icon: string; dot: string }
 > = {
   positive: {
     badge: "bg-emerald-100 text-emerald-700 border-emerald-200",
-    border: "border-l-emerald-500",
-    bg: "bg-emerald-50/50",
+    bg: "bg-emerald-100 dark:bg-emerald-500/30",
     icon: "text-emerald-600",
     dot: "bg-emerald-500",
   },
   warning: {
     badge: "bg-amber-100 text-amber-700 border-amber-200",
-    border: "border-l-amber-500",
-    bg: "bg-amber-50/50",
+    bg: "bg-amber-100 dark:bg-amber-500/30",
     icon: "text-amber-600",
     dot: "bg-amber-500",
   },
   danger: {
     badge: "bg-red-100 text-red-700 border-red-200",
-    border: "border-l-red-500",
-    bg: "bg-red-50/50",
+    bg: "bg-red-100 dark:bg-red-500/30",
     icon: "text-red-600",
     dot: "bg-red-500",
-  },
-  tip: {
-    badge: "bg-blue-100 text-blue-700 border-blue-200",
-    border: "border-l-blue-500",
-    bg: "bg-blue-50/50",
-    icon: "text-blue-600",
-    dot: "bg-blue-500",
   },
 }
 
@@ -115,7 +105,6 @@ const severityLabel: Record<InsightSeverity, string> = {
   positive: "Positif",
   warning: "Perhatian",
   danger: "Kritis",
-  tip: "Tips",
 }
 
 export default function AiInsight() {
@@ -168,8 +157,7 @@ export default function AiInsight() {
             <div
               key={item.id}
               className={cn(
-                "group rounded-xl border-l-[3px] p-3 transition-all",
-                cfg.border,
+                "group rounded-xl p-3 transition-all",
                 cfg.bg,
                 "cursor-default border border-border/60 hover:shadow-sm"
               )}

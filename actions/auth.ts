@@ -72,4 +72,40 @@ const logout = async () => {
   await supabase.auth.signOut()
 }
 
-export { signInWithGoogle, signInWithOtp, verifyOtp, logout }
+const deleteAccount = async () => {
+  const supabase = await createClient()
+
+  // Get current user
+  const {
+    data: { user },
+    error: userError,
+  } = await supabase.auth.getUser()
+
+  if (userError || !user) {
+    return {
+      success: false,
+      message: "Pengguna tidak ditemukan.",
+    }
+  }
+
+  // Delete user data from your tables first (if any)
+  // Example: await supabase.from("profiles").delete().eq("id", user.id)
+
+  // Delete the auth user via admin client or RPC
+  // If you have a Supabase Edge Function or RPC for this:
+  const { error } = await supabase.rpc("delete_user")
+
+  if (error) {
+    // Fallback: sign out and let admin handle cleanup
+    // In production, call a server-side admin endpoint instead
+    return {
+      success: false,
+      message: "Gagal menghapus akun. Hubungi support jika masalah berlanjut.",
+    }
+  }
+
+  await supabase.auth.signOut()
+  redirect("/auth/login")
+}
+
+export { signInWithGoogle, signInWithOtp, verifyOtp, logout, deleteAccount }

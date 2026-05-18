@@ -1,13 +1,17 @@
 import { AppSidebar } from "@/app/(protected)/app-sidebar"
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar"
+import { UserProvider } from "@/components/user-provider"
+import { getUserData } from "@/lib/queries/get-user-data"
 
-const ProtectedLayout = ({ children }: { children: React.ReactNode }) => {
+export default async function ProtectedLayout({ children }: { children: React.ReactNode }) {
+  const user = await getUserData()
+
   return (
-    <SidebarProvider>
-      <AppSidebar />
-      <SidebarInset>{children}</SidebarInset>
-    </SidebarProvider>
+    <UserProvider user={user}>
+      <SidebarProvider>
+        <AppSidebar />
+        <SidebarInset>{children}</SidebarInset>
+      </SidebarProvider>
+    </UserProvider>
   )
 }
-
-export default ProtectedLayout

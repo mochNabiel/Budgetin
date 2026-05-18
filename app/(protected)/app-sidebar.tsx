@@ -4,7 +4,15 @@ import Link from "next/link"
 import Image from "next/image"
 import { usePathname } from "next/navigation"
 
-import { Home, Sparkles, LayoutGrid, UserRound, Crown, Wallet } from "lucide-react"
+import {
+  Home,
+  Sparkles,
+  LayoutGrid,
+  UserRound,
+  Crown,
+  Wallet,
+  ArrowUpRight,
+} from "lucide-react"
 
 import {
   Sidebar,
@@ -116,7 +124,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       </SidebarContent>
       <SidebarFooter className="p-2">
         {state !== "collapsed" && (
-          <Card className="via-primary-10 flex flex-col gap-2 bg-linear-to-br from-primary/10 to-chart-2/10 p-4">
+          <Card className="flex flex-col gap-2 bg-linear-to-br from-primary/10 to-chart-2/10 p-4">
             <div className="flex items-center gap-2">
               <div className="flex size-8 items-center justify-center rounded-2xl bg-background shadow-sm">
                 <Crown className="size-4 text-[#FFD700]" fill="#FFD700" />
@@ -127,11 +135,14 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             </div>
 
             <p className="text-xs leading-5 text-muted-foreground">
-              Dapatkan fitur lengkap: smart insight AI, input suara, asisten AI dan lebih banyak lagi.
+              Dapatkan fitur lengkap: smart insight AI, input suara, asisten AI
+              dan lebih banyak lagi.
             </p>
 
             <Link href="/plan" className="w-full">
-              <Button className="w-full">Upgrade ke Pro</Button>
+              <Button className="w-full">
+                Upgrade ke Pro <ArrowUpRight />
+              </Button>
             </Link>
           </Card>
         )}

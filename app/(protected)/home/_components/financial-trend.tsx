@@ -9,7 +9,6 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import {
   ChartContainer,
   ChartTooltip,
-  ChartTooltipContent,
 } from "@/components/ui/chart"
 
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
@@ -19,7 +18,7 @@ import { spendingTrendData } from "@/lib/data"
 const chartConfig = {
   income: {
     label: "Income",
-    color: "var(--chart-1)",
+    color: "var(--chart-2)",
   },
   expense: {
     label: "Expense",
@@ -156,7 +155,7 @@ export default function FinancialTrend() {
 
                             <span
                               className={`text-sm font-semibold ${
-                                isIncome ? "text-chart-1" : "text-primary"
+                                isIncome ? "text-chart-2" : "text-primary"
                               }`}
                             >
                               ${item.value}
@@ -197,7 +196,7 @@ export default function FinancialTrend() {
           </div>
 
           <div className="flex items-center gap-2">
-            <span className="h-2.5 w-2.5 rounded-full bg-chart-1" />
+            <span className="h-2.5 w-2.5 rounded-full bg-chart-2" />
 
             <span className="text-xs text-muted-foreground">Income</span>
           </div>

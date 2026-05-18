@@ -1,11 +1,11 @@
 import { Metadata } from "next"
 
-import { Header } from "./header"
-import StatsSection from "./stats-section"
-import Allocation from "./allocation"
-import FinancialTrend from "./financial-trend"
-import AiInsight from "./ai-insight"
-import RecentTransactions from "./recent-transactions"
+import { Header } from "./_components/header"
+import StatsSection from "./_components/stats-section"
+import Allocation from "./_components/allocation"
+import FinancialTrend from "./_components/financial-trend"
+import AiInsight from "./_components/ai-insight"
+import RecentTransactions from "./_components/recent-transactions"
 
 export const metadata: Metadata = {
   title: "Budgetin - Home",
