@@ -1,6 +1,7 @@
 "use server"
 
 import { createClient } from "@/lib/supabase/server"
+import { cookies } from "next/headers"
 import { redirect } from "next/navigation"
 
 interface FormState {
@@ -31,6 +32,8 @@ const signInWithGoogle = async () => {
 
 const signInWithOtp = async (prev: FormState, formData: FormData) => {
   const supabase = await createClient()
+  const cookieStore = await cookies()
+
   const email = formData.get("email") as string
 
   const { error } = await supabase.auth.signInWithOtp({
@@ -44,14 +47,31 @@ const signInWithOtp = async (prev: FormState, formData: FormData) => {
     }
   }
 
+  // Nyimpen email di cookie biar ga terekspos di url & hrs dilempar via input hidden
+  cookieStore.set("pending_email", email, {
+    httpOnly: true,
+    secure: true,
+    maxAge: 60 * 10,
+    path: "/",
+  })
+
   redirect(`/auth/verify-otp?email=${email}`)
 }
 
 const verifyOtp = async (prev: FormState, formData: FormData) => {
   const supabase = await createClient()
+  const cookieStore = await cookies()
+  const email = cookieStore.get("pending_email")?.value
+
+  if (!email) {
+    return {
+      success: false,
+      message: "Email tidak ditemukan. Silahkan login kembali.",
+    }
+  }
 
   const { error } = await supabase.auth.verifyOtp({
-    email: formData.get("email") as string,
+    email,
     token: formData.get("otp") as string,
     type: "email",
   })
@@ -62,6 +82,8 @@ const verifyOtp = async (prev: FormState, formData: FormData) => {
       message: error.message,
     }
   }
+
+  cookieStore.delete("pending_email")
 
   redirect("/home")
 }
@@ -75,7 +97,6 @@ const logout = async () => {
 const deleteAccount = async () => {
   const supabase = await createClient()
 
-  // Get current user
   const {
     data: { user },
     error: userError,

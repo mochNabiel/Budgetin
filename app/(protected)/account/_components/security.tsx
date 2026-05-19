@@ -28,7 +28,7 @@ import {
 
 import { Input } from "@/components/ui/input"
 
-import { deleteAccount, logout } from "@/actions/auth"
+import { deleteAccount, logout } from "@/lib/actions/auth"
 
 export function SecuritySection() {
   const [deleteText, setDeleteText] = useState("")

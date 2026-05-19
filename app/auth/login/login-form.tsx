@@ -3,7 +3,7 @@
 import Image from "next/image"
 import Link from "next/link"
 import { useActionState } from "react"
-import { signInWithOtp, signInWithGoogle } from "@/actions/auth"
+import { signInWithOtp, signInWithGoogle } from "@/lib/actions/auth"
 
 import {
   Field,

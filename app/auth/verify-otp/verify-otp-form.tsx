@@ -1,7 +1,7 @@
 "use client"
 
 import { useActionState, useEffect } from "react"
-import { useRouter, useSearchParams } from "next/navigation"
+import { useRouter } from "next/navigation"
 import { toast } from "sonner"
 
 import {
@@ -16,15 +16,13 @@ import {
   FieldError,
   FieldGroup,
 } from "@/components/ui/field"
-import { Input } from "@/components/ui/input"
 
-import { verifyOtp } from "@/actions/auth"
+import { verifyOtp } from "@/lib/actions/auth"
 import { useCountdown } from "@/hooks/use-countdown"
 
 const OTP_LENGTH = 6
 
 export function VerifyOtpForm() {
-  const email = useSearchParams().get("email") as string
   const router = useRouter()
   const { formattedTime, isExpired } = useCountdown(600)
   const [state, formAction, isPending] = useActionState(verifyOtp, {
@@ -48,8 +46,7 @@ export function VerifyOtpForm() {
         <div className="mb-4 flex flex-col items-center justify-center text-center">
           <h1 className="mb-2 text-2xl font-bold">Cek emailmu</h1>
           <FieldDescription className="text-center">
-            Kami mengirim kode 6 digit ke{" "}
-            <span className="font-medium text-primary">{email}</span>
+            Kami mengirim kode 6 digit ke emailmu
           </FieldDescription>
           <FieldDescription className="text-center">
             Masukkan kode di bawah untuk melanjutkan.
@@ -78,7 +75,6 @@ export function VerifyOtpForm() {
                   {formattedTime}
                 </span>
               </FieldDescription>
-              <Input type="hidden" name="email" value={email} />
             </Field>
 
             <Button type="submit" disabled={isPending}>
