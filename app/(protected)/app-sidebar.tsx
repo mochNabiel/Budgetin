@@ -8,7 +8,7 @@ import {
   Home,
   Sparkles,
   LayoutGrid,
-  UserRound,
+  Settings,
   Crown,
   Wallet,
   ArrowUpRight,
@@ -50,14 +50,14 @@ const items = [
     icon: LayoutGrid,
   },
   {
-    title: "Pengaturan Akun",
-    url: "/account",
-    icon: UserRound,
-  },
-  {
     title: "Langganan",
     url: "/plan",
     icon: Crown,
+  },
+  {
+    title: "Pengaturan Akun",
+    url: "/account",
+    icon: Settings,
   },
 ]
 

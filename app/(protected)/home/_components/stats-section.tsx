@@ -10,7 +10,7 @@ import { cn } from "@/lib/utils"
 
 export default function StatsSection() {
   return (
-    <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+    <div className="grid grid-cols-1 gap-4 lg:grid-cols-2 mt-1">
       {/* BALANCE */}
       <Card size="sm" className="bg-linear-to-br from-primary via-primary to-primary/60 text-primary-foreground">
         <CardContent>
@@ -41,14 +41,13 @@ export default function StatsSection() {
       {/* INCOME + EXPENSE */}
       <div className="grid grid-cols-2 gap-4">
         {/* INCOME */}
-        <Card size="sm" className="bg-foreground shadow-sm">
+        <Card size="sm">
           <CardContent>
             <div className="mb-4 flex items-center gap-3">
               <div
                 className={cn(
                   "flex size-9 items-center justify-center rounded-xl sm:size-10",
-                  "bg-chart-2 text-foreground",
-                  "dark:bg-chart-2 dark:text-foreground"
+                  "bg-chart-2 text-background"
                 )}
               >
                 <ArrowUpRight className="size-4 sm:size-5" />
@@ -59,7 +58,7 @@ export default function StatsSection() {
               </span>
             </div>
 
-            <div className="mb-2 text-lg font-bold tracking-tight text-background sm:text-2xl lg:text-3xl">
+            <div className="mb-2 text-lg font-bold tracking-tight text-foreground sm:text-2xl lg:text-3xl">
               Rp 8.250.000
             </div>
 
@@ -74,14 +73,13 @@ export default function StatsSection() {
         </Card>
 
         {/* EXPENSE */}
-        <Card size="sm" className="bg-foreground shadow-sm">
+        <Card size="sm">
           <CardContent>
             <div className="mb-4 flex items-center gap-3">
               <div
                 className={cn(
                   "flex size-9 items-center justify-center rounded-xl sm:size-10",
-                  "bg-primary text-foreground",
-                  "dark:bg-primary dark:text-foreground"
+                  "bg-primary text-background",
                 )}
               >
                 <ArrowDownLeft className="size-4 sm:size-5" />
@@ -92,7 +90,7 @@ export default function StatsSection() {
               </span>
             </div>
 
-            <div className="mb-2 text-lg font-bold tracking-tight text-background sm:text-2xl lg:text-3xl">
+            <div className="mb-2 text-lg font-bold tracking-tight text-foreground sm:text-2xl lg:text-3xl">
               Rp 2.250.000
             </div>
 
