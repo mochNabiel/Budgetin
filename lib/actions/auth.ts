@@ -1,13 +1,10 @@
 "use server"
 
-import { createClient } from "@/lib/supabase/server"
 import { cookies } from "next/headers"
 import { redirect } from "next/navigation"
 
-interface FormState {
-  success: boolean
-  message?: string
-}
+import { createClient } from "@/lib/supabase/server"
+import { ActionState } from "@/types"
 
 const signInWithGoogle = async () => {
   const supabase = await createClient()
@@ -30,11 +27,21 @@ const signInWithGoogle = async () => {
   redirect(data.url)
 }
 
-const signInWithOtp = async (prev: FormState, formData: FormData) => {
+const signInWithOtp = async (
+  _: ActionState,
+  formData: FormData
+): Promise<ActionState> => {
   const supabase = await createClient()
   const cookieStore = await cookies()
 
   const email = formData.get("email") as string
+
+  if (!email) {
+    return {
+      success: false,
+      message: "Email wajib diisi",
+    }
+  }
 
   const { error } = await supabase.auth.signInWithOtp({
     email,
@@ -47,7 +54,6 @@ const signInWithOtp = async (prev: FormState, formData: FormData) => {
     }
   }
 
-  // Nyimpen email di cookie biar ga terekspos di url & hrs dilempar via input hidden
   cookieStore.set("pending_email", email, {
     httpOnly: true,
     secure: true,
@@ -55,24 +61,36 @@ const signInWithOtp = async (prev: FormState, formData: FormData) => {
     path: "/",
   })
 
-  redirect(`/auth/verify-otp?email=${email}`)
+  redirect("/auth/verify-otp")
 }
 
-const verifyOtp = async (prev: FormState, formData: FormData) => {
+const verifyOtp = async (
+  _: ActionState,
+  formData: FormData
+): Promise<ActionState> => {
   const supabase = await createClient()
   const cookieStore = await cookies()
+
   const email = cookieStore.get("pending_email")?.value
+  const otp = formData.get("otp") as string
 
   if (!email) {
     return {
       success: false,
-      message: "Email tidak ditemukan. Silahkan login kembali.",
+      message: "Email tidak ditemukan. Silakan login kembali.",
     }
   }
 
-  const { error } = await supabase.auth.verifyOtp({
+  if (!otp) {
+    return {
+      success: false,
+      message: "Kode OTP wajib diisi",
+    }
+  }
+
+  const { data, error } = await supabase.auth.verifyOtp({
     email,
-    token: formData.get("otp") as string,
+    token: otp,
     type: "email",
   })
 
@@ -83,7 +101,137 @@ const verifyOtp = async (prev: FormState, formData: FormData) => {
     }
   }
 
+  const user = data.user
+
+  if (!user) {
+    return {
+      success: false,
+      message: "User tidak ditemukan",
+    }
+  }
+
+  // ambil onboarding status
+  const { data: profile } = await supabase
+    .from("users")
+    .select("onboarding_completed")
+    .eq("id", user.id)
+    .single()
+
   cookieStore.delete("pending_email")
+
+  // user belum onboarding
+  if (!profile?.onboarding_completed) {
+    cookieStore.set("needs_onboarding", "true", {
+      httpOnly: true,
+      secure: true,
+      path: "/",
+      maxAge: 60 * 10,
+    })
+
+    redirect("/auth/onboarding")
+  }
+
+  redirect("/home")
+}
+
+const completeOnboarding = async (
+  _: ActionState,
+  formData: FormData
+): Promise<ActionState> => {
+  const supabase = await createClient()
+  const cookieStore = await cookies()
+
+  const {
+    data: { user },
+    error: authError,
+  } = await supabase.auth.getUser()
+
+  if (authError || !user) {
+    return {
+      success: false,
+      message: "Unauthorized",
+    }
+  }
+
+  const fullName = formData.get("full_name")?.toString().trim()
+  const avatar = formData.get("avatar") as File | null
+
+  if (!fullName) {
+    return {
+      success: false,
+      message: "Nama wajib diisi",
+    }
+  }
+
+  let avatarUrl: string | null = user.user_metadata?.avatar_url ?? null
+
+  /**
+   * Upload avatar baru jika user pilih file
+   */
+  if (avatar && avatar.size > 0) {
+    const fileExt = avatar.name.split(".").pop()
+    const filePath = `${user.id}/${Date.now()}.${fileExt}`
+
+    const { error: uploadError } = await supabase.storage
+      .from("avatars")
+      .upload(filePath, avatar, {
+        upsert: true,
+      })
+
+    if (uploadError) {
+      return {
+        success: false,
+        message: uploadError.message,
+      }
+    }
+
+    const {
+      data: { publicUrl },
+    } = supabase.storage.from("avatars").getPublicUrl(filePath)
+
+    avatarUrl = publicUrl
+  }
+
+  /**
+   * Update auth metadata
+   */
+  const { error: updateAuthError } = await supabase.auth.updateUser({
+    data: {
+      full_name: fullName,
+      avatar_url: avatarUrl,
+    },
+  })
+
+  if (updateAuthError) {
+    return {
+      success: false,
+      message: updateAuthError.message,
+    }
+  }
+
+  /**
+   * Update users table
+   */
+  const { error: dbError } = await supabase
+    .from("users")
+    .update({
+      full_name: fullName,
+      avatar_url: avatarUrl,
+      onboarding_completed: true,
+    })
+    .eq("id", user.id)
+
+  if (dbError) {
+    return {
+      success: false,
+      message: dbError.message,
+    }
+  }
+
+  /**
+   * onboarding selesai
+   */
+  cookieStore.delete("needs_onboarding")
 
   redirect("/home")
 }
@@ -92,41 +240,14 @@ const logout = async () => {
   const supabase = await createClient()
 
   await supabase.auth.signOut()
-}
 
-const deleteAccount = async () => {
-  const supabase = await createClient()
-
-  const {
-    data: { user },
-    error: userError,
-  } = await supabase.auth.getUser()
-
-  if (userError || !user) {
-    return {
-      success: false,
-      message: "Pengguna tidak ditemukan.",
-    }
-  }
-
-  // Delete user data from your tables first (if any)
-  // Example: await supabase.from("profiles").delete().eq("id", user.id)
-
-  // Delete the auth user via admin client or RPC
-  // If you have a Supabase Edge Function or RPC for this:
-  const { error } = await supabase.rpc("delete_user")
-
-  if (error) {
-    // Fallback: sign out and let admin handle cleanup
-    // In production, call a server-side admin endpoint instead
-    return {
-      success: false,
-      message: "Gagal menghapus akun. Hubungi support jika masalah berlanjut.",
-    }
-  }
-
-  await supabase.auth.signOut()
   redirect("/auth/login")
 }
 
-export { signInWithGoogle, signInWithOtp, verifyOtp, logout, deleteAccount }
+export {
+  signInWithGoogle,
+  signInWithOtp,
+  verifyOtp,
+  completeOnboarding,
+  logout,
+}

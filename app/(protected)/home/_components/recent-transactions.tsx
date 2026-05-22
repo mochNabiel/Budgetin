@@ -1,5 +1,3 @@
-"use client"
-
 import Link from "next/link"
 import { ArrowDownLeft, ArrowUpRight, ChevronRight, History } from "lucide-react"
 
@@ -64,7 +62,7 @@ export default function RecentTransactions() {
                       {transaction.name}
                     </p>
 
-                    <Badge className="mt-1 rounded-full px-2 py-0 text-[10px]">
+                    <Badge className="mt-1 rounded-full px-2 py-0 text-[8px] lg:text-[9px]">
                       {transaction.category}
                     </Badge>
                   </div>

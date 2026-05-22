@@ -141,7 +141,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 
             <Link href="/plan" className="w-full">
               <Button className="w-full">
-                Upgrade ke Pro <ArrowUpRight />
+                <ArrowUpRight /> Upgrade ke Pro
               </Button>
             </Link>
           </Card>

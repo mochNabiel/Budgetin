@@ -10,7 +10,6 @@ import {
   Bot,
   Mic,
   LayoutDashboard,
-  MoonStar,
   ReceiptText,
   FileSpreadsheet,
   PieChart,
@@ -40,10 +39,6 @@ const freeFeatures = [
   {
     label: "Pencatatan transaksi",
     icon: ReceiptText,
-  },
-  {
-    label: "Dark mode",
-    icon: MoonStar,
   },
   {
     label: "Export PDF & Excel",
@@ -178,8 +173,8 @@ export function PlanSection() {
             </Button>
           ) : (
             <Button onClick={() => setIsPro(true)} className="w-full sm:w-auto">
-              <span>Upgrade ke Pro</span>
               <ArrowUpRight className="size-4" />
+              Upgrade ke Pro
             </Button>
           )}
         </div>

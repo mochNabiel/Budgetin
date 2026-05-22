@@ -22,7 +22,6 @@ import { FcGoogle } from "react-icons/fc"
 
 export async function ProfileSection() {
   const user = await getUserData()
-  const { name, email, avatar_url } = user?.user_metadata
 
   return (
     <Card size="sm">
@@ -37,14 +36,14 @@ export async function ProfileSection() {
         <Item className="p-0">
           <ItemMedia>
             <Avatar className="size-16">
-              <AvatarImage src={avatar_url} alt={name} />
-              <AvatarFallback>{name.charAt(0).toUpperCase()}</AvatarFallback>
+              <AvatarImage src={user?.avatar_url} alt={user?.full_name} />
+              <AvatarFallback>{user?.full_name.charAt(0).toUpperCase()}</AvatarFallback>
             </Avatar>
           </ItemMedia>
           <ItemContent>
-            <ItemTitle>{name}</ItemTitle>
+            <ItemTitle>{user?.full_name}</ItemTitle>
             <ItemDescription>
-              <span className="text-sm text-muted-foreground">{email}</span>
+              <span className="text-sm text-muted-foreground">{user?.email}</span>
               <Badge variant="secondary" className="flex mt-2 items-center gap-1 text-xs text-muted-foreground">
                 <FcGoogle size={16} />
                 Akun Google

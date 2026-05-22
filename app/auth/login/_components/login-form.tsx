@@ -17,19 +17,17 @@ import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 
 import { FaGoogle } from "react-icons/fa"
+import { INITIAL_ACTION_STATE } from "@/types"
 
 export function LoginForm() {
-  const [otpState, otpAction, isOtpPending] = useActionState(signInWithOtp, {
-    success: false,
-    message: "",
-  })
+  const [otpState, otpAction, isOtpPending] = useActionState(
+    signInWithOtp,
+    INITIAL_ACTION_STATE
+  )
 
   const [googleState, googleAction, isGooglePending] = useActionState(
     signInWithGoogle,
-    {
-      success: false,
-      message: "",
-    }
+    INITIAL_ACTION_STATE
   )
 
   const { message: otpMessage } = otpState

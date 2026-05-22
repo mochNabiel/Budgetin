@@ -41,24 +41,45 @@ export async function updateSession(request: NextRequest) {
   const user = data?.claims
 
   const PUBLIC_ROUTES = ["/"]
+
   const AUTH_PREFIX = "/auth"
+
   const DEFAULT_LOGIN_PATH = "/auth/login"
   const DEFAULT_HOME_PATH = "/home"
+  const ONBOARDING_PATH = "/auth/onboarding"
 
   const pathname = request.nextUrl.pathname
+
   const isPublicRoute = PUBLIC_ROUTES.includes(pathname)
   const isAuthRoute = pathname.startsWith(AUTH_PREFIX)
+  const isOnboardingRoute = pathname === ONBOARDING_PATH
+
+  const needsOnboarding =
+    request.cookies.get("needs_onboarding")?.value === "true"
 
   const redirectTo = (path: string) => {
     const url = request.nextUrl.clone()
+
     url.pathname = path
+
     return NextResponse.redirect(url)
   }
 
+  // guest tidak boleh akses protected route
   if (!user && !isPublicRoute && !isAuthRoute) {
     return redirectTo(DEFAULT_LOGIN_PATH)
   }
 
+  // user yang butuh onboarding, arahkan ke aut/onboarding
+  if (user && needsOnboarding) {
+    if (!isOnboardingRoute) {
+      return redirectTo(ONBOARDING_PATH)
+    }
+
+    return supabaseResponse
+  }
+
+  // authenticated normal user
   if (user && isAuthRoute) {
     return redirectTo(DEFAULT_HOME_PATH)
   }

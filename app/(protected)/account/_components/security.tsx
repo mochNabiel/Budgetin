@@ -28,7 +28,7 @@ import {
 
 import { Input } from "@/components/ui/input"
 
-import { deleteAccount, logout } from "@/lib/actions/auth"
+import { logout } from "@/lib/actions/auth"
 
 export function SecuritySection() {
   const [deleteText, setDeleteText] = useState("")
@@ -162,11 +162,7 @@ export function SecuritySection() {
 
                   <AlertDialogAction
                     disabled={!isDeleteValid || isPending}
-                    onClick={() => {
-                      startTransition(async () => {
-                        await deleteAccount()
-                      })
-                    }}
+                    onClick={() => {}}
                     className="text-destructive-foreground bg-destructive hover:bg-destructive/90"
                   >
                     {isPending ? (
