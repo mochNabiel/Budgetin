@@ -1,0 +1,14 @@
+{
+  "Sidebar": {
+    "home": "Home",
+    "history": "Transaction History",
+    "assistant": "AI Assistant",
+    "preferences": "Preferences",
+    "plan": "Subscription",
+    "account": "Account Settings",
+
+    "pro_title": "Budgetin Pro",
+    "pro_description": "Unlock smart AI insights, voice input, AI assistant and more.",
+    "upgrade": "Upgrade to Pro"
+  }
+}

@@ -96,13 +96,13 @@ export const spendingCategories = [
 ]
 
 export const spendingTrendData = [
-  { day: "1 May", expense: 300, income: 0 },
-  { day: "6 May", expense: 450, income: 400 },
-  { day: "11 May", expense: 600, income: 500 },
-  { day: "16 May", expense: 500, income: 600 },
-  { day: "21 May", expense: 750, income: 700 },
-  { day: "26 May", expense: 900, income: 800 },
-  { day: "31 May", expense: 1100, income: 850 },
+  { day: "1 Mei", expense: 300, income: 0 },
+  { day: "6 Mei", expense: 450, income: 400 },
+  { day: "11 Mei", expense: 600, income: 500 },
+  { day: "16 Mei", expense: 500, income: 600 },
+  { day: "21 Mei", expense: 750, income: 700 },
+  { day: "26 Mei", expense: 900, income: 800 },
+  { day: "31 Mei", expense: 1100, income: 850 },
 ]
 
 export const transactionsItem = [

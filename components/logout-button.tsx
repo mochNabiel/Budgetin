@@ -1,9 +1,9 @@
-'use client'
+"use client"
 
-import { useRouter } from 'next/navigation'
+import { useRouter } from "@/i18n/navigation"
 
-import { createClient } from '@/lib/supabase/client'
-import { Button } from '@/components/ui/button'
+import { createClient } from "@/lib/supabase/client"
+import { Button } from "@/components/ui/button"
 
 export function LogoutButton() {
   const router = useRouter()
@@ -14,5 +14,9 @@ export function LogoutButton() {
     router.refresh()
   }
 
-  return <Button className="w-full" variant="destructive" onClick={logout}>Logout</Button>
+  return (
+    <Button className="w-full" variant="destructive" onClick={logout}>
+      Logout
+    </Button>
+  )
 }

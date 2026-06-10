@@ -1,13 +1,15 @@
 "use server"
 
 import { cookies } from "next/headers"
-import { redirect } from "next/navigation"
+import { redirect } from "@/i18n/navigation"
+import { getLocale } from "next-intl/server"
 
 import { createClient } from "@/lib/supabase/server"
 import { ActionState } from "@/types"
 
 const signInWithGoogle = async () => {
   const supabase = await createClient()
+  const locale = await getLocale()
 
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider: "google",
@@ -24,7 +26,15 @@ const signInWithGoogle = async () => {
     }
   }
 
-  redirect(data.url)
+  redirect({
+    href: data.url,
+    locale,
+  })
+
+  return {
+    success: true,
+    message: "Silakan login menggunakan akun Google Anda.",
+  }
 }
 
 const signInWithOtp = async (
@@ -33,6 +43,7 @@ const signInWithOtp = async (
 ): Promise<ActionState> => {
   const supabase = await createClient()
   const cookieStore = await cookies()
+  const locale = await getLocale()
 
   const email = formData.get("email") as string
 
@@ -61,7 +72,15 @@ const signInWithOtp = async (
     path: "/",
   })
 
-  redirect("/auth/verify-otp")
+  redirect({
+    href: "/auth/verify-otp",
+    locale,
+  })
+
+  return {
+    success: true,
+    message: "Kode OTP telah dikirim ke email Anda.",
+  }
 }
 
 const verifyOtp = async (
@@ -70,6 +89,7 @@ const verifyOtp = async (
 ): Promise<ActionState> => {
   const supabase = await createClient()
   const cookieStore = await cookies()
+  const locale = await getLocale()
 
   const email = cookieStore.get("pending_email")?.value
   const otp = formData.get("otp") as string
@@ -128,10 +148,26 @@ const verifyOtp = async (
       maxAge: 60 * 10,
     })
 
-    redirect("/auth/onboarding")
+    redirect({
+      href: "/auth/onboarding",
+      locale,
+    })
+
+    return {
+      success: true,
+      message: "Login berhasil",
+    }
   }
 
-  redirect("/home")
+  redirect({
+    href: "/home",
+    locale,
+  })
+
+  return {
+    success: true,
+    message: "Login berhasil",
+  }
 }
 
 const completeOnboarding = async (
@@ -140,6 +176,7 @@ const completeOnboarding = async (
 ): Promise<ActionState> => {
   const supabase = await createClient()
   const cookieStore = await cookies()
+  const locale = await getLocale()
 
   const {
     data: { user },
@@ -233,15 +270,27 @@ const completeOnboarding = async (
    */
   cookieStore.delete("needs_onboarding")
 
-  redirect("/home")
+  redirect({
+    href: "/home",
+    locale,
+  })
+
+  return {
+    success: true,
+    message: "Onboarding selesai",
+  }
 }
 
 const logout = async () => {
   const supabase = await createClient()
+  const locale = await getLocale()
 
   await supabase.auth.signOut()
 
-  redirect("/auth/login")
+  redirect({
+    href: "/auth/login",
+    locale,
+  })
 }
 
 export {
