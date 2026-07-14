@@ -1,7 +1,7 @@
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar"
 import { UserProvider } from "@/components/user-provider"
-import { getUserData } from "@/lib/queries/get-user-data"
 import { AppSidebar } from "@/components/sidebar"
+import { getUserData } from "@/features/auth/lib/queries/get-user-data"
 
 export default async function ProtectedLayout({
   children,

@@ -1,6 +1,6 @@
 import LoginButton from "@/components/login-button"
 import { Metadata } from "next"
-import { createClient } from "@/lib/supabase/server"
+import { createClient } from "@/shared/supabase/server"
 import { LogoutButton } from "@/components/logout-button"
 import Image from "next/image"
 
@@ -15,10 +15,9 @@ export default async function Page() {
 
   return (
     <div className="flex min-h-svh items-center justify-center p-6">
-      <div className="w-full max-w-md space-y-6 text-center">
-        {/* Headline */}
+      <div className="w-full max-w-md space-y-4 text-center">
         <div className="space-y-3">
-          <span className="align-middle relative inline-block h-8 w-8">
+          <span className="relative inline-block h-8 w-8 align-middle">
             <Image
               src="/icons/logo.svg"
               alt="budgetin logo"
@@ -35,12 +34,10 @@ export default async function Page() {
           </p>
         </div>
 
-        {/* Status Badge */}
         <div className="inline-flex items-center gap-2 rounded-full border border-primary bg-primary/10 px-4 py-1.5 text-xs backdrop-blur">
           🚧 Work in progress
         </div>
 
-        {/* CTA */}
         <div className="pt-2">
           {data?.claims.email ? (
             <div className="space-y-3">
@@ -59,10 +56,15 @@ export default async function Page() {
           )}
         </div>
 
-        {/* Footer vibe */}
-        <p className="pt-6 text-[11px] text-muted-foreground">
-          Built for students who want to stop wondering where their money went.
-        </p>
+        <div className="space-y-2">
+          <p className="text-[11px] text-muted-foreground">
+            Built for anyone who want to stop wondering where their money went.
+          </p>
+          <p className="text-[11px] text-muted-foreground">
+            &copy; {new Date().getFullYear()} Budgetin App. Created with ❤️ by
+            Mochammad Nabiel. All rights reserved.
+          </p>
+        </div>
       </div>
     </div>
   )

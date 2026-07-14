@@ -12,7 +12,7 @@ import { Button } from "@/components/ui/button"
 
 export function AppSidebarFooter() {
   const { state } = useSidebar()
-  const t = useTranslations("Sidebar")
+  const t = useTranslations("sidebar")
 
   if (state === "collapsed") return null
 

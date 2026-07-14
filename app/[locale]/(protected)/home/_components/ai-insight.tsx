@@ -19,7 +19,7 @@ import {
   Flame,
   PiggyBank,
 } from "lucide-react"
-import { cn } from "@/lib/utils"
+import { cn } from "@/shared/utils"
 import Link from "next/link"
 
 // ─── Types ────────────────────────────────────────────────────────────────────

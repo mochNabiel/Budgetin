@@ -1,5 +1,5 @@
 {
-  "Sidebar": {
+  "sidebar": {
     "home": "Home",
     "history": "Transaction History",
     "assistant": "AI Assistant",
@@ -10,5 +10,50 @@
     "pro_title": "Budgetin Pro",
     "pro_description": "Unlock smart AI insights, voice input, AI assistant and more.",
     "upgrade": "Upgrade to Pro"
+  },
+  "validation": {
+    "email_required": "Email is required",
+    "email_invalid": "Invalid email format"
+  },
+  "auth": {
+    "processing": "Processing...",
+    "continue": "Continue",
+    "login": {
+      "or": "or",
+      "agreement": "By continuing, you agree to our <terms>Terms & Conditions</terms> and <privacy>Privacy Policy</privacy>.",
+      "title": "Let's get started with",
+      "description": "Build better money habits and start saving today",
+      "google": "Continue with Google"
+    },
+    "otp": {
+      "title": "Time to Check Your Email",
+      "description": "We've sent a 6-digit verification code to your email. Enter the code below to continue.",
+      "expired_toast_title": "Verification Code Expired",
+      "expired_toast_description": "The verification code has expired. Please request a new one.",
+      "confirm": "Confirm",
+      "verifying": "Verifying...",
+      "expires_in": "Code expires in"
+    },
+    "onboarding": {
+      "step1_title": "Complete Your Profile",
+      "step1_description": "Add your name and photo",
+      "full_name": "Full Name",
+      "change_photo": "Change Photo",
+      "upload_photo": "Upload Photo",
+      "saving": "Saving...",
+      "continue": "Continue",
+      "step2_title": "Create Your First Wallet",
+      "step2_description": "Enter your current balance",
+      "wallet_name_placeholder": "Main Wallet",
+      "wallet_name_icon": "Wallet Name and Icon",
+      "wallet_color": "Wallet Color",
+      "currency": "Currency",
+      "initial_balance": "Initial Balance",
+      "start": "Start With Budgetin"
+    }
+  },
+  "home": {
+    "welcome": "Welcome,",
+    "description": "It's time to start tracking your finances."
   }
 }

@@ -2,7 +2,7 @@ import { Poppins, Figtree } from "next/font/google"
 
 import "@/app/globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
-import { cn } from "@/lib/utils"
+import { cn } from "@/shared/utils"
 import { Toaster } from "@/components/ui/sonner"
 import { TooltipProvider } from "@/components/ui/tooltip"
 import { hasLocale, NextIntlClientProvider } from "next-intl"

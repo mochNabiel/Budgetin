@@ -1,17 +1,24 @@
 import { Metadata } from "next"
-import { OnboardingForm } from "./_components/onboarding-form"
+import AuthContainer from "@/features/auth/components/auth-container"
+import AuthTopbar from "@/features/auth/components/auth-topbar"
+import { OnboardingShell } from "@/features/auth/components/onboarding/onboarding-shell"
+import { getUserData } from "@/features/auth/lib/queries/get-user-data"
 
 export const metadata: Metadata = {
   title: "Budgetin - Onboarding",
   description: "Complete your onboarding",
 }
 
-export default function OnboardingPage() {
+export default async function OnboardingPage() {
+  const user = await getUserData()
+
   return (
-    <div className="flex min-h-svh flex-col items-center justify-center gap-6 bg-background p-6 lg:p-10">
-      <div className="w-full max-w-sm">
-        <OnboardingForm />
-      </div>
-    </div>
+    <AuthContainer>
+      <AuthTopbar />
+      <OnboardingShell
+        defaultName={user.full_name}
+        defaultAvatar={user.avatar_url}
+      />
+    </AuthContainer>
   )
 }

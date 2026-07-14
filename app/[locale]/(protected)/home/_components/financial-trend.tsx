@@ -6,14 +6,11 @@ import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from "recharts"
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 
-import {
-  ChartContainer,
-  ChartTooltip,
-} from "@/components/ui/chart"
+import { ChartContainer, ChartTooltip } from "@/components/ui/chart"
 
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
-import { spendingTrendData } from "@/lib/data"
+import { spendingTrendData } from "@/shared/data"
 
 const chartConfig = {
   income: {
@@ -84,7 +81,7 @@ export default function FinancialTrend() {
 
       <CardContent>
         {/* Chart */}
-        <ChartContainer config={chartConfig} className="h-48 lg:h-64 w-full">
+        <ChartContainer config={chartConfig} className="h-48 w-full lg:h-64">
           <BarChart
             data={spendingTrendData}
             margin={{

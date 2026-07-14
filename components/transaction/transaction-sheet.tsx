@@ -9,7 +9,7 @@ import {
   SheetTitle,
 } from "@/components/ui/sheet"
 
-import { useTransactionDialog } from "@/hooks/use-transaction-dialog"
+import { useTransactionDialog } from "@/shared/hooks/use-transaction-dialog"
 import { CreateTransactionForm } from "./create-transaction-form"
 import { Separator } from "../ui/separator"
 
@@ -30,16 +30,15 @@ export function TransactionSheet() {
       <SheetContent
         showCloseButton={false}
         side="bottom"
-        className="mx-auto max-h-8/10 w-full max-w-2xl rounded-t-3xl overflow-y-auto"
+        className="mx-auto max-h-8/10 w-full max-w-2xl overflow-y-auto rounded-t-3xl"
       >
         <SheetHeader className="mx-auto p-4">
-          <SheetTitle className="text-base lg:text-lg text-primary font-semibold">
+          <SheetTitle className="text-base font-semibold text-primary lg:text-lg">
             {isCreate ? "Tambah Transaksi" : "Edit Transaksi"}
           </SheetTitle>
         </SheetHeader>
 
         <Separator />
-
 
         {isCreate ? (
           <CreateTransactionForm />

@@ -1,13 +1,18 @@
 import Link from "next/link"
-import { ArrowDownLeft, ArrowUpRight, ChevronRight, History } from "lucide-react"
+import {
+  ArrowDownLeft,
+  ArrowUpRight,
+  ChevronRight,
+  History,
+} from "lucide-react"
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 
 import { Badge } from "@/components/ui/badge"
-import { transactionsItem } from "@/lib/data"
-import { cn } from "@/lib/utils"
-import formatCurrency from "@/lib/helper/format-currency"
+import { transactionsItem } from "@/shared/data"
+import { cn } from "@/shared/utils"
+import formatCurrency from "@/shared/helper/format-currency"
 
 export default function RecentTransactions() {
   return (

@@ -1,18 +1,16 @@
-import {
-  Eye,
-  TrendingUp,
-  ArrowUpRight,
-  ArrowDownLeft,
-} from "lucide-react"
+import { Eye, TrendingUp, ArrowUpRight, ArrowDownLeft } from "lucide-react"
 
 import { Card, CardContent } from "@/components/ui/card"
-import { cn } from "@/lib/utils"
+import { cn } from "@/shared/utils"
 
 export default function StatsSection() {
   return (
-    <div className="flex flex-col lg:flex-row gap-4 mt-1">
+    <div className="mt-1 flex flex-col gap-4 lg:flex-row">
       {/* BALANCE */}
-      <Card size="sm" className="bg-primary text-primary-foreground w-full lg:w-1/3">
+      <Card
+        size="sm"
+        className="w-full bg-primary text-primary-foreground lg:w-1/3"
+      >
         <CardContent>
           <div className="mb-5 flex items-center justify-between">
             <span className="text-sm font-medium text-primary-foreground">
@@ -39,14 +37,14 @@ export default function StatsSection() {
       </Card>
 
       {/* INCOME + EXPENSE */}
-      <div className="grid grid-cols-2 gap-4 flex-1">
+      <div className="grid flex-1 grid-cols-2 gap-4">
         {/* INCOME */}
         <Card size="sm">
           <CardContent>
             <div className="mb-4 flex items-center gap-3">
               <div
                 className={cn(
-                  "flex items-center justify-center rounded-xl size-10",
+                  "flex size-10 items-center justify-center rounded-xl",
                   "bg-chart-2 text-background"
                 )}
               >
@@ -58,11 +56,11 @@ export default function StatsSection() {
               </span>
             </div>
 
-            <div className="mb-2 font-bold tracking-tight text-foreground text-xl lg:text-3xl">
+            <div className="mb-2 text-xl font-bold tracking-tight text-foreground lg:text-3xl">
               Rp 8.250.000
             </div>
 
-            <div className="flex flex-wrap items-center gap-1 text-[11px] text-xs lg:text-sm">
+            <div className="flex flex-wrap items-center gap-1 text-xs text-[11px] lg:text-sm">
               <span className="font-semibold text-chart-2 dark:text-chart-2">
                 +12.5%
               </span>
@@ -78,8 +76,8 @@ export default function StatsSection() {
             <div className="mb-4 flex items-center gap-3">
               <div
                 className={cn(
-                  "flex items-center justify-center rounded-xl size-10",
-                  "bg-primary text-background",
+                  "flex size-10 items-center justify-center rounded-xl",
+                  "bg-primary text-background"
                 )}
               >
                 <ArrowDownLeft className="size-5" />
@@ -90,11 +88,11 @@ export default function StatsSection() {
               </span>
             </div>
 
-            <div className="mb-2 font-bold tracking-tight text-foreground text-xl lg:text-3xl">
+            <div className="mb-2 text-xl font-bold tracking-tight text-foreground lg:text-3xl">
               Rp 2.250.000
             </div>
 
-            <div className="flex flex-wrap items-center gap-1 text-[11px] text-xs lg:text-sm">
+            <div className="flex flex-wrap items-center gap-1 text-xs text-[11px] lg:text-sm">
               <span className="font-semibold text-primary dark:text-primary">
                 -8.1%
               </span>

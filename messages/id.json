@@ -1,5 +1,5 @@
 {
-  "Sidebar": {
+  "sidebar": {
     "home": "Beranda",
     "history": "Riwayat Transaksi",
     "assistant": "Asisten AI",
@@ -10,5 +10,50 @@
     "pro_title": "Budgetin Pro",
     "pro_description": "Dapatkan fitur lengkap: smart insight AI, input suara, asisten AI dan lebih banyak lagi.",
     "upgrade": "Upgrade ke Pro"
+  },
+  "validation": {
+    "email_required": "Email wajib diisi",
+    "email_invalid": "Format email tidak valid"
+  },
+  "auth": {
+    "login": {
+      "processing": "Memproses...",
+      "continue": "Lanjutkan",
+      "or": "atau",
+      "agreement": "Dengan melanjutkan, kamu menyetujui <terms>Syarat & Ketentuan</terms> dan <privacy>Kebijakan Privasi</privacy>.",
+      "title": "Yuk mulai bareng",
+      "description": "Bantu dirimu lebih bijak soal uang mulai sekarang",
+      "google": "Masuk dengan Google"
+    },
+    "otp": {
+      "title": "Saatnya Cek Emailmu",
+      "description": "Kami telah mengirimkan kode 6 Digit ke emailmu. Masukkan kode tersebut untuk melanjutkan.",
+      "expired_toast_title": "Kode OTP kadaluarsa",
+      "expired_toast_description": "Silakan login ulang untuk mendapatkan kode baru.",
+      "confirm": "Konfirmasi",
+      "verifying": "Memverifikasi...",
+      "expires_in": "Kode berlaku selama"
+    },
+    "onboarding": {
+      "step1_title": "Lengkapi Profilmu",
+      "step1_description": "Tambahkan nama dan foto",
+      "full_name": "Nama Lengkap",
+      "change_photo": "Ganti Foto",
+      "upload_photo": "Unggah Foto",
+      "saving": "Menyimpan...",
+      "continue": "Lanjutkan",
+      "step2_title": "Buat Dompet Pertamamu",
+      "step2_description": "Masukkan saldo yang kamu miliki saat ini",
+      "wallet_name_placeholder": "Dompet Utama",
+      "wallet_name_icon": "Nama dan Ikon Dompet",
+      "wallet_color": "Warna Dompet",
+      "currency": "Mata Uang",
+      "initial_balance": "Saldo Awal",
+      "start": "Mulai Pakai Budgetin"
+    }
+  },
+  "home": {
+    "welcome": "Selamat datang,",
+    "description": "Saatnya lihat progress finansialmu hari ini"
   }
 }

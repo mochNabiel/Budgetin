@@ -13,7 +13,7 @@ import {
 
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
-import { spendingCategories } from "@/lib/data"
+import { spendingCategories } from "@/shared/data"
 import { Wallet } from "lucide-react"
 import { Separator } from "@/components/ui/separator"
 

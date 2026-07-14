@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { cn } from "@/lib/utils"
+import { cn } from "@/shared/utils"
 
 export function HeaderClient({ children }: { children: React.ReactNode }) {
   const [scrolled, setScrolled] = useState(false)

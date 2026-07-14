@@ -17,7 +17,7 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import { Camera, Pencil } from "lucide-react"
-import { getUserData } from "@/lib/queries/get-user-data"
+import { getUserData } from "@/features/auth/lib/queries/get-user-data"
 import { FcGoogle } from "react-icons/fc"
 
 export async function ProfileSection() {
@@ -37,14 +37,21 @@ export async function ProfileSection() {
           <ItemMedia>
             <Avatar className="size-16">
               <AvatarImage src={user?.avatar_url} alt={user?.full_name} />
-              <AvatarFallback>{user?.full_name.charAt(0).toUpperCase()}</AvatarFallback>
+              <AvatarFallback>
+                {user?.full_name.charAt(0).toUpperCase()}
+              </AvatarFallback>
             </Avatar>
           </ItemMedia>
           <ItemContent>
             <ItemTitle>{user?.full_name}</ItemTitle>
             <ItemDescription>
-              <span className="text-sm text-muted-foreground">{user?.email}</span>
-              <Badge variant="secondary" className="flex mt-2 items-center gap-1 text-xs text-muted-foreground">
+              <span className="text-sm text-muted-foreground">
+                {user?.email}
+              </span>
+              <Badge
+                variant="secondary"
+                className="mt-2 flex items-center gap-1 text-xs text-muted-foreground"
+              >
                 <FcGoogle size={16} />
                 Akun Google
               </Badge>
