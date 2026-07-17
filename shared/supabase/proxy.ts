@@ -35,6 +35,13 @@ export async function updateSession(request: NextRequest) {
 
   const pathname = request.nextUrl.pathname
 
+  // Redirect root "/" ke default locale
+  if (pathname === "/") {
+    const url = request.nextUrl.clone()
+    url.pathname = `/${routing.defaultLocale}`
+    return NextResponse.redirect(url)
+  }
+
   const locale =
     routing.locales.find(
       (l) => pathname === `/${l}` || pathname.startsWith(`/${l}/`)
