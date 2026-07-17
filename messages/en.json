@@ -1,7 +1,7 @@
 {
   "bottomNavBar": {
     "home": "Home",
-    "transaction": "Transaction",
+    "transactions": "Transactions",
     "statistics": "Statistics",
     "assistant": "Assistant",
     "settings": "Settings"

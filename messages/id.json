@@ -1,7 +1,7 @@
 {
   "bottomNavBar": {
     "home": "Beranda",
-    "transaction": "Transaksi",
+    "transactions": "Transaksi",
     "statistics": "Statistik",
     "assistant": "Asisten AI",
     "settings": "Pengaturan"

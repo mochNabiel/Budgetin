@@ -13,8 +13,8 @@ export const navItems = [
     icon: Home,
   },
   {
-    key: "transaction",
-    href: "/transaction",
+    key: "transactions",
+    href: "/transactions",
     icon: LayoutGrid,
   },
   {
