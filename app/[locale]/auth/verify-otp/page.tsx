@@ -12,8 +12,13 @@ export const metadata: Metadata = {
   description: "Verify OTP",
 }
 
-export default async function VerifyOtpPage() {
-  const t = await getTranslations("auth.otp")
+interface Props {
+  params: Promise<{ locale: Locale }>
+}
+
+export default async function VerifyOtpPage({ params }: Props) {
+  const { locale } = await params
+  const t = await getTranslations({ locale, namespace: "auth.otp" })
   return (
     <AuthContainer>
       <AuthTopbar />

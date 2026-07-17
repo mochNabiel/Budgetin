@@ -17,8 +17,13 @@ export const metadata: Metadata = {
   description: "Login",
 }
 
-export default async function LoginPage() {
-  const t = await getTranslations("auth.login")
+interface Props {
+  params: Promise<{ locale: Locale }>
+}
+
+export default async function LoginPage({ params }: Props) {
+  const { locale } = await params
+  const t = await getTranslations({ locale, namespace: "auth.login" })
   return (
     <AuthContainer>
       <AuthTopbar />

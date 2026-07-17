@@ -38,9 +38,9 @@
     "email_invalid": "Invalid email format"
   },
   "auth": {
-    "processing": "Processing...",
-    "continue": "Continue",
     "login": {
+      "processing": "Processing...",
+      "continue": "Continue",
       "or": "or",
       "agreement": "By continuing, you agree to our <terms>Terms & Conditions</terms> and <privacy>Privacy Policy</privacy>.",
       "title": "Get started with",

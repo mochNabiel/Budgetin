@@ -22,7 +22,7 @@ export default function EmailLoginForm() {
 
   const { message: otpMessage } = otpState
 
-  const t = useTranslations("auth")
+  const t = useTranslations("auth.login")
 
   return (
     <form action={otpAction}>
