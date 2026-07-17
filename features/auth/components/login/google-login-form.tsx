@@ -15,7 +15,7 @@ export default function GoogleLoginForm() {
     INITIAL_ACTION_STATE
   )
 
-  const t = useTranslations("auth.login")
+  const t = useTranslations("auth")
 
   return (
     <form action={action}>
@@ -26,7 +26,7 @@ export default function GoogleLoginForm() {
         className="w-full"
       >
         <FcGoogle className="mr-2 size-4" aria-hidden />
-        {isPending ? t("processing") : t("google")}
+        {isPending ? t("processing") : t("login.google")}
       </Button>
       {state.message && !state.success && (
         <FieldError className="mt-2 text-center">{state.message}</FieldError>

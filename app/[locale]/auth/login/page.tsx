@@ -1,8 +1,7 @@
 import { Metadata } from "next"
-import Link from "next/link"
 import type { Locale } from "next-intl"
 
-import { FieldDescription, FieldSeparator } from "@/components/ui/field"
+import { FieldSeparator } from "@/components/ui/field"
 import { getTranslations } from "next-intl/server"
 
 import AuthTopbar from "@/features/auth/components/auth-topbar"
@@ -11,19 +10,15 @@ import AuthHeading from "@/features/auth/components/auth-heading"
 
 import EmailLoginForm from "@/features/auth/components/login/email-login-form"
 import GoogleLoginForm from "@/features/auth/components/login/google-login-form"
+import AuthFooter from "@/features/auth/components/auth-footer"
 
 export const metadata: Metadata = {
   title: "Budgetin - Login",
   description: "Login",
 }
 
-interface Props {
-  params: Promise<{ locale: Locale }>
-}
-
-export default async function LoginPage({ params }: Props) {
-  const { locale } = await params
-  const t = await getTranslations({ locale, namespace: "auth.login" })
+export default async function LoginPage() {
+  const t = await getTranslations("auth.login")
   return (
     <AuthContainer>
       <AuthTopbar />
@@ -38,12 +33,7 @@ export default async function LoginPage({ params }: Props) {
       <EmailLoginForm />
       <FieldSeparator className="my-4">{t("or")}</FieldSeparator>
       <GoogleLoginForm />
-      <FieldDescription className="text-center text-xs">
-        {t.rich("agreement", {
-          terms: (chunks) => <Link href="/terms">{chunks}</Link>,
-          privacy: (chunks) => <Link href="/privacy">{chunks}</Link>,
-        })}
-      </FieldDescription>
+      <AuthFooter />
     </AuthContainer>
   )
 }

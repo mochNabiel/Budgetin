@@ -4,10 +4,14 @@ interface IWalletColor {
 }
 
 export const WALLET_COLORS: IWalletColor[] = [
-  { label: "Blue", value: "#3B82F6" },
-  { label: "Green", value: "#22C55E" },
-  { label: "Violet", value: "#A855F7" },
-  { label: "Orange", value: "#F97316" },
-  { label: "Red", value: "#EF4444" },
-  { label: "Gray", value: "#6B7280" },
+  { label: "Sky", value: "#7DD3FC" },
+  { label: "Mint", value: "#86EFAC" },
+  { label: "Amber", value: "#FCD34D" },
+  { label: "Peach", value: "#FDBA74" },
+  { label: "Lavender", value: "#C4B5FD" },
+  { label: "Cyan", value: "#67E8F9" },
+  { label: "Lime", value: "#BEF264" },
+  { label: "Pink", value: "#FDA4AF" },
+  { label: "Periwinkle", value: "#DDD6FE" },
+  { label: "Teal", value: "#99F6E4" },
 ]

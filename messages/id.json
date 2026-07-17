@@ -1,15 +1,37 @@
 {
-  "sidebar": {
+  "bottomNavBar": {
     "home": "Beranda",
-    "history": "Riwayat Transaksi",
+    "transaction": "Transaksi",
+    "statistics": "Statistik",
     "assistant": "Asisten AI",
-    "preferences": "Personalisasi",
-    "plan": "Langganan",
-    "account": "Pengaturan Akun",
-
-    "pro_title": "Budgetin Pro",
-    "pro_description": "Dapatkan fitur lengkap: smart insight AI, input suara, asisten AI dan lebih banyak lagi.",
-    "upgrade": "Upgrade ke Pro"
+    "settings": "Pengaturan"
+  },
+  "home": {
+    "header": {
+      "welcome": "Senang bertemu lagi,",
+      "description": "Saatnya lihat progress finansialmu hari ini"
+    },
+    "stats": {
+      "total_balance": "Total Saldo",
+      "income": "Pemasukan",
+      "expense": "Pengeluaran"
+    },
+    "actions": {
+      "title": "Aksi Utama",
+      "record": "Catat Transaksi",
+      "transfer": "Pindahkan Dana",
+      "budget": "Atur Budget",
+      "export": "Ekspor Data"
+    },
+    "wallets": {
+      "title": "Dompet Saya",
+      "add_wallet": "Tambah Dompet",
+      "balance": "Saldo"
+    },
+    "recent_transactions": {
+      "title": "Transaksi Terakhir",
+      "view_all": "Lihat Semua"
+    }
   },
   "validation": {
     "email_required": "Email wajib diisi",
@@ -51,9 +73,5 @@
       "initial_balance": "Saldo Awal",
       "start": "Mulai Pakai Budgetin"
     }
-  },
-  "home": {
-    "welcome": "Selamat datang,",
-    "description": "Saatnya lihat progress finansialmu hari ini"
   }
 }

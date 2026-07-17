@@ -1,6 +1,6 @@
-import LocaleToggle from "@/components/locale-toggle";
-import ThemeToggle from "@/components/theme-toggle";
-import Image from "next/image";
+import LocaleToggle from "@/components/global/locale-toggle"
+import ThemeToggle from "@/components/global/theme-toggle"
+import Image from "next/image"
 
 export default function AuthTopbar() {
   return (

@@ -1,7 +1,7 @@
-import LoginButton from "@/components/login-button"
+import LoginButton from "@/components/global/login-button"
 import { Metadata } from "next"
 import { createClient } from "@/shared/supabase/server"
-import { LogoutButton } from "@/components/logout-button"
+import { LogoutButton } from "@/components/global/logout-button"
 import Image from "next/image"
 
 export const metadata: Metadata = {

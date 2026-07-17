@@ -9,9 +9,9 @@ import { useTranslations } from "next-intl"
 const OTP_LENGTH = 6
 
 const otpSlotClassName = cn(
-  "h-12 flex-1 rounded-xl border border-input bg-background text-base",
-  "transition-all first:rounded-xl last:rounded-xl",
-  "focus-within:border-primary focus-within:ring-1 focus-within:ring-primary"
+  "size-12 rounded-xl border border-input bg-background text-base",
+  "transition-all",
+  "focus-within:border-primary focus-within:ring-1 focus-within:ring-primary first:rounded-l-xl last:rounded-r-xl"
 )
 
 interface OtpInputProps {
@@ -30,7 +30,7 @@ export function OtpInput({ disabled, error, formattedTime }: OtpInputProps) {
         disabled={disabled}
         containerClassName="w-full"
       >
-        <InputOTPGroup className="w-full gap-2">
+        <InputOTPGroup className="justify-center gap-2 mx-auto">
           {Array.from({ length: OTP_LENGTH }).map((_, i) => (
             <InputOTPSlot key={i} index={i} className={otpSlotClassName} />
           ))}

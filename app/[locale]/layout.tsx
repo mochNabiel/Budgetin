@@ -1,7 +1,7 @@
 import { Poppins, Figtree } from "next/font/google"
 
 import "@/app/globals.css"
-import { ThemeProvider } from "@/components/theme-provider"
+import { ThemeProvider } from "@/components/global/theme-provider"
 import { cn } from "@/shared/utils"
 import { Toaster } from "@/components/ui/sonner"
 import { TooltipProvider } from "@/components/ui/tooltip"

@@ -9,13 +9,13 @@ export const getWallets = cache(async () => {
 
   const { data, error } = await supabase
     .from("wallets")
-    .select(`id, name, balance, currency, icon, color`)
+    .select(`id, user_id, name, balance, icon, color`)
     .eq("user_id", user.id)
     .order("created_at", { ascending: false })
 
   if (error) {
     return {
-      success: false,
+      success: false, 
       message: error.message,
     }
   }

@@ -1,13 +1,12 @@
 import { Metadata } from "next"
 
-import { Header } from "./_components/header"
-import StatsSection from "./_components/stats-section"
-import Allocation from "./_components/allocation"
-import FinancialTrend from "./_components/financial-trend"
-import AiInsight from "./_components/ai-insight"
-import RecentTransactions from "./_components/recent-transactions"
-import { TransactionSheet } from "@/components/transaction/transaction-sheet"
-import Wallets from "./_components/wallets"
+import { Header } from "@/features/home/components/header"
+
+import { getWallets } from "@/features/wallet/lib/queries"
+import StatsSection from "@/features/home/components/stats-section"
+import WalletsSection from "@/features/home/components/wallets-section"
+import RecentTransactionsSection from "@/features/home/components/recent-transactions-section"
+import ActionSection from "@/features/home/components/action-section"
 
 export const metadata: Metadata = {
   title: "Budgetin - Home",
@@ -15,20 +14,17 @@ export const metadata: Metadata = {
 }
 
 export default async function Page() {
+  const { data: wallets } = await getWallets()
+
   return (
-    <div className="w-full p-2">
+    <div className="mb-20 w-full p-2">
       <Header />
-      <main className="space-y-4">
+      <div className="space-y-4">
         <StatsSection />
-        <Wallets />
-        <div className="grid w-full grid-cols-1 gap-4 lg:grid-cols-2">
-          <FinancialTrend />
-          <AiInsight />
-          <RecentTransactions />
-          <Allocation />
-        </div>
-        <TransactionSheet />
-      </main>
+        <ActionSection />
+        <WalletsSection wallets={wallets ?? []} />
+        <RecentTransactionsSection />
+      </div>
     </div>
   )
 }

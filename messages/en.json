@@ -1,15 +1,37 @@
 {
-  "sidebar": {
+  "bottomNavBar": {
     "home": "Home",
-    "history": "Transaction History",
-    "assistant": "AI Assistant",
-    "preferences": "Preferences",
-    "plan": "Subscription",
-    "account": "Account Settings",
-
-    "pro_title": "Budgetin Pro",
-    "pro_description": "Unlock smart AI insights, voice input, AI assistant and more.",
-    "upgrade": "Upgrade to Pro"
+    "transaction": "Transaction",
+    "statistics": "Statistics",
+    "assistant": "Assistant",
+    "settings": "Settings"
+  },
+  "home": {
+    "header": {
+      "welcome": "Glad you're here,",
+      "description": "It's time to start tracking your finances."
+    },
+    "stats": {
+      "total_balance": "Total Balance",
+      "income": "Income",
+      "expense": "Expense"
+    },
+    "actions": {
+      "title": "Main Actions",
+      "record": "Add Transaction",
+      "transfer": "Move Money",
+      "budget": "Set Budget",
+      "export": "Export Data"
+    },
+    "wallets": {
+      "title": "My Wallets",
+      "add_wallet": "Add Wallet",
+      "balance": "Balance"
+    },
+    "recent_transactions": {
+      "title": "Recent Transactions",
+      "view_all": "View All"
+    }
   },
   "validation": {
     "email_required": "Email is required",
@@ -21,7 +43,7 @@
     "login": {
       "or": "or",
       "agreement": "By continuing, you agree to our <terms>Terms & Conditions</terms> and <privacy>Privacy Policy</privacy>.",
-      "title": "Let's get started with",
+      "title": "Get started with",
       "description": "Build better money habits and start saving today",
       "google": "Continue with Google"
     },
@@ -51,9 +73,5 @@
       "initial_balance": "Initial Balance",
       "start": "Start With Budgetin"
     }
-  },
-  "home": {
-    "welcome": "Welcome,",
-    "description": "It's time to start tracking your finances."
   }
 }

@@ -1,6 +1,5 @@
-import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar"
-import { UserProvider } from "@/components/user-provider"
-import { AppSidebar } from "@/components/sidebar"
+import { BottomNavBar } from "@/components/global/bottom-nav"
+import { UserProvider } from "@/components/global/user-provider"
 import { getUserData } from "@/features/auth/lib/queries/get-user-data"
 
 export default async function ProtectedLayout({
@@ -12,10 +11,10 @@ export default async function ProtectedLayout({
 
   return (
     <UserProvider user={user}>
-      <SidebarProvider>
-        <AppSidebar />
-        <SidebarInset>{children}</SidebarInset>
-      </SidebarProvider>
+      <div className="mx-auto max-w-lg">
+        {children}
+        <BottomNavBar />
+      </div>
     </UserProvider>
   )
 }
