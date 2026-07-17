@@ -45,7 +45,8 @@
       "agreement": "Dengan melanjutkan, kamu menyetujui <terms>Syarat & Ketentuan</terms> dan <privacy>Kebijakan Privasi</privacy>.",
       "title": "Yuk mulai bareng",
       "description": "Bantu dirimu lebih bijak soal uang mulai sekarang",
-      "google": "Masuk dengan Google"
+      "google": "Masuk dengan Google",
+      "back_home": "Kembali ke halaman utama"
     },
     "otp": {
       "title": "Saatnya Cek Emailmu",

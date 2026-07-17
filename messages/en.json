@@ -45,7 +45,8 @@
       "agreement": "By continuing, you agree to our <terms>Terms & Conditions</terms> and <privacy>Privacy Policy</privacy>.",
       "title": "Get started with",
       "description": "Build better money habits and start saving today",
-      "google": "Continue with Google"
+      "google": "Continue with Google",
+      "back_home": "Back to main page"
     },
     "otp": {
       "title": "Time to Check Your Email",

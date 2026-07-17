@@ -11,6 +11,7 @@ import AuthHeading from "@/features/auth/components/auth-heading"
 import EmailLoginForm from "@/features/auth/components/login/email-login-form"
 import GoogleLoginForm from "@/features/auth/components/login/google-login-form"
 import AuthFooter from "@/features/auth/components/auth-footer"
+import BackHomeButton from "@/features/auth/components/login/back-home-button"
 
 export const metadata: Metadata = {
   title: "Budgetin - Login",
@@ -38,6 +39,7 @@ export default async function LoginPage({ params }: Props) {
       <EmailLoginForm />
       <FieldSeparator className="my-4">{t("or")}</FieldSeparator>
       <GoogleLoginForm />
+      <BackHomeButton locale={locale} />
       <AuthFooter />
     </AuthContainer>
   )
