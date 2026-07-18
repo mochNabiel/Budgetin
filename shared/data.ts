@@ -203,3 +203,223 @@ export const transactionsItem = [
     },
   },
 ]
+
+export const defaultCategories = [
+  // =========================
+  // INCOME
+  // =========================
+  {
+    id: 1,
+    type: "income",
+    name: "Salary",
+    icon: "💼",
+    color: "#7DD3FC", // Sky
+  },
+  {
+    id: 2,
+    type: "income",
+    name: "Freelance",
+    icon: "💻",
+    color: "#86EFAC", // Mint
+  },
+  {
+    id: 3,
+    type: "income",
+    name: "Business",
+    icon: "🏪",
+    color: "#FCD34D", // Amber
+  },
+  {
+    id: 4,
+    type: "income",
+    name: "Investment",
+    icon: "📈",
+    color: "#FDBA74", // Peach
+  },
+  {
+    id: 5,
+    type: "income",
+    name: "Bonus",
+    icon: "🎁",
+    color: "#C4B5FD", // Lavender
+  },
+  {
+    id: 6,
+    type: "income",
+    name: "Commission",
+    icon: "🤝",
+    color: "#67E8F9", // Cyan
+  },
+  {
+    id: 7,
+    type: "income",
+    name: "Interest",
+    icon: "🏦",
+    color: "#BEF264", // Lime
+  },
+  {
+    id: 8,
+    type: "income",
+    name: "Refund",
+    icon: "↩️",
+    color: "#FDA4AF", // Pink
+  },
+  {
+    id: 9,
+    type: "income",
+    name: "Allowance",
+    icon: "👛",
+    color: "#DDD6FE", // Periwinkle
+  },
+  {
+    id: 10,
+    type: "income",
+    name: "Other Income",
+    icon: "💰",
+    color: "#99F6E4", // Teal
+  },
+
+  // =========================
+  // EXPENSE
+  // =========================
+  {
+    id: 11,
+    type: "expense",
+    name: "Food & Drink",
+    icon: "🍔",
+    color: "#FDBA74", // Peach
+  },
+  {
+    id: 12,
+    type: "expense",
+    name: "Transportation",
+    icon: "🚗",
+    color: "#7DD3FC", // Sky
+  },
+  {
+    id: 13,
+    type: "expense",
+    name: "Shopping",
+    icon: "🛍️",
+    color: "#FDA4AF", // Pink
+  },
+  {
+    id: 14,
+    type: "expense",
+    name: "Bills",
+    icon: "🧾",
+    color: "#FCD34D", // Amber
+  },
+  {
+    id: 15,
+    type: "expense",
+    name: "Internet",
+    icon: "📶",
+    color: "#67E8F9", // Cyan
+  },
+  {
+    id: 16,
+    type: "expense",
+    name: "Phone",
+    icon: "📱",
+    color: "#DDD6FE", // Periwinkle
+  },
+  {
+    id: 17,
+    type: "expense",
+    name: "Health",
+    icon: "❤️",
+    color: "#86EFAC", // Mint
+  },
+  {
+    id: 18,
+    type: "expense",
+    name: "Education",
+    icon: "🎓",
+    color: "#C4B5FD", // Lavender
+  },
+  {
+    id: 19,
+    type: "expense",
+    name: "Entertainment",
+    icon: "🎬",
+    color: "#99F6E4", // Teal
+  },
+  {
+    id: 20,
+    type: "expense",
+    name: "Travel",
+    icon: "✈️",
+    color: "#7DD3FC", // Sky
+  },
+  {
+    id: 21,
+    type: "expense",
+    name: "Fuel",
+    icon: "⛽",
+    color: "#FDBA74", // Peach
+  },
+  {
+    id: 22,
+    type: "expense",
+    name: "Rent",
+    icon: "🏠",
+    color: "#BEF264", // Lime
+  },
+  {
+    id: 23,
+    type: "expense",
+    name: "Insurance",
+    icon: "🛡️",
+    color: "#67E8F9", // Cyan
+  },
+  {
+    id: 24,
+    type: "expense",
+    name: "Tax",
+    icon: "💸",
+    color: "#DDD6FE", // Periwinkle
+  },
+  {
+    id: 25,
+    type: "expense",
+    name: "Gift",
+    icon: "🎁",
+    color: "#FDA4AF", // Pink
+  },
+  {
+    id: 26,
+    type: "expense",
+    name: "Donation",
+    icon: "🤲",
+    color: "#99F6E4", // Teal
+  },
+  {
+    id: 27,
+    type: "expense",
+    name: "Pet",
+    icon: "🐾",
+    color: "#BEF264", // Lime
+  },
+  {
+    id: 28,
+    type: "expense",
+    name: "Beauty",
+    icon: "💄",
+    color: "#C4B5FD", // Lavender
+  },
+  {
+    id: 29,
+    type: "expense",
+    name: "Kids",
+    icon: "🧸",
+    color: "#86EFAC", // Mint
+  },
+  {
+    id: 30,
+    type: "expense",
+    name: "Other Expense",
+    icon: "📦",
+    color: "#FCD34D", // Amber
+  },
+]

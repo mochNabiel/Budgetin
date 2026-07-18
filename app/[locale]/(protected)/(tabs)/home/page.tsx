@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 }
 
 export default async function Page() {
-  const { data: wallets } = await getWallets()
+  const wallets = await getWallets()
 
   return (
     <div className="mb-20 w-full p-2">

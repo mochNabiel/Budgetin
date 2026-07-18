@@ -26,21 +26,20 @@ export default async function WalletsSection({ wallets }: Props) {
         {wallets.map((wallet) => (
           <Item
             key={wallet.id}
-            className="flex w-fit flex-col items-start gap-2 px-6"
-            style={{ backgroundColor: wallet.color }}
+            variant="outline"
+            className="flex min-w-48 flex-col items-start gap-2 px-6"
           >
-            <div className="flex items-center gap-2">
-              <ItemMedia variant="icon" className="rounded-full text-xl">
-                {wallet.icon}
-              </ItemMedia>
-              <h2 className="text-xs font-semibold tracking-wide text-mist-950 uppercase">
-                {wallet.name}
-              </h2>
-            </div>
+            <ItemMedia
+              variant="icon"
+              className="size-9 text-lg rounded-full"
+              style={{ backgroundColor: wallet.color }}
+            >
+              {wallet.icon}
+            </ItemMedia>
 
             <ItemContent className="gap-0">
               <ItemTitle className="text-xs font-medium tracking-wide text-mist-500">
-                {t("balance")}
+                {wallet.name}
               </ItemTitle>
               <ItemDescription className="text-lg font-semibold text-mist-950">
                 {formatCurrency(wallet.balance)}
@@ -51,7 +50,7 @@ export default async function WalletsSection({ wallets }: Props) {
 
         <Button
           variant="ghost"
-          className="h-auto w-44 shrink-0 rounded-xl border-2 border-dashed border-muted-foreground/30 hover:border-primary hover:bg-primary/5"
+          className="h-auto w-44 shrink-0 rounded-xl border-2 border-dashed border-muted-foreground/30 p-4 hover:border-primary hover:bg-primary/5"
           asChild
         >
           <Link href="/wallets/new">

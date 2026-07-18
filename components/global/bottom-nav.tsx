@@ -23,7 +23,7 @@ export function BottomNavBar({
     <div
       className={cn(
         stickyBottom &&
-          "pointer-events-none fixed inset-x-0 bottom-4 w-full max-w-lg mx-auto z-20 px-2",
+          "pointer-events-none fixed inset-x-0 bottom-4 z-20 mx-auto w-full max-w-lg px-2",
         className
       )}
     >
@@ -37,7 +37,9 @@ export function BottomNavBar({
         }}
         role="navigation"
         aria-label="Bottom Navigation"
-        className="pointer-events-auto mx-auto flex h-14 w-full items-center rounded-full bg-primary px-3 shadow-xl"
+        className={cn(
+          "pointer-events-auto mx-auto flex h-14 w-full max-w-lg items-center rounded-full border border-border bg-background/70 px-3 shadow-sm backdrop-blur-xl"
+        )}
       >
         <div className="flex w-full items-center gap-1">
           {navItems.map((item) => {
@@ -49,10 +51,10 @@ export function BottomNavBar({
                 <motion.div
                   whileTap={{ scale: 0.96 }}
                   className={cn(
-                    "flex h-10 w-full items-center justify-center rounded-full px-4 transition-all duration-200",
+                    "flex h-10 w-full items-center justify-center rounded-full px-4 transition-colors",
                     isActive
-                      ? "gap-2 bg-primary-foreground text-primary"
-                      : "text-primary-foreground/75 hover:bg-white/10 hover:text-primary-foreground"
+                      ? "gap-2 bg-primary/10 text-primary"
+                      : "text-muted-foreground hover:bg-muted/70"
                   )}
                 >
                   <Icon size={22} strokeWidth={2} aria-hidden />
@@ -62,7 +64,7 @@ export function BottomNavBar({
                     animate={{
                       width: isActive ? "auto" : 0,
                       opacity: isActive ? 1 : 0,
-                      marginLeft: isActive ? 6 : 0,
+                      marginLeft: isActive ? 2 : 0,
                     }}
                     transition={{
                       type: "spring",
@@ -71,12 +73,7 @@ export function BottomNavBar({
                     }}
                     className="overflow-hidden"
                   >
-                    <span
-                      className={cn(
-                        "text-xs font-semibold whitespace-nowrap",
-                        isActive ? "text-primary" : "text-primary-foreground"
-                      )}
-                    >
+                    <span className="text-xs font-medium whitespace-nowrap">
                       {t(item.key)}
                     </span>
                   </motion.div>

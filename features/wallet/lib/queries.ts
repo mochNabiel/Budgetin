@@ -1,10 +1,11 @@
+// queries.ts
 import { getUserData } from "@/features/auth/lib/queries"
 import { createClient } from "@/shared/supabase/server"
+import { IWallet } from "@/types/wallet"
 import { cache } from "react"
 
-export const getWallets = cache(async () => {
+export const getWallets = cache(async (): Promise<IWallet[]> => {
   const supabase = await createClient()
-
   const user = await getUserData()
 
   const { data, error } = await supabase
@@ -14,14 +15,8 @@ export const getWallets = cache(async () => {
     .order("created_at", { ascending: false })
 
   if (error) {
-    return {
-      success: false, 
-      message: error.message,
-    }
+    throw new Error(error.message)
   }
 
-  return {
-    success: true,
-    data,
-  }
+  return data ?? []
 })
