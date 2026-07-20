@@ -1,36 +1,35 @@
-import { ProfileSection } from "@/features/settings/components/profile"
-import { PlanSection } from "@/features/settings/components/plan"
-import { SecuritySection } from "@/features/settings/components/security"
 import { Metadata } from "next"
 
+import { getWallets } from "@/features/wallet/lib/queries"
+import AccountPlanCard from "@/features/settings/components/account-plan-card"
+import PreferencesCard from "@/features/settings/components/preferences-card"
+import DangerZoneCard from "@/features/settings/components/danger-zone-card"
+import { SectionHeader } from "@/components/global/section-header"
+
 export const metadata: Metadata = {
-  title: "Budgetin - Akun",
-  description: "Akun",
+  title: "Budgetin - Settings",
+  description: "Settings",
 }
 
-export default function AccountPage() {
+export default async function SettingsPage() {
+  const wallets = await getWallets()
+
   return (
-    <div className="w-full space-y-4 p-2">
-      <header className="flex flex-col items-center justify-center lg:items-start">
-        <h1 className="text-lg font-semibold tracking-tight text-primary lg:text-xl">
-          Pengaturan Akun
-        </h1>
-        <p className="text-sm text-muted-foreground">
-          Kelola profil, langganan, dan keamanan akunmu.
-        </p>
-      </header>
+    <main className="space-y-4 px-4 py-6 pb-28">
+      <section className="space-y-3">
+        <SectionHeader title="Account & Plan" />
+        <AccountPlanCard walletCount={wallets.length} />
+      </section>
 
-      <main className="space-y-4">
-        <ProfileSection />
-        <PlanSection />
-        <SecuritySection />
-      </main>
+      <section className="space-y-3">
+        <SectionHeader title="Preferences" />
+        <PreferencesCard />
+      </section>
 
-      <footer>
-        <p className="my-8 text-center text-xs text-muted-foreground/60">
-          Budgetin v1.0.0 · Dibuat untuk pengelolaan keuangan yang lebih cerdas.
-        </p>
-      </footer>
-    </div>
+      <section className="space-y-3">
+        <SectionHeader title="Danger Zone" />
+        <DangerZoneCard />
+      </section>
+    </main>
   )
 }

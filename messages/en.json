@@ -2,9 +2,9 @@
   "home": {
     "add_action_sheet": {
       "title": "What would you like to do?",
-      "record_title": "Record Transaction",
+      "record_title": "Add Transaction",
       "record_description": "Log an income or expense",
-      "transfer_title": "Transfer Between Wallets",
+      "transfer_title": "Transfer Wallets",
       "transfer_description": "Move money from one wallet to another",
       "transfer_disabled_description": "Add another wallet first to enable transfers"
     },
@@ -127,6 +127,40 @@
       "date_range": "Date Range",
       "reset": "Reset",
       "apply": "Apply Filter"
+    }
+  },
+  "category": {
+    "type": "Type",
+    "income": "Income",
+    "expense": "Expense",
+    "name": "Name",
+    "name_placeholder": "Food",
+    "icon": "Icon",
+    "color": "Color",
+    "save": "Save",
+    "create": "Create",
+    "update": "Update",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "delete_btn": "Delete Category",
+    "delete_alert_title": "Delete this category?",
+    "delete_alert_msg": "This action cannot be undone. Categories that are used by transactions cannot be deleted.",
+    "transactions": "Transactions",
+    "created": "Created",
+    "updated": "Updated",
+    "add_category": "Add Category",
+    "no_category": "No categories found",
+    "list": {
+      "header_title": "Category List"
+    },
+    "new": {
+      "header_title": "Add Category"
+    },
+    "detail": {
+      "header_title": "Category Detail"
+    },
+    "edit": {
+      "header_title": "Edit Category"
     }
   },
   "wallet": {

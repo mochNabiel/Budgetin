@@ -33,7 +33,7 @@ export async function saveProfile(formData: FormData): Promise<ActionState> {
 
   if (avatar && avatar.size > 0) {
     const fileExt = avatar.name.split(".").pop()
-    const filePath = `${user.id}/${Date.now()}.${fileExt}`
+    const filePath = `${user.id}/avatar.${fileExt}`
 
     const { error: uploadError } = await supabase.storage
       .from("avatars")

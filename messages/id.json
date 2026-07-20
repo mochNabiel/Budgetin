@@ -3,8 +3,8 @@
     "add_action_sheet": {
       "title": "Mau ngapain nih?",
       "record_title": "Catat Transaksi",
-      "record_description": "Catat pemasukan atau pengeluaran",
-      "transfer_title": "Transfer Antar Dompet",
+      "record_description": "Catat income atau expense",
+      "transfer_title": "Transfer Dompet",
       "transfer_description": "Pindahkan uang dari satu dompet ke dompet lain",
       "transfer_disabled_description": "Tambahkan dompet lain dulu untuk mengaktifkan transfer"
     },
@@ -14,8 +14,8 @@
     },
     "stats": {
       "total_balance": "Total Saldo",
-      "income": "Pemasukan",
-      "expense": "Pengeluaran",
+      "income": "Income",
+      "expense": "Expense",
       "wallet_period": "Seluruh dompet • {period}"
     },
     "actions": {
@@ -44,8 +44,8 @@
   },
   "transaction": {
     "type": "Tipe",
-    "expense": "Pengeluaran",
-    "income": "Pemasukan",
+    "expense": "Expense",
+    "income": "Income",
     "amount": "Jumlah",
     "category": "Kategori",
     "category_placeholder": "Pilih Kategori",
@@ -82,8 +82,8 @@
       "title": "Filter Transaksi",
       "type": "Tipe",
       "type_all": "Semua",
-      "type_expense": "Pengeluaran",
-      "type_income": "Pemasukan",
+      "type_expense": "Expense",
+      "type_income": "Income",
       "date_range": "Rentang Tanggal",
       "wallet": "Dompet",
       "wallet_placeholder": "Semua Dompet",
@@ -127,6 +127,40 @@
       "date_range": "Rentang Tanggal",
       "reset": "Reset",
       "apply": "Terapkan Filter"
+    }
+  },
+  "category": {
+    "type": "Tipe",
+    "income": "Income",
+    "expense": "Expense",
+    "name": "Nama",
+    "name_placeholder": "Makanan",
+    "icon": "Ikon",
+    "color": "Warna",
+    "save": "Simpan",
+    "create": "Buat",
+    "update": "Perbarui",
+    "cancel": "Batal",
+    "delete": "Hapus",
+    "delete_btn": "Hapus Kategori",
+    "delete_alert_title": "Hapus kategori ini?",
+    "delete_alert_msg": "Aksi ini tidak dapat dibatalkan. Kategori yang dipakai transaksi tidak bisa dihapus.",
+    "transactions": "Transaksi",
+    "created": "Dibuat",
+    "updated": "Diperbarui",
+    "add_category": "Tambah Kategori",
+    "no_category": "Belum ada kategori",
+    "list": {
+      "header_title": "Daftar Kategori"
+    },
+    "new": {
+      "header_title": "Tambah Kategori"
+    },
+    "detail": {
+      "header_title": "Detail Kategori"
+    },
+    "edit": {
+      "header_title": "Edit Kategori"
     }
   },
   "wallet": {
