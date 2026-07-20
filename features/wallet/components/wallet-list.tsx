@@ -1,8 +1,8 @@
 import { getUserData } from "@/features/auth/lib/queries"
 import { getWallets } from "@/features/wallet/lib/queries"
 import formatCurrency from "@/shared/helper/format-currency"
-import EditWalletDialog from "./edit-wallet-dialog"
-import DeleteWalletButton from "./delete-wallet-button"
+import { Link } from "@/i18n/navigation"
+import { ChevronRight } from "lucide-react"
 
 export default async function WalletList() {
   const { currency } = await getUserData()
@@ -11,9 +11,14 @@ export default async function WalletList() {
   return (
     <div className="flex flex-col gap-2">
       {wallets.map((wallet) => (
-        <div
+        <Link
           key={wallet.id}
-          className="flex items-center gap-3 rounded-xl border p-4"
+          href={`/wallet/${wallet.id}`}
+          className="flex items-center gap-3 rounded-xl border p-4 transition-colors hover:bg-muted/40"
+          style={{
+            backgroundColor: `${wallet.color}30`,
+            borderColor: wallet.color,
+          }}
         >
           <span
             className="flex size-11 shrink-0 items-center justify-center rounded-full text-xl"
@@ -29,9 +34,8 @@ export default async function WalletList() {
             </p>
           </div>
 
-          <EditWalletDialog wallet={wallet} />
-          <DeleteWalletButton walletId={wallet.id} walletName={wallet.name} />
-        </div>
+          <ChevronRight className="size-4 shrink-0 text-muted-foreground" />
+        </Link>
       ))}
     </div>
   )
