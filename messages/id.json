@@ -21,7 +21,7 @@
     "actions": {
       "title": "Aksi Cepat",
       "record": "Catat Transaksi",
-      "transfer": "Transfer Antar Dompet",
+      "transfer": "Transfer Dompet",
       "budget": "Atur Budget",
       "export": "Ekspor Data"
     },

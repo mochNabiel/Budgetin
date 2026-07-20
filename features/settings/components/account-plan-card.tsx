@@ -2,7 +2,7 @@
 
 import Image from "next/image"
 import { useMemo, useState, useTransition } from "react"
-import { Camera, ChevronRight, Crown, Wallet } from "lucide-react"
+import { ChevronRight, Crown, Pencil } from "lucide-react"
 import { toast } from "sonner"
 
 import { Button } from "@/components/ui/button"
@@ -20,11 +20,7 @@ import { useUser } from "@/components/global/user-provider"
 import { saveProfile } from "@/features/auth/lib/actions/save-profile"
 import { useRouter } from "@/i18n/navigation"
 
-interface Props {
-  walletCount: number
-}
-
-export default function AccountPlanCard({ walletCount }: Props) {
+export default function AccountPlanCard() {
   const user = useUser()
   const router = useRouter()
   const [open, setOpen] = useState(false)
@@ -102,7 +98,7 @@ export default function AccountPlanCard({ walletCount }: Props) {
                   size="icon"
                   className="absolute right-0 bottom-0 size-8 rounded-full bg-primary text-primary-foreground shadow-lg"
                 >
-                  <Camera className="size-4" />
+                  <Pencil className="size-4" />
                 </Button>
               </DialogTrigger>
               <DialogContent className="sm:max-w-md">

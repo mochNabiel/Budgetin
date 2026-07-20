@@ -21,7 +21,7 @@
     "actions": {
       "title": "Quick Actions",
       "record": "Add Transaction",
-      "transfer": "Transfer Between Wallets",
+      "transfer": "Transfer Wallets",
       "budget": "Set Budget",
       "export": "Export Data"
     },
