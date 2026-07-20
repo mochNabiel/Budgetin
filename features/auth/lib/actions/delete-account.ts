@@ -6,9 +6,8 @@ import { createAdminClient } from "@/shared/supabase/admin"
 import { createClient } from "@/shared/supabase/server"
 import { getLocaleFromRequest } from "@/shared/get-locale-from-request"
 import { redirect } from "@/i18n/navigation"
-import { ActionState } from "@/types"
 
-export async function deleteAccount(): Promise<ActionState> {
+export async function deleteAccount() {
   const supabase = await createClient()
   const locale = await getLocaleFromRequest()
 
