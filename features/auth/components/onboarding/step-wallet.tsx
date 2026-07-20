@@ -213,7 +213,7 @@ export function StepWallet() {
             render={({ field, fieldState }) => (
               <Field>
                 <FieldLabel>{t("wallet_color")}</FieldLabel>
-                <div className="flex gap-3">
+                <div className="flex flex-wrap gap-3">
                   {WALLET_COLORS.map((c) => (
                     <button
                       key={c.value}

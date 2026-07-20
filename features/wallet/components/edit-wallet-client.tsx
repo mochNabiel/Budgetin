@@ -76,7 +76,7 @@ export default function EditWalletClient({ wallet }: Props) {
             <AlertDialogTitle>
               {t("delete")} &quot;{wallet.name}&quot;?
             </AlertDialogTitle>
-            <AlertDialogDescription>
+            <AlertDialogDescription>s
               {t("delete_dialog_description")}
             </AlertDialogDescription>
           </AlertDialogHeader>
