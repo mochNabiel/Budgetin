@@ -242,10 +242,9 @@ export function StepWallet() {
             <FieldLabel>Preview</FieldLabel>
             <Item
               variant="outline"
-              className="flex flex-col items-start gap-2 px-6"
+              className="flex flex-col items-start border-none gap-2 px-6"
               style={{
-                borderColor: selectedColor,
-                backgroundColor: `${selectedColor}20`,
+                backgroundColor: `${selectedColor}30`,
               }}
             >
               <ItemMedia

@@ -24,7 +24,10 @@ export default async function ActionSection() {
               >
                 <div
                   className={cn(
-                    "flex size-11 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary"
+                    "flex size-11 shrink-0 items-center justify-center rounded-full",
+                    item.color === "primary"
+                      ? "bg-primary/10 text-primary"
+                      : "bg-chart-2/10 text-chart-2"
                   )}
                 >
                   <Icon size={22} strokeWidth={2} />

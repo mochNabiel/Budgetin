@@ -208,10 +208,9 @@ export default function WalletForm({
             <FieldLabel>Preview</FieldLabel>
             <Item
               variant="outline"
-              className="flex w-fit flex-col items-start gap-2 px-6"
+              className="flex w-fit border-none flex-col items-start gap-2 px-6"
               style={{
-                borderColor: selectedColor,
-                backgroundColor: `${selectedColor}20`,
+                backgroundColor: `${selectedColor}30`,
               }}
             >
               <ItemMedia

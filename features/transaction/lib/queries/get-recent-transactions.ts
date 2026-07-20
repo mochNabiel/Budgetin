@@ -3,7 +3,7 @@ import { cache } from "react"
 import { getUserData } from "@/features/auth/lib/queries"
 import { createClient } from "@/shared/supabase/server"
 
-const LIMIT = 10
+const LIMIT = 5
 
 export interface IRecentTransaction {
   id: string

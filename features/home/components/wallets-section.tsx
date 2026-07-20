@@ -9,16 +9,14 @@ import {
 } from "@/components/ui/item"
 import { getUserData } from "@/features/auth/lib/queries/get-user-data"
 import { Link } from "@/i18n/navigation"
-import { IWallet } from "@/types/wallet"
 import { Plus } from "lucide-react"
 import { getTranslations } from "next-intl/server"
 import BalanceText from "./balance-text"
+import { getWallets } from "@/features/wallet/lib/queries"
 
-interface Props {
-  wallets: IWallet[]
-}
 
-export default async function WalletsSection({ wallets }: Props) {
+export default async function WalletsSection() {
+  const wallets = await getWallets()
   const t = await getTranslations("home")
   const { currency } = await getUserData()
 
@@ -37,10 +35,9 @@ export default async function WalletsSection({ wallets }: Props) {
           <Link key={wallet.id} href={`/wallet/${wallet.id}`}>
             <Item
               variant="outline"
-              className="flex w-fit flex-col items-start gap-2 px-6 transition-opacity hover:opacity-80"
+              className="flex w-fit border-none flex-col items-start gap-2 px-6 transition-opacity hover:opacity-80"
               style={{
-                borderColor: wallet.color,
-                backgroundColor: `${wallet.color}20`,
+                backgroundColor: `${wallet.color}30`,
               }}
             >
               <ItemMedia
@@ -50,7 +47,7 @@ export default async function WalletsSection({ wallets }: Props) {
               >
                 {wallet.icon}
               </ItemMedia>
-              
+
               <ItemContent className="gap-0">
                 <ItemTitle className="w-full truncate text-sm font-light">
                   {wallet.name}

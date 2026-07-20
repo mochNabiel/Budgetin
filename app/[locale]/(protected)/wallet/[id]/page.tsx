@@ -56,7 +56,7 @@ export default async function WalletDetailPage({ params }: PageProps) {
           className="flex flex-col items-center gap-3 rounded-2xl border py-8"
           style={{
             borderColor: wallet.color,
-            backgroundColor: `${wallet.color}15`,
+            backgroundColor: `${wallet.color}30`,
           }}
         >
           <span

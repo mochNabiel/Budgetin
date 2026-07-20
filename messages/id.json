@@ -1,5 +1,13 @@
 {
   "home": {
+    "add_action_sheet": {
+      "title": "Mau ngapain nih?",
+      "record_title": "Catat Transaksi",
+      "record_description": "Catat pemasukan atau pengeluaran",
+      "transfer_title": "Transfer Antar Dompet",
+      "transfer_description": "Pindahkan uang dari satu dompet ke dompet lain",
+      "transfer_disabled_description": "Tambahkan dompet lain dulu untuk mengaktifkan transfer"
+    },
     "header": {
       "welcome": "Senang bertemu lagi,",
       "description": "Saatnya lihat progress finansialmu hari ini"
@@ -13,7 +21,7 @@
     "actions": {
       "title": "Aksi Cepat",
       "record": "Catat Transaksi",
-      "transfer": "Pindahkan Dana",
+      "transfer": "Transfer Antar Dompet",
       "budget": "Atur Budget",
       "export": "Ekspor Data"
     },
@@ -26,6 +34,11 @@
       "title": "Transaksi Terakhir",
       "empty_title": "Belum ada transaksi",
       "empty_description": "Transaksi yang kamu catat akan muncul di sini"
+    },
+    "recent_transfers": {
+      "title": "Transfer Terbaru",
+      "empty_title": "Belum ada transfer",
+      "empty_description": "Transfer yang kamu catat akan muncul di sini"
     },
     "view_all": "Lihat Semua"
   },
@@ -78,6 +91,18 @@
       "category_placeholder": "Semua Kategori",
       "reset": "Reset",
       "apply": "Terapkan Filter"
+    }
+  },
+  "transfer": {
+    "new": {
+      "header_title": "Transfer Baru",
+      "from_wallet": "Dari Dompet",
+      "to_wallet": "Ke Dompet",
+      "swap": "Tukar dompet",
+      "notes": "Catatan",
+      "notes_placeholder": "cth. Pindah tabungan ke rekening utama",
+      "save": "Transfer",
+      "saving": "Memproses..."
     }
   },
   "wallet": {

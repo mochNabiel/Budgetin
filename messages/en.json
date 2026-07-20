@@ -1,5 +1,13 @@
 {
   "home": {
+    "add_action_sheet": {
+      "title": "What would you like to do?",
+      "record_title": "Record Transaction",
+      "record_description": "Log an income or expense",
+      "transfer_title": "Transfer Between Wallets",
+      "transfer_description": "Move money from one wallet to another",
+      "transfer_disabled_description": "Add another wallet first to enable transfers"
+    },
     "header": {
       "welcome": "Glad you're here,",
       "description": "It's time to start tracking your finances."
@@ -13,7 +21,7 @@
     "actions": {
       "title": "Quick Actions",
       "record": "Add Transaction",
-      "transfer": "Move Money",
+      "transfer": "Transfer Between Wallets",
       "budget": "Set Budget",
       "export": "Export Data"
     },
@@ -26,6 +34,11 @@
       "title": "Recent Transactions",
       "empty_title": "No transactions yet",
       "empty_description": "Transactions you record will show up here"
+    },
+    "recent_transfers": {
+      "title": "Recent Transfers",
+      "empty_title": "No transfers yet",
+      "empty_description": "Transfers you make will show up here"
     },
     "view_all": "View All"
   },
@@ -78,6 +91,18 @@
       "category_placeholder": "All Categories",
       "reset": "Reset",
       "apply": "Apply Filter"
+    }
+  },
+  "transfer": {
+    "new": {
+      "header_title": "New Transfer",
+      "from_wallet": "From Wallet",
+      "to_wallet": "To Wallet",
+      "swap": "Swap wallets",
+      "notes": "Notes",
+      "notes_placeholder": "e.g. Move savings to main account",
+      "save": "Transfer",
+      "saving": "Processing..."
     }
   },
   "wallet": {
