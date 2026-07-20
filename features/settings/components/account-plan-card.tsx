@@ -190,7 +190,7 @@ export default function AccountPlanCard() {
 
       <div className="p-4 pt-0">
         <Button
-          className="h-12 w-full gap-2 bg-linear-to-r from-pink-600 to-fuchsia-500 text-white shadow-lg shadow-pink-500/20 hover:opacity-95"
+          className="rounded-xl h-12 w-full gap-2 bg-linear-to-r from-primary via-primary to-chart-2 text-primary-foreground hover:opacity-95"
           onClick={() => router.push("/subscription")}
         >
           <Crown className="size-4" />

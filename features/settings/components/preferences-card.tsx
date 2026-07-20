@@ -8,6 +8,7 @@ import {
   ChevronRight,
   Coins,
   Globe,
+  Monitor,
   MoonStar,
   SunMedium,
   Tag,
@@ -15,7 +16,6 @@ import {
 } from "lucide-react"
 import { toast } from "sonner"
 
-import { Button } from "@/components/ui/button"
 import {
   Dialog,
   DialogContent,
@@ -23,13 +23,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuRadioGroup,
-  DropdownMenuRadioItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
 import { usePathname, useRouter } from "@/i18n/navigation"
 import { locales } from "@/constants/locales"
 import { CURRENCIES } from "@/constants/currencies"
@@ -40,6 +33,12 @@ import { useUser } from "@/components/global/user-provider"
 
 type ThemeOption = "system" | "light" | "dark"
 
+const THEME_OPTIONS: { value: ThemeOption; icon: typeof Monitor }[] = [
+  { value: "system", icon: Monitor },
+  { value: "light", icon: SunMedium },
+  { value: "dark", icon: MoonStar },
+]
+
 export default function PreferencesCard() {
   const user = useUser()
   const locale = useLocale()
@@ -48,11 +47,14 @@ export default function PreferencesCard() {
   const { theme, setTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
   const [currencyOpen, setCurrencyOpen] = useState(false)
+  const [languageOpen, setLanguageOpen] = useState(false)
   const [isPending, startTransition] = useTransition()
 
   const currentCurrency =
     CURRENCIES.find((currency) => currency.code === user.currency) ??
     CURRENCIES[0]
+
+  const currentLanguage = locales.find((item) => item.value === locale)
 
   const currentTheme = (theme ?? "system") as ThemeOption
 
@@ -63,6 +65,7 @@ export default function PreferencesCard() {
 
   function handleLanguageChange(nextLocale: string) {
     router.replace(pathname, { locale: nextLocale })
+    setLanguageOpen(false)
   }
 
   function handleCurrencyChange(currencyCode: string) {
@@ -82,8 +85,8 @@ export default function PreferencesCard() {
 
   return (
     <div className="overflow-hidden rounded-3xl border bg-background">
-      <DropdownMenu>
-        <DropdownMenuTrigger asChild>
+      <Dialog open={languageOpen} onOpenChange={setLanguageOpen}>
+        <DialogTrigger asChild>
           <button
             type="button"
             className="flex w-full items-center gap-3 px-4 py-4 text-left transition-colors hover:bg-muted/40"
@@ -94,28 +97,44 @@ export default function PreferencesCard() {
             <div className="min-w-0 flex-1">
               <p className="font-medium">Language</p>
               <p className="text-sm text-muted-foreground">
-                {locales.find((item) => item.value === locale)?.label}
+                {currentLanguage?.label}
               </p>
             </div>
             <ChevronRight className="size-4 text-muted-foreground" />
           </button>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent align="start">
-          <DropdownMenuRadioGroup
-            value={locale}
-            onValueChange={handleLanguageChange}
-          >
-            {locales.map((item) => (
-              <DropdownMenuRadioItem key={item.value} value={item.value}>
-                <div className="flex items-center gap-2">
-                  <span>{item.flag}</span>
-                  <span>{item.label}</span>
-                </div>
-              </DropdownMenuRadioItem>
-            ))}
-          </DropdownMenuRadioGroup>
-        </DropdownMenuContent>
-      </DropdownMenu>
+        </DialogTrigger>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle>Select language</DialogTitle>
+          </DialogHeader>
+          <div className="grid gap-2">
+            {locales.map((item) => {
+              const selected = item.value === locale
+              return (
+                <button
+                  key={item.value}
+                  type="button"
+                  onClick={() => handleLanguageChange(item.value)}
+                  className={cn(
+                    "flex items-center gap-3 rounded-2xl border px-4 py-3 text-left transition-colors",
+                    selected
+                      ? "border-primary bg-primary/10"
+                      : "border-border hover:bg-muted/40"
+                  )}
+                >
+                  <span className="flex size-10 shrink-0 items-center justify-center rounded-2xl bg-muted text-lg">
+                    {item.flag}
+                  </span>
+                  <div className="min-w-0 flex-1">
+                    <p className="font-medium">{item.label}</p>
+                  </div>
+                  {selected && <Check className="size-4 text-primary" />}
+                </button>
+              )
+            })}
+          </div>
+        </DialogContent>
+      </Dialog>
 
       <Dialog open={currencyOpen} onOpenChange={setCurrencyOpen}>
         <DialogTrigger asChild>
@@ -172,30 +191,41 @@ export default function PreferencesCard() {
         </DialogContent>
       </Dialog>
 
-      <div className="flex items-center gap-3 border-t px-4 py-4">
-        <span className="flex size-11 items-center justify-center rounded-2xl bg-sky-500/10 text-sky-600">
-          <SunMedium className="size-5 dark:hidden" />
-          <MoonStar className="hidden size-5 dark:block" />
-        </span>
-        <div className="min-w-0 flex-1">
-          <p className="font-medium">Theme</p>
-          <p className="text-sm text-muted-foreground capitalize">
-            {mounted ? currentTheme : "system"}
-          </p>
+      <div className="border-t px-4 py-4">
+        <div className="flex items-center gap-3">
+          <span className="flex size-11 shrink-0 items-center justify-center rounded-2xl bg-sky-500/10 text-sky-600">
+            <SunMedium className="size-5 dark:hidden" />
+            <MoonStar className="hidden size-5 dark:block" />
+          </span>
+          <div className="min-w-0 flex-1">
+            <p className="font-medium">Theme</p>
+            <p className="text-sm text-muted-foreground capitalize">
+              {mounted ? currentTheme : "system"}
+            </p>
+          </div>
         </div>
-        <div className="grid grid-cols-3 gap-1 rounded-xl bg-muted p-1">
-          {(["system", "light", "dark"] as const).map((option) => (
-            <Button
-              key={option}
-              type="button"
-              variant={mounted && currentTheme === option ? "default" : "ghost"}
-              size="sm"
-              className="h-8 px-3 capitalize"
-              onClick={() => setTheme(option)}
-            >
-              {option}
-            </Button>
-          ))}
+
+        <div className="mt-3 grid grid-cols-3 gap-2">
+          {THEME_OPTIONS.map(({ value, icon: Icon }) => {
+            const selected = mounted && currentTheme === value
+
+            return (
+              <button
+                key={value}
+                type="button"
+                aria-label={value}
+                onClick={() => setTheme(value)}
+                className={cn(
+                  "flex h-11 items-center justify-center rounded-xl border transition-colors",
+                  selected
+                    ? "border-primary bg-primary text-primary-foreground"
+                    : "border-border text-muted-foreground hover:bg-muted/40"
+                )}
+              >
+                <Icon className="size-5" />
+              </button>
+            )
+          })}
         </div>
       </div>
 

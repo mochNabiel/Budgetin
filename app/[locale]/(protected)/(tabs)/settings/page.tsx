@@ -1,6 +1,5 @@
 import { Metadata } from "next"
 
-import { getWallets } from "@/features/wallet/lib/queries"
 import AccountPlanCard from "@/features/settings/components/account-plan-card"
 import PreferencesCard from "@/features/settings/components/preferences-card"
 import DangerZoneCard from "@/features/settings/components/danger-zone-card"
@@ -12,13 +11,11 @@ export const metadata: Metadata = {
 }
 
 export default async function SettingsPage() {
-  const wallets = await getWallets()
-
   return (
     <main className="space-y-4 px-4 py-6 pb-28">
       <section className="space-y-3">
         <SectionHeader title="Account & Plan" />
-        <AccountPlanCard walletCount={wallets.length} />
+        <AccountPlanCard />
       </section>
 
       <section className="space-y-3">
