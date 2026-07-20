@@ -1,19 +1,18 @@
 import { type NextRequest } from "next/server"
 import { updateSession } from "@/shared/supabase/proxy"
+import { handleI18nRouting } from "@/i18n/proxy"
 
 export async function proxy(request: NextRequest) {
-  return await updateSession(request)
+  // 1. next-intl handle locale detection & routing dulu
+  const intlResponse = handleI18nRouting(request)
+
+  // 2. lanjut ke Supabase session/auth logic,
+  //    dengan response dari next-intl sebagai base (bukan bikin baru)
+  return await updateSession(request, intlResponse)
 }
 
 export const config = {
   matcher: [
-    /*
-     * Match all request paths except for the ones starting with:
-     * - _next/static (static files)
-     * - _next/image (image optimization files)
-     * - favicon.ico (favicon file)
-     * Feel free to modify this pattern to include more paths.
-     */
     "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
   ],
 }

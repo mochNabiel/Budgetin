@@ -7,45 +7,61 @@ import {
   ItemMedia,
   ItemTitle,
 } from "@/components/ui/item"
+import { getUserData } from "@/features/auth/lib/queries/get-user-data"
 import { Link } from "@/i18n/navigation"
-import formatCurrency from "@/shared/helper/format-currency"
 import { IWallet } from "@/types/wallet"
 import { Plus } from "lucide-react"
 import { getTranslations } from "next-intl/server"
+import BalanceText from "./balance-text"
 
 interface Props {
   wallets: IWallet[]
 }
 
 export default async function WalletsSection({ wallets }: Props) {
-  const t = await getTranslations("home.wallets")
+  const t = await getTranslations("home")
+  const { currency } = await getUserData()
+
   return (
     <section>
-      <SectionHeader title={t("title")} />
+      <SectionHeader
+        title={t("wallets.title")}
+        action={
+          <Button variant="link" className="h-fit" asChild>
+            <Link href="/wallet">{t("view_all")}</Link>
+          </Button>
+        }
+      />
       <div className="flex scrollbar-none gap-3 overflow-x-auto [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
         {wallets.map((wallet) => (
-          <Item
-            key={wallet.id}
-            variant="outline"
-            className="flex min-w-48 flex-col items-start gap-2 px-6"
-          >
-            <ItemMedia
-              variant="icon"
-              className="size-9 text-lg rounded-full"
-              style={{ backgroundColor: wallet.color }}
+          <Link key={wallet.id} href={`/wallet/${wallet.id}`}>
+            <Item
+              variant="outline"
+              className="flex w-fit flex-col items-start gap-2 px-6 transition-opacity hover:opacity-80"
+              style={{
+                borderColor: wallet.color,
+                backgroundColor: `${wallet.color}20`,
+              }}
             >
-              {wallet.icon}
-            </ItemMedia>
+              <ItemMedia
+                variant="icon"
+                className="size-9 rounded-full text-lg"
+                style={{ backgroundColor: wallet.color }}
+              >
+                {wallet.icon}
+              </ItemMedia>
+              
+              <ItemContent className="gap-0">
+                <ItemTitle className="w-full truncate text-sm font-light">
+                  {wallet.name}
+                </ItemTitle>
 
-            <ItemContent className="gap-0">
-              <ItemTitle className="text-xs font-medium tracking-wide text-mist-500">
-                {wallet.name}
-              </ItemTitle>
-              <ItemDescription className="text-lg font-semibold text-mist-950">
-                {formatCurrency(wallet.balance)}
-              </ItemDescription>
-            </ItemContent>
-          </Item>
+                <ItemDescription className="w-full text-lg font-semibold whitespace-nowrap text-foreground">
+                  <BalanceText amount={wallet.balance} currency={currency} />
+                </ItemDescription>
+              </ItemContent>
+            </Item>
+          </Link>
         ))}
 
         <Button
@@ -53,13 +69,13 @@ export default async function WalletsSection({ wallets }: Props) {
           className="h-auto w-44 shrink-0 rounded-xl border-2 border-dashed border-muted-foreground/30 p-4 hover:border-primary hover:bg-primary/5"
           asChild
         >
-          <Link href="/wallets/new">
+          <Link href="/wallet/new">
             <div className="flex h-full w-full flex-col items-center justify-center gap-2">
               <div className="flex size-10 items-center justify-center rounded-full bg-primary/10 text-primary">
                 <Plus className="size-5" />
               </div>
 
-              <span className="font-medium">{t("add_wallet")}</span>
+              <span className="font-medium">{t("wallets.add_wallet")}</span>
             </div>
           </Link>
         </Button>

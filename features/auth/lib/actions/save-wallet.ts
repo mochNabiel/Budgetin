@@ -2,7 +2,7 @@
 
 import { redirect } from "@/i18n/navigation"
 import { getLocaleFromRequest } from "@/shared/get-locale-from-request"
-import { walletSchema } from "@/shared/schemas/wallet.schema"
+import { initialWalletSchema } from "@/shared/schemas/wallet.schema"
 import { createClient } from "@/shared/supabase/server"
 import { ActionState } from "@/types"
 
@@ -19,9 +19,9 @@ export async function saveWallet(formData: FormData): Promise<ActionState> {
     return { success: false, message: "You must be signed in" }
   }
 
-  const parsed = walletSchema.safeParse({
+  const parsed = initialWalletSchema.safeParse({
     name: formData.get("name")?.toString().trim(),
-    balance: formData.get("balance")?.toString(),
+    balance: formData.get("balance"),
     currency: formData.get("currency")?.toString(),
     icon: formData.get("icon")?.toString(),
     color: formData.get("color")?.toString(),
@@ -47,7 +47,7 @@ export async function saveWallet(formData: FormData): Promise<ActionState> {
     name,
     icon,
     color,
-    balance: Number(balance.replace(/\./g, "")),
+    balance,
   })
 
   if (walletError) {

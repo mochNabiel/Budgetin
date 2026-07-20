@@ -1,11 +1,4 @@
 {
-  "bottomNavBar": {
-    "home": "Beranda",
-    "transactions": "Transaksi",
-    "statistics": "Statistik",
-    "assistant": "Asisten AI",
-    "settings": "Pengaturan"
-  },
   "home": {
     "header": {
       "welcome": "Senang bertemu lagi,",
@@ -14,10 +7,11 @@
     "stats": {
       "total_balance": "Total Saldo",
       "income": "Pemasukan",
-      "expense": "Pengeluaran"
+      "expense": "Pengeluaran",
+      "wallet_period": "Seluruh dompet • {period}"
     },
     "actions": {
-      "title": "Aksi Utama",
+      "title": "Aksi Cepat",
       "record": "Catat Transaksi",
       "transfer": "Pindahkan Dana",
       "budget": "Atur Budget",
@@ -30,7 +24,88 @@
     },
     "recent_transactions": {
       "title": "Transaksi Terakhir",
-      "view_all": "Lihat Semua"
+      "empty_title": "Belum ada transaksi",
+      "empty_description": "Transaksi yang kamu catat akan muncul di sini"
+    },
+    "view_all": "Lihat Semua"
+  },
+  "transaction": {
+    "type": "Tipe",
+    "expense": "Pengeluaran",
+    "income": "Pemasukan",
+    "amount": "Jumlah",
+    "category": "Kategori",
+    "category_placeholder": "Pilih Kategori",
+    "wallet": "Dompet",
+    "date": "Tanggal",
+    "today": "Hari Ini",
+    "yesterday": "Kemarin",
+    "notes": "Catatan",
+    "notes_placeholder": "Beli sepatu Adidas",
+    "attachment": "Lampiran",
+    "created": "Dibuat",
+    "updated": "Diperbarui",
+    "delete": "Hapus",
+    "delete_btn": "Hapus Transaksi",
+    "delete_alert_title": "Hapus transaksi ini?",
+    "delete_alert_msg": "Aksi ini tidak dapat dibatalkan. Saldo akan disesuaikan secara otomatis.",
+    "cancel": "Batal",
+    "save": "Simpan",
+    "saving": "Menyimpan...",
+    "no_transaction": "Belum ada transaksi",
+    "new": {
+      "header_title": "Catat Transaksi"
+    },
+    "edit": {
+      "header_title": "Edit Transaksi"
+    },
+    "detail": {
+      "header_title": "Detail Transaksi"
+    },
+    "history": {
+      "header_title": "Riwayat Transaksi"
+    },
+    "filter": {
+      "title": "Filter Transaksi",
+      "type": "Tipe",
+      "type_all": "Semua",
+      "type_expense": "Pengeluaran",
+      "type_income": "Pemasukan",
+      "date_range": "Rentang Tanggal",
+      "wallet": "Dompet",
+      "wallet_placeholder": "Semua Dompet",
+      "category": "Kategori",
+      "category_placeholder": "Semua Kategori",
+      "reset": "Reset",
+      "apply": "Terapkan Filter"
+    }
+  },
+  "wallet": {
+    "add_wallet": "Tambah Dompet",
+    "name_icon": "Nama dan Ikon Dompet",
+    "name_placeholder": "Dompet Utama",
+    "initial_balance": "Saldo Awal",
+    "balance": "Saldo",
+    "color": "Warna Dompet",
+    "save": "Simpan",
+    "cancel": "Batal",
+    "delete": "Hapus",
+    "delete_wallet": "Hapus Dompet",
+    "delete_dialog_description": "Aksi ini tidak dapat dibatalkan. Dompet dan semua transaksi yang terkait akan dihapus secara permanen.",
+    "list": {
+      "header_title": "Daftar Dompet"
+    },
+    "detail": {
+      "header_title": "Detail Dompet",
+      "created": "Dibuat",
+      "updated": "Diperbarui",
+      "transactions": "Transaksi"
+    },
+    "new": {
+      "header_title": "Tambah Dompet"
+    },
+    "edit": {
+      "header_title": "Edit Dompet"
     }
   },
   "validation": {

@@ -3,12 +3,8 @@ import { Link } from "@/i18n/navigation"
 import { ChevronLeft } from "lucide-react"
 import { getTranslations } from "next-intl/server"
 
-interface Props {
-  locale: string
-}
-
-export default async function BackHomeButton({ locale }: Props) {
-  const t = await getTranslations({ locale, namespace: "auth.login" })
+export default async function BackHomeButton() {
+  const t = await getTranslations("auth.login")
   return (
     <Button
       variant="link"

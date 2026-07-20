@@ -12,7 +12,7 @@ export function SectionHeader({ title, icon, action }: SectionHeaderProps) {
       <div className="flex items-center gap-1">
         {icon}
 
-        <h2 className="font-semibold tracking-wide text-lg">{title}</h2>
+        <h2 className="font-semibold text-lg">{title}</h2>
       </div>
 
       {action && <div className="shrink-0">{action}</div>}

@@ -34,7 +34,6 @@ export function StepProfile({
   onDone,
 }: StepProfileProps) {
   const [preview, setPreview] = useState<string | null>(defaultAvatar ?? null)
-  const [serverError, setServerError] = useState<string>()
   const [isPending, startTransition] = useTransition()
 
   const t = useTranslations("auth.onboarding")
@@ -51,8 +50,6 @@ export function StepProfile({
   const { onChange: onAvatarChange, ...avatarField } = register("avatarFile")
 
   function onSubmit(values: ProfileFormValues) {
-    setServerError(undefined)
-
     startTransition(async () => {
       const formData = new FormData()
       formData.set("full_name", values.full_name)
@@ -60,12 +57,7 @@ export function StepProfile({
       const file = values.avatarFile?.[0]
       if (file) formData.set("avatar", file)
 
-      const result = await saveProfile(formData)
-
-      if (!result.success) {
-        setServerError(result.message)
-        return
-      }
+      await saveProfile(formData)
 
       onDone()
     })
@@ -125,10 +117,6 @@ export function StepProfile({
               <FieldError>{errors.full_name.message}</FieldError>
             )}
           </Field>
-
-          {serverError && (
-            <FieldError className="text-center">{serverError}</FieldError>
-          )}
 
           <Button type="submit" disabled={isPending} className="w-full">
             {isPending ? t("saving") : t("continue")}

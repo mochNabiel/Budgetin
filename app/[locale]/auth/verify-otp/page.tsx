@@ -4,7 +4,6 @@ import AuthTopbar from "@/features/auth/components/auth-topbar"
 import AuthHeading from "@/features/auth/components/auth-heading"
 import { VerifyOtpForm } from "@/features/auth/components/otp/verify-otp-form"
 import { getTranslations } from "next-intl/server"
-import type { Locale } from "next-intl"
 import AuthFooter from "@/features/auth/components/auth-footer"
 
 export const metadata: Metadata = {
@@ -12,13 +11,8 @@ export const metadata: Metadata = {
   description: "Verify OTP",
 }
 
-interface Props {
-  params: Promise<{ locale: Locale }>
-}
-
-export default async function VerifyOtpPage({ params }: Props) {
-  const { locale } = await params
-  const t = await getTranslations({ locale, namespace: "auth.otp" })
+export default async function VerifyOtpPage() {
+  const t = await getTranslations("auth.otp")
   return (
     <AuthContainer>
       <AuthTopbar />

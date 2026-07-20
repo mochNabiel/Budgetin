@@ -1,5 +1,4 @@
 import { Metadata } from "next"
-import type { Locale } from "next-intl"
 
 import { FieldSeparator } from "@/components/ui/field"
 import { getTranslations } from "next-intl/server"
@@ -18,13 +17,8 @@ export const metadata: Metadata = {
   description: "Login",
 }
 
-interface Props {
-  params: Promise<{ locale: Locale }>
-}
-
-export default async function LoginPage({ params }: Props) {
-  const { locale } = await params
-  const t = await getTranslations({ locale, namespace: "auth.login" })
+export default async function LoginPage() {
+  const t = await getTranslations("auth.login")
   return (
     <AuthContainer>
       <AuthTopbar />
@@ -39,7 +33,7 @@ export default async function LoginPage({ params }: Props) {
       <EmailLoginForm />
       <FieldSeparator className="my-4">{t("or")}</FieldSeparator>
       <GoogleLoginForm />
-      <BackHomeButton locale={locale} />
+      <BackHomeButton />
       <AuthFooter />
     </AuthContainer>
   )

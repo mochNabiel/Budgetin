@@ -1,6 +1,5 @@
 import { createServerClient } from "@supabase/ssr"
 import { NextResponse, type NextRequest } from "next/server"
-
 import { routing } from "@/i18n/routing"
 
 const PUBLIC_ROUTES = ["/"]
@@ -9,8 +8,13 @@ const LOGIN_PATH = "/auth/login"
 const HOME_PATH = "/home"
 const ONBOARDING_PATH = "/auth/onboarding"
 
-export async function updateSession(request: NextRequest) {
-  let supabaseResponse = NextResponse.next({ request })
+export async function updateSession(
+  request: NextRequest,
+  baseResponse?: NextResponse
+) {
+  // pakai response dari next-intl kalau ada (supaya cookie/header locale-nya
+  // tidak hilang), fallback bikin baru kalau tidak ada
+  let supabaseResponse = baseResponse ?? NextResponse.next({ request })
 
   const supabase = createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -24,6 +28,7 @@ export async function updateSession(request: NextRequest) {
           cookiesToSet.forEach(({ name, value }) =>
             request.cookies.set(name, value)
           )
+          // penting: rebuild response tapi tetap dari base yang sama
           supabaseResponse = NextResponse.next({ request })
           cookiesToSet.forEach(({ name, value, options }) =>
             supabaseResponse.cookies.set(name, value, options)
@@ -35,7 +40,6 @@ export async function updateSession(request: NextRequest) {
 
   const pathname = request.nextUrl.pathname
 
-  // Redirect root "/" ke default locale
   if (pathname === "/") {
     const url = request.nextUrl.clone()
     url.pathname = `/${routing.defaultLocale}`
@@ -59,7 +63,6 @@ export async function updateSession(request: NextRequest) {
     return NextResponse.redirect(url)
   }
 
-  // OAuth code exchange — kirim ke dedicated route handler
   if (route === "/" && request.nextUrl.searchParams.has("code")) {
     const url = request.nextUrl.clone()
     url.pathname = `/${locale}/auth/oauth`
@@ -70,16 +73,13 @@ export async function updateSession(request: NextRequest) {
   const isAuthRoute = route.startsWith(AUTH_PREFIX)
   const isOnboardingRoute = route === ONBOARDING_PATH
 
-  // Decode JWT lokal — tidak ada network call
   const { data } = await supabase.auth.getClaims()
   const user = data?.claims
 
-  // Guest: block semua protected routes
   if (!user && !isPublicRoute && !isAuthRoute) {
     return redirectTo(LOGIN_PATH)
   }
 
-  // Untuk user yang sudah login, cek onboarding status dari DB
   if (user) {
     const { data: profile } = await supabase
       .from("profiles")
@@ -89,18 +89,14 @@ export async function updateSession(request: NextRequest) {
 
     const needsOnboarding = profile?.onboarding_completed === false
 
-    // Belum onboarding — paksa ke onboarding
     if (needsOnboarding && !isOnboardingRoute) {
       return redirectTo(ONBOARDING_PATH)
     }
 
-    // Sudah onboarding — block akses ke /auth/onboarding
     if (!needsOnboarding && isOnboardingRoute) {
       return redirectTo(HOME_PATH)
     }
 
-    // Sudah login — block semua auth pages (login, verify-otp, dll)
-    // kecuali onboarding yang sudah dihandle di atas
     if (isAuthRoute && !isOnboardingRoute) {
       return redirectTo(HOME_PATH)
     }

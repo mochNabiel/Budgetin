@@ -22,7 +22,7 @@ export default async function Page() {
       <div className="space-y-4">
         <StatsSection />
         <ActionSection />
-        <WalletsSection wallets={wallets ?? []} />
+        <WalletsSection wallets={wallets} />
         <RecentTransactionsSection />
       </div>
     </div>

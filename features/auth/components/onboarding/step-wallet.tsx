@@ -4,9 +4,11 @@ import { useState, useTransition } from "react"
 import { useForm, Controller, useWatch } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import dynamic from "next/dynamic"
-import { Smile } from "lucide-react"
 
-import { walletSchema, WalletFormValues } from "@/shared/schemas/wallet.schema"
+import {
+  initialWalletSchema,
+  InitialWalletFormValues,
+} from "@/shared/schemas/wallet.schema"
 import { saveWallet } from "@/features/auth/lib/actions/save-wallet"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -24,9 +26,18 @@ import {
 import { cn } from "@/shared/utils"
 import { CURRENCIES } from "@/constants/currencies"
 import { WALLET_COLORS } from "@/constants/wallet-colors"
-import { formatThousands } from "@/shared/helper/format-thousand"
 import AuthHeading from "../auth-heading"
 import { useTranslations } from "next-intl"
+import {
+  Item,
+  ItemContent,
+  ItemDescription,
+  ItemMedia,
+  ItemTitle,
+} from "@/components/ui/item"
+import formatCurrency, {
+  getCurrencySymbol,
+} from "@/shared/helper/format-currency"
 
 const EmojiPicker = dynamic(() => import("emoji-picker-react"), { ssr: false })
 
@@ -37,32 +48,27 @@ export function StepWallet() {
   const t = useTranslations("auth.onboarding")
 
   const {
-    register,
     handleSubmit,
     control,
-    setError,
     formState: { errors },
-  } = useForm<WalletFormValues>({
-    resolver: zodResolver(walletSchema),
+  } = useForm<InitialWalletFormValues>({
+    resolver: zodResolver(initialWalletSchema),
     defaultValues: {
       name: t("wallet_name_placeholder"),
-      balance: "0",
+      balance: 0,
       currency: CURRENCIES[0].code,
       icon: "💰",
       color: WALLET_COLORS[0].value,
     },
   })
 
-  function onSubmit(values: WalletFormValues) {
+  function onSubmit(values: InitialWalletFormValues) {
     startTransition(async () => {
       const formData = new FormData()
-      Object.entries(values).forEach(([k, v]) => formData.set(k, v))
-
-      const result = await saveWallet(formData)
-
-      if (!result.success) {
-        setError("root", { message: result.message })
-      }
+      Object.entries(values).forEach(([k, v]) => {
+        formData.set(k, String(v))
+      })
+      await saveWallet(formData)
     })
   }
 
@@ -72,10 +78,6 @@ export function StepWallet() {
   const walletName = useWatch({ control, name: "name" })
   const balance = useWatch({ control, name: "balance" })
 
-  // derive simbol dari code yang tersimpan, untuk ditampilkan ke user
-const selectedCurrencySymbol =
-  CURRENCIES.find((c) => c.code === selectedCurrencyCode)?.symbol ?? ""
-
   return (
     <div className="flex flex-col gap-6">
       <AuthHeading
@@ -83,31 +85,15 @@ const selectedCurrencySymbol =
         description={t("step2_description")}
       />
 
-      {/* Preview wallet card */}
-      <div
-        className="flex items-center gap-3 rounded-2xl p-4 text-white shadow-md transition-colors"
-        style={{ backgroundColor: selectedColor }}
-      >
-        <span className="text-3xl">{selectedIcon}</span>
-        <div>
-          <p className="leading-tight font-semibold">
-            {walletName || "Nama Wallet"}
-          </p>
-          <p className="text-sm opacity-80">
-            {selectedCurrencySymbol} {formatThousands(balance)}
-          </p>
-        </div>
-      </div>
-
       <form onSubmit={handleSubmit(onSubmit)} noValidate>
         <FieldGroup>
           {/* Currency */}
-          <Field>
-            <FieldLabel>{t("currency")}</FieldLabel>
-            <Controller
-              control={control}
-              name="currency"
-              render={({ field }) => (
+          <Controller
+            control={control}
+            name="currency"
+            render={({ field, fieldState }) => (
+              <Field data-invalid={fieldState.invalid} className="gap-2">
+                <FieldLabel>{t("currency")}</FieldLabel>
                 <div className="grid grid-cols-5 gap-2">
                   {CURRENCIES.map((c) => (
                     <button
@@ -121,34 +107,39 @@ const selectedCurrencySymbol =
                           : "border-border text-muted-foreground hover:border-primary/40"
                       )}
                     >
-                      <span className="text-xs font-semibold">{c.symbol}</span>
+                      <span className="text-xs font-semibold">
+                        {getCurrencySymbol(c.code)}
+                      </span>
                       <span className="text-[10px] opacity-70">{c.name}</span>
                     </button>
                   ))}
                 </div>
-              )}
-            />
-            {errors.currency && (
-              <FieldError>{errors.currency.message}</FieldError>
+                {fieldState.invalid && (
+                  <FieldError errors={[fieldState.error]} />
+                )}
+              </Field>
             )}
-          </Field>
+          />
 
           {/* Icon + Nama — satu baris */}
           <Field>
             <FieldLabel>{t("wallet_name_icon")}</FieldLabel>
+
             <div className="flex gap-2">
               <Controller
-                control={control}
                 name="icon"
-                render={({ field }) => (
+                control={control}
+                render={({ field, fieldState }) => (
                   <Popover open={emojiOpen} onOpenChange={setEmojiOpen}>
                     <PopoverTrigger asChild>
-                      <Button variant="outline">
-                        {field.value || (
-                          <Smile className="size-4 text-muted-foreground" />
-                        )}
+                      <Button
+                        variant="outline"
+                        aria-invalid={fieldState.invalid}
+                      >
+                        {field.value}
                       </Button>
                     </PopoverTrigger>
+
                     <PopoverContent className="w-auto p-0" align="start">
                       <EmojiPicker
                         onEmojiClick={(e) => {
@@ -156,7 +147,6 @@ const selectedCurrencySymbol =
                           setEmojiOpen(false)
                         }}
                         skinTonesDisabled
-                        searchDisabled={false}
                         height={350}
                         width={300}
                       />
@@ -164,28 +154,40 @@ const selectedCurrencySymbol =
                   </Popover>
                 )}
               />
-              <div className="flex-1">
-                <Input
-                  placeholder={t("wallet_name_placeholder")}
-                  aria-invalid={!!errors.name}
-                  {...register("name")}
-                />
-              </div>
+
+              <Controller
+                name="name"
+                control={control}
+                render={({ field, fieldState }) => (
+                  <Input
+                    {...field}
+                    className="flex-1"
+                    placeholder={t("wallet_name_placeholder")}
+                    aria-invalid={fieldState.invalid}
+                  />
+                )}
+              />
             </div>
-            {errors.icon && <FieldError>{errors.icon.message}</FieldError>}
-            {errors.name && <FieldError>{errors.name.message}</FieldError>}
+
+            {(errors.icon || errors.name) && (
+              <FieldError>
+                {errors.icon?.message ?? errors.name?.message}
+              </FieldError>
+            )}
           </Field>
 
-          {/* Saldo awal */}
-          <Field>
-            <FieldLabel htmlFor="balance">{t("initial_balance")}</FieldLabel>
-            <Controller
-              control={control}
-              name="balance"
-              render={({ field }) => (
+          {/* Balance */}
+          <Controller
+            control={control}
+            name="balance"
+            render={({ field, fieldState }) => (
+              <Field>
+                <FieldLabel htmlFor="balance">
+                  {t("initial_balance")}
+                </FieldLabel>
                 <div className="relative">
                   <span className="absolute top-1/2 left-3 -translate-y-1/2 text-sm text-muted-foreground">
-                    {selectedCurrencySymbol}
+                    {getCurrencySymbol(selectedCurrencyCode)}
                   </span>
                   <Input
                     id="balance"
@@ -193,24 +195,24 @@ const selectedCurrencySymbol =
                     className="pl-14"
                     value={field.value}
                     onChange={(e) =>
-                      field.onChange(formatThousands(e.target.value))
+                      field.onChange(Number(e.target.value) || 0)
                     }
                   />
                 </div>
-              )}
-            />
-            {errors.balance && (
-              <FieldError>{errors.balance.message}</FieldError>
+                {fieldState.invalid && (
+                  <FieldError errors={[fieldState.error]} />
+                )}
+              </Field>
             )}
-          </Field>
+          />
 
           {/* Warna */}
-          <Field>
-            <FieldLabel>{t("wallet_color")}</FieldLabel>
-            <Controller
-              control={control}
-              name="color"
-              render={({ field }) => (
+          <Controller
+            control={control}
+            name="color"
+            render={({ field, fieldState }) => (
+              <Field>
+                <FieldLabel>{t("wallet_color")}</FieldLabel>
                 <div className="flex gap-3">
                   {WALLET_COLORS.map((c) => (
                     <button
@@ -228,16 +230,42 @@ const selectedCurrencySymbol =
                     />
                   ))}
                 </div>
-              )}
-            />
-            {errors.color && <FieldError>{errors.color.message}</FieldError>}
-          </Field>
+                {fieldState.invalid && (
+                  <FieldError errors={[fieldState.error]} />
+                )}
+              </Field>
+            )}
+          />
 
-          {errors.root && (
-            <FieldError className="text-center">
-              {errors.root.message}
-            </FieldError>
-          )}
+          {/* Preview wallet card */}
+          <Field>
+            <FieldLabel>Preview</FieldLabel>
+            <Item
+              variant="outline"
+              className="flex flex-col items-start gap-2 px-6"
+              style={{
+                borderColor: selectedColor,
+                backgroundColor: `${selectedColor}20`,
+              }}
+            >
+              <ItemMedia
+                variant="icon"
+                className="size-9 rounded-full text-lg"
+                style={{ backgroundColor: selectedColor }}
+              >
+                {selectedIcon}
+              </ItemMedia>
+
+              <ItemContent className="gap-0">
+                <ItemTitle className="text-xs font-medium tracking-wide text-muted-foreground">
+                  {walletName}
+                </ItemTitle>
+                <ItemDescription className="text-lg font-semibold text-foreground">
+                  {formatCurrency(balance, selectedCurrencyCode)}
+                </ItemDescription>
+              </ItemContent>
+            </Item>
+          </Field>
 
           <Button type="submit" disabled={isPending} className="w-full">
             {isPending ? t("saving") : t("start")}

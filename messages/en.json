@@ -1,11 +1,4 @@
 {
-  "bottomNavBar": {
-    "home": "Home",
-    "transactions": "Transactions",
-    "statistics": "Statistics",
-    "assistant": "Assistant",
-    "settings": "Settings"
-  },
   "home": {
     "header": {
       "welcome": "Glad you're here,",
@@ -14,10 +7,11 @@
     "stats": {
       "total_balance": "Total Balance",
       "income": "Income",
-      "expense": "Expense"
+      "expense": "Expense",
+      "wallet_period": "From all wallets • {period}"
     },
     "actions": {
-      "title": "Main Actions",
+      "title": "Quick Actions",
       "record": "Add Transaction",
       "transfer": "Move Money",
       "budget": "Set Budget",
@@ -30,7 +24,88 @@
     },
     "recent_transactions": {
       "title": "Recent Transactions",
-      "view_all": "View All"
+      "empty_title": "No transactions yet",
+      "empty_description": "Transactions you record will show up here"
+    },
+    "view_all": "View All"
+  },
+  "transaction": {
+    "type": "Type",
+    "expense": "Expense",
+    "income": "Income",
+    "amount": "Amount",
+    "category": "Category",
+    "category_placeholder": "Select a category",
+    "wallet": "Wallet",
+    "date": "Date",
+    "today": "Today",
+    "yesterday": "Yesterday",
+    "notes": "Notes",
+    "notes_placeholder": "One pair of Adidas shoes",
+    "attachment": "Attachment",
+    "created": "Created",
+    "updated": "Updated",
+    "delete": "Delete",
+    "delete_btn": "Delete Transaction",
+    "delete_alert_title": "Delete this transaction?",
+    "delete_alert_msg": "This action cannot be undone. Your balance will be adjusted automatically.",
+    "cancel": "Cancel",
+    "save": "Save",
+    "saving": "Saving...",
+    "no_transaction": "No transactions found",
+    "new": {
+      "header_title": "Add Transaction"
+    },
+    "edit": {
+      "header_title": "Edit Transaction"
+    },
+    "detail": {
+      "header_title": "Transaction Detail"
+    },
+    "history": {
+      "header_title": "Transaction History"
+    },
+    "filter": {
+      "title": "Filter Transactions",
+      "type": "Type",
+      "type_all": "All",
+      "type_expense": "Expense",
+      "type_income": "Income",
+      "date_range": "Date Range",
+      "wallet": "Wallet",
+      "wallet_placeholder": "All Wallets",
+      "category": "Category",
+      "category_placeholder": "All Categories",
+      "reset": "Reset",
+      "apply": "Apply Filter"
+    }
+  },
+  "wallet": {
+    "add_wallet": "Add Wallet",
+    "name_icon": "Wallet Name and Icon",
+    "name_placeholder": "Main Wallet",
+    "initial_balance": "Initial Balance",
+    "balance": "Balance",
+    "color": "Wallet Color",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "delete_wallet": "Delete Wallet",
+    "delete_dialog_description": "This will permanently delete this wallet and all transactions associated with it. This action cannot be undone.",
+    "list": {
+      "header_title": "Wallet List"
+    },
+    "detail": {
+      "header_title": "Wallet Detail",
+      "created": "Created",
+      "updated": "Updated",
+      "transactions": "Transactions"
+    },
+    "new": {
+      "header_title": "Add Wallet"
+    },
+    "edit": {
+      "header_title": "Edit Wallet"
     }
   },
   "validation": {

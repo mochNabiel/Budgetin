@@ -1,9 +1,9 @@
 "use client"
 
-import { User } from "@supabase/supabase-js"
+import { IUser } from "@/features/auth/lib/queries/get-user-data"
 import { createContext, useContext } from "react"
 
-const UserContext = createContext<User | null>(null)
+const UserContext = createContext<IUser | null>(null)
 
 export function useUser() {
   const context = useContext(UserContext)
@@ -20,7 +20,7 @@ export function UserProvider({
   user,
 }: {
   children: React.ReactNode
-  user: User | null
+  user: IUser | null
 }) {
   return <UserContext.Provider value={user}>{children}</UserContext.Provider>
 }

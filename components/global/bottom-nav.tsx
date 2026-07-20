@@ -1,7 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { useTranslations } from "next-intl"
+import { Plus } from "lucide-react"
 
 import { Link, usePathname } from "@/i18n/navigation"
 import { navItems } from "@/constants/nav-items"
@@ -17,7 +17,9 @@ export function BottomNavBar({
   stickyBottom = true,
 }: BottomNavBarProps) {
   const pathname = usePathname()
-  const t = useTranslations("bottomNavBar")
+
+  const firstHalf = navItems.slice(0, Math.ceil(navItems.length / 2))
+  const secondHalf = navItems.slice(Math.ceil(navItems.length / 2))
 
   return (
     <div
@@ -37,53 +39,80 @@ export function BottomNavBar({
         }}
         role="navigation"
         aria-label="Bottom Navigation"
-        className={cn(
-          "pointer-events-auto mx-auto flex h-14 w-full max-w-lg items-center rounded-full border border-border bg-background/70 px-3 shadow-sm backdrop-blur-xl"
-        )}
+        className="pointer-events-auto mx-auto flex h-16 w-fit items-center gap-4 rounded-full bg-foreground px-2 shadow-lg"
       >
-        <div className="flex w-full items-center gap-1">
-          {navItems.map((item) => {
-            const Icon = item.icon
-            const isActive = pathname === item.href
+        {firstHalf.map((item) => (
+          <NavLink key={item.key} item={item} pathname={pathname} />
+        ))}
 
-            return (
-              <Link key={item.key} href={item.href} className="flex-1">
-                <motion.div
-                  whileTap={{ scale: 0.96 }}
-                  className={cn(
-                    "flex h-10 w-full items-center justify-center rounded-full px-4 transition-colors",
-                    isActive
-                      ? "gap-2 bg-primary/10 text-primary"
-                      : "text-muted-foreground hover:bg-muted/70"
-                  )}
-                >
-                  <Icon size={22} strokeWidth={2} aria-hidden />
+        {/* FAB — ukuran wrapper = ukuran visual, tidak boleh shrink */}
+        <Link
+          href="/transaction/new"
+          aria-label="add-btn"
+          className="relative flex size-14 shrink-0 items-center justify-center"
+        >
+          <motion.span
+            whileTap={{ scale: 0.92 }}
+            initial={{ scale: 0, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{
+              type: "spring",
+              stiffness: 320,
+              damping: 22,
+              delay: 0.1,
+            }}
+            className="-mt-8 flex size-14 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-lg shadow-primary/30"
+          >
+            <Plus size={26} strokeWidth={2.5} aria-hidden />
+          </motion.span>
+        </Link>
 
-                  <motion.div
-                    initial={false}
-                    animate={{
-                      width: isActive ? "auto" : 0,
-                      opacity: isActive ? 1 : 0,
-                      marginLeft: isActive ? 2 : 0,
-                    }}
-                    transition={{
-                      type: "spring",
-                      stiffness: 350,
-                      damping: 32,
-                    }}
-                    className="overflow-hidden"
-                  >
-                    <span className="text-xs font-medium whitespace-nowrap">
-                      {t(item.key)}
-                    </span>
-                  </motion.div>
-                </motion.div>
-              </Link>
-            )
-          })}
-        </div>
+        {secondHalf.map((item) => (
+          <NavLink key={item.key} item={item} pathname={pathname} />
+        ))}
       </motion.nav>
     </div>
+  )
+}
+
+function NavLink({
+  item,
+  pathname,
+}: {
+  item: (typeof navItems)[number]
+  pathname: string
+}) {
+  const Icon = item.icon
+  const isActive = pathname === item.href
+
+  return (
+    <Link
+      href={item.href}
+      aria-current={isActive ? "page" : undefined}
+      className="relative flex size-12 shrink-0 items-center justify-center"
+    >
+      {isActive && (
+        <motion.span
+          layoutId="bottom-nav-active-pill"
+          transition={{
+            type: "spring",
+            stiffness: 380,
+            damping: 30,
+          }}
+          className="absolute inset-0 m-auto size-11 rounded-full bg-background shadow-sm"
+        />
+      )}
+
+      <motion.span
+        whileTap={{ scale: 0.9 }}
+        className={cn(
+          "relative z-10 flex items-center justify-center",
+          isActive ? "text-foreground" : "text-background/50"
+        )}
+      >
+        <Icon size={20} strokeWidth={2} aria-hidden />
+      </motion.span>
+    </Link>
   )
 }
 

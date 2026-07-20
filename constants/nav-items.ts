@@ -1,9 +1,8 @@
 import {
   Home,
   Sparkles,
-  LayoutGrid,
-  Settings,
-  PieChart,
+  BarChartBig,
+  User2,
 } from "lucide-react"
 
 export const navItems = [
@@ -13,14 +12,9 @@ export const navItems = [
     icon: Home,
   },
   {
-    key: "transactions",
-    href: "/transactions",
-    icon: LayoutGrid,
-  },
-  {
     key: "statistics",
     href: "/statistics",
-    icon: PieChart,
+    icon: BarChartBig,
   },
   {
     key: "assistant",
@@ -30,6 +24,6 @@ export const navItems = [
   {
     key: "settings",
     href: "/settings",
-    icon: Settings,
+    icon: User2,
   },
 ] as const

@@ -138,10 +138,10 @@ create table public.transfers (
     on delete cascade,
 
   from_wallet_id uuid not null
-    references public.wallets(id),
+    references public.wallets(id) on delete cascade,
 
   to_wallet_id uuid not null
-    references public.wallets(id),
+    references public.wallets(id) on delete cascade,
 
   amount bigint not null
     check (amount > 0),
@@ -260,6 +260,28 @@ begin
     false
   );
 
+  -- Default categories
+  insert into public.categories (
+    user_id,
+    type,
+    name,
+    icon,
+    color
+  )
+  values
+    -- Income
+    (new.id, 'income', 'Salary', '💼', '#86EFAC'),
+    (new.id, 'income', 'Business', '🏪', '#67E8F9'),
+    (new.id, 'income', 'Other Income', '💰', '#C4B5FD'),
+
+    -- Expense
+    (new.id, 'expense', 'Food & Drinks', '🍜', '#FDBA74'),
+    (new.id, 'expense', 'Transportation', '🚗', '#7DD3FC'),
+    (new.id, 'expense', 'Shopping', '🛍️', '#FDA4AF'),
+    (new.id, 'expense', 'Bills', '🧾', '#FCD34D'),
+    (new.id, 'expense', 'Entertainment', '🎮', '#DDD6FE'),
+    (new.id, 'expense', 'Health', '❤️', '#99F6E4');
+
   return new;
 end;
 $$;
@@ -268,8 +290,6 @@ create trigger on_auth_user_created
 after insert on auth.users
 for each row
 execute function public.handle_new_user();
-
-
 
 -- STORAGE BUCKET UNTUK MENYIMPAN AVATAR USER
 insert into storage.buckets (
@@ -321,8 +341,7 @@ on public.categories
 for select
 to authenticated
 using (
-  is_default = true
-  or auth.uid() = user_id
+  auth.uid() = user_id
 );
 
 create policy "categories_insert"
@@ -449,3 +468,50 @@ using (
   bucket_id = 'avatars'
   and (storage.foldername(name))[1] = auth.uid()::text
 );
+
+-- TRIGGER FUNCTION UNTUK AUTO UPDATE updated_at
+create or replace function public.handle_updated_at()
+returns trigger
+language plpgsql
+as $$
+begin
+  new.updated_at = now();
+  return new;
+end;
+$$;
+
+-- PROFILE
+create trigger profiles_updated_at
+before update on public.profiles
+for each row
+execute function public.handle_updated_at();
+
+-- WALLET
+create trigger wallets_updated_at
+before update on public.wallets
+for each row
+execute function public.handle_updated_at();
+
+-- TRANSACTIONS
+create trigger transactions_updated_at
+before update on public.transactions
+for each row
+execute function public.handle_updated_at();
+
+-- TRANSFER
+create trigger transfers_updated_at
+before update on public.transfers
+for each row
+execute function public.handle_updated_at();
+
+-- SUBSCRIPTIONS
+create trigger subscriptions_updated_at
+before update on public.subscriptions
+for each row
+execute function public.handle_updated_at();
+
+-- AI CONVERSATIONS
+create trigger ai_conversations_updated_at
+before update on public.ai_conversations
+for each row
+execute function public.handle_updated_at();

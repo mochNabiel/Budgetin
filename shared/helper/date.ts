@@ -21,3 +21,13 @@ export function isSameDay(a: Date, b: Date) {
 export function formatDisplayDate(d: Date) {
   return d.toLocaleDateString("en-US", { month: "short", day: "numeric" })
 }
+
+export function formatMonthYear(
+  date: Date | string,
+  locale: string = "en"
+) {
+  return new Intl.DateTimeFormat(locale, {
+    month: "long",
+    year: "numeric",
+  }).format(new Date(date))
+}

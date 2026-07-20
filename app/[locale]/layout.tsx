@@ -5,7 +5,7 @@ import { ThemeProvider } from "@/components/global/theme-provider"
 import { cn } from "@/shared/utils"
 import { Toaster } from "@/components/ui/sonner"
 import { TooltipProvider } from "@/components/ui/tooltip"
-import { hasLocale, NextIntlClientProvider } from "next-intl"
+import { NextIntlClientProvider } from "next-intl"
 import { routing } from "@/i18n/routing"
 import { getMessages, setRequestLocale } from "next-intl/server"
 import { notFound } from "next/navigation"
@@ -28,11 +28,14 @@ interface Props {
 
 export default async function RootLayout({ children, params }: Props) {
   const { locale } = await params
-  if (!hasLocale(routing.locales, locale)) {
+  
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  if (!routing.locales.includes(locale as any)) {
     notFound()
   }
 
   setRequestLocale(locale)
+  
   const messages = await getMessages()
 
   return (
