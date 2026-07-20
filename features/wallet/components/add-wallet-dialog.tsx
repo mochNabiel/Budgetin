@@ -21,7 +21,7 @@ export default function AddWalletDialog() {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button className="gap-2 h-12">
+        <Button className="h-12 gap-2">
           <Plus className="size-4" />
           {t("add_wallet")}
         </Button>
@@ -32,11 +32,7 @@ export default function AddWalletDialog() {
           <DialogTitle>{t("add_wallet")}</DialogTitle>
         </DialogHeader>
 
-        <WalletForm
-          mode="create"
-          onSubmitAction={createWallet}
-          onSuccess={() => setOpen(false)}
-        />
+        <WalletForm mode="create" onSubmitAction={createWallet} />
       </DialogContent>
     </Dialog>
   )
