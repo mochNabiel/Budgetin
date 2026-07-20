@@ -6,7 +6,7 @@ import { getRecentTransfers } from "@/features/transfer/lib/queries/get-recent-t
 import { Link } from "@/i18n/navigation"
 import formatCurrency from "@/shared/helper/format-currency"
 import formatDate from "@/shared/helper/format-date"
-import { ArrowRight, Repeat } from "lucide-react"
+import { ArrowRight, ChevronRight, Repeat } from "lucide-react"
 import { getLocale, getTranslations } from "next-intl/server"
 
 export default async function RecentTransfersSection() {
@@ -46,8 +46,9 @@ export default async function RecentTransfersSection() {
         <Card size="sm" className="data-[size=sm]:py-0">
           <CardContent className="divide-y divide-border/60">
             {recentTransfers.map((transfer) => (
-              <div
+              <Link
                 key={transfer.id}
+                href={`/transfer/${transfer.id}`}
                 className="flex w-full items-center gap-3 py-3"
               >
                 <span className="flex size-11 shrink-0 items-center justify-center rounded-full bg-muted text-muted-foreground">
@@ -87,7 +88,9 @@ export default async function RecentTransfersSection() {
                 <p className="text-sm font-semibold">
                   {formatCurrency(transfer.amount, currency)}
                 </p>
-              </div>
+
+                <ChevronRight className="size-4 shrink-0 text-muted-foreground" />
+              </Link>
             ))}
           </CardContent>
         </Card>

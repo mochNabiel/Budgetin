@@ -103,6 +103,30 @@
       "notes_placeholder": "cth. Pindah tabungan ke rekening utama",
       "save": "Transfer",
       "saving": "Memproses..."
+    },
+    "history": {
+      "header_title": "Riwayat Transfer"
+    },
+    "detail": {
+      "header_title": "Detail Transfer"
+    },
+    "from_wallet": "Dari Dompet",
+    "to_wallet": "Ke Dompet",
+    "date": "Tanggal",
+    "notes": "Catatan",
+    "created": "Dibuat",
+    "updated": "Diperbarui",
+    "delete": "Hapus",
+    "delete_btn": "Hapus Transfer",
+    "delete_alert_title": "Hapus transfer ini?",
+    "delete_alert_msg": "Aksi ini tidak dapat dibatalkan. Saldo dompet akan disesuaikan secara otomatis.",
+    "cancel": "Batal",
+    "no_transfer": "Belum ada transfer",
+    "filter": {
+      "title": "Filter Transfer",
+      "date_range": "Rentang Tanggal",
+      "reset": "Reset",
+      "apply": "Terapkan Filter"
     }
   },
   "wallet": {

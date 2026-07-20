@@ -103,6 +103,30 @@
       "notes_placeholder": "e.g. Move savings to main account",
       "save": "Transfer",
       "saving": "Processing..."
+    },
+    "history": {
+      "header_title": "Transfer History"
+    },
+    "detail": {
+      "header_title": "Transfer Detail"
+    },
+    "from_wallet": "From Wallet",
+    "to_wallet": "To Wallet",
+    "date": "Date",
+    "notes": "Notes",
+    "created": "Created",
+    "updated": "Updated",
+    "delete": "Delete",
+    "delete_btn": "Delete Transfer",
+    "delete_alert_title": "Delete this transfer?",
+    "delete_alert_msg": "This action cannot be undone. The wallet balances will be adjusted automatically.",
+    "cancel": "Cancel",
+    "no_transfer": "No transfers found",
+    "filter": {
+      "title": "Filter Transfers",
+      "date_range": "Date Range",
+      "reset": "Reset",
+      "apply": "Apply Filter"
     }
   },
   "wallet": {
