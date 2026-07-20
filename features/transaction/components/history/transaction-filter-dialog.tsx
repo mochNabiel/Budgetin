@@ -122,10 +122,10 @@ export default function TransactionFilterDialog({
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button variant="outline" size="icon" className="relative">
+        <Button size="icon" className="relative">
           <SlidersHorizontal className="size-4" />
           {activeFilterCount > 0 && (
-            <span className="absolute -top-1 -right-1 flex size-4 items-center justify-center rounded-full bg-primary text-[10px] text-primary-foreground">
+            <span className="absolute -top-1 -right-1 flex size-4 items-center justify-center rounded-full bg-foreground text-[10px] text-background">
               {activeFilterCount}
             </span>
           )}
