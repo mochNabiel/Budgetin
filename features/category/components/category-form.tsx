@@ -6,7 +6,6 @@ import { Controller, useForm, useWatch } from "react-hook-form"
 import dynamic from "next/dynamic"
 import { toast } from "sonner"
 import { useTranslations } from "next-intl"
-import { ChevronRight } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -91,6 +90,35 @@ export default function CategoryForm({
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-6">
       <FieldGroup className="gap-4">
+        <Field>
+          <FieldLabel>Preview</FieldLabel>
+          <Item
+            variant="outline"
+            className="flex w-full items-center gap-3 px-4 py-3"
+          >
+            <ItemMedia
+              variant="icon"
+              className="size-11 rounded-full text-xl"
+              style={{ backgroundColor: selectedColor }}
+            >
+              {selectedIcon}
+            </ItemMedia>
+            <ItemContent className="gap-0">
+              <ItemTitle className="text-sm font-semibold">
+                {selectedName || t("name_placeholder")}
+              </ItemTitle>
+              <ItemDescription
+                className={cn(
+                  "text-xs font-medium capitalize",
+                  selectedType === "income" ? "text-chart-2" : "text-primary"
+                )}
+              >
+                {selectedType}
+              </ItemDescription>
+            </ItemContent>
+          </Item>
+        </Field>
+
         <Controller
           name="type"
           control={control}
@@ -198,40 +226,11 @@ export default function CategoryForm({
             </Field>
           )}
         />
-
-        <Field>
-          <FieldLabel>Preview</FieldLabel>
-          <Item
-            variant="outline"
-            className="flex w-full items-center gap-3 px-4 py-3"
-          >
-            <ItemMedia
-              variant="icon"
-              className="size-11 rounded-full text-xl"
-              style={{ backgroundColor: selectedColor }}
-            >
-              {selectedIcon}
-            </ItemMedia>
-            <ItemContent className="gap-0">
-              <ItemTitle className="text-sm font-semibold">
-                {selectedName || t("name_placeholder")}
-              </ItemTitle>
-              <ItemDescription
-                className={cn(
-                  "text-xs font-medium capitalize",
-                  selectedType === "income" ? "text-chart-2" : "text-primary"
-                )}
-              >
-                {selectedType}
-              </ItemDescription>
-            </ItemContent>
-          </Item>
-        </Field>
       </FieldGroup>
 
       <Button type="submit" disabled={isPending} className="h-12 w-full">
         {isPending ? (
-          <Spinner />
+          <Spinner  className="text-primary-foreground"/>
         ) : mode === "create" ? (
           t("create")
         ) : (

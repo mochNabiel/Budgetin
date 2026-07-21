@@ -13,14 +13,22 @@ import { formatMonthYear } from "@/shared/helper/date"
 import { ArrowDownLeft, ArrowUpRight } from "lucide-react"
 import { getLocale, getTranslations } from "next-intl/server"
 import { getBalanceSummary } from "../lib/queries/get-balance-summary"
+import { getWallets } from "@/features/wallet/lib/queries"
 import BalanceVisibilityButton from "./balance-visibility-button"
 import BalanceText from "./balance-text"
 
 export default async function StatsSection() {
-  const t = await getTranslations("home.stats")
-  const locale = await getLocale()
-  const { currency } = await getUserData()
-  const { totalBalance, totalIncome, totalExpense } = await getBalanceSummary()
+  const [t, locale, { currency }, wallets] = await Promise.all([
+    getTranslations("home.stats"),
+    getLocale(),
+    getUserData(),
+    getWallets(),
+  ])
+
+  const walletBalance = wallets.reduce((sum, w) => sum + w.balance, 0)
+  const { totalBalance, totalIncome, totalExpense } = await getBalanceSummary({
+    walletBalance,
+  })
 
   return (
     <Card

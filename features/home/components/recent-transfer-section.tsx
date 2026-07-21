@@ -10,10 +10,12 @@ import { ArrowRight, ChevronRight, Repeat } from "lucide-react"
 import { getLocale, getTranslations } from "next-intl/server"
 
 export default async function RecentTransfersSection() {
-  const t = await getTranslations("home")
-  const locale = await getLocale()
-  const { currency } = await getUserData()
-  const recentTransfers = await getRecentTransfers()
+  const [t, locale, { currency }, recentTransfers] = await Promise.all([
+    getTranslations("home"),
+    getLocale(),
+    getUserData(),
+    getRecentTransfers(),
+  ])
 
   return (
     <section>
@@ -51,14 +53,10 @@ export default async function RecentTransfersSection() {
                 href={`/transfer/${transfer.id}`}
                 className="flex w-full items-center gap-3 py-3"
               >
-                <span className="flex size-11 shrink-0 items-center justify-center rounded-full bg-muted text-muted-foreground">
-                  <Repeat className="size-5" />
-                </span>
-
-                <div className="min-w-0 flex-1">
-                  <p className="flex items-center gap-1 truncate text-sm font-semibold">
+                <div className="min-w-0 flex-1 space-y-1">
+                  <p className="flex items-center gap-1 truncate text-sm font-medium">
                     <span
-                      className="flex size-4 shrink-0 items-center justify-center rounded-full text-[10px]"
+                      className="flex size-4 shrink-0 items-center justify-center rounded-full"
                       style={{ backgroundColor: transfer.from_wallet.color }}
                     >
                       {transfer.from_wallet.icon}
@@ -69,9 +67,8 @@ export default async function RecentTransfersSection() {
                     </span>
 
                     <ArrowRight className="size-3 shrink-0 text-muted-foreground" />
-
                     <span
-                      className="flex size-4 shrink-0 items-center justify-center rounded-full text-[10px]"
+                      className="flex size-4 shrink-0 items-center justify-center rounded-full"
                       style={{ backgroundColor: transfer.to_wallet.color }}
                     >
                       {transfer.to_wallet.icon}

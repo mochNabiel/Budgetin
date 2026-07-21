@@ -93,6 +93,35 @@ export default function WalletForm({
     <div className="flex flex-col gap-6">
       <form onSubmit={handleSubmit(onSubmit)} noValidate>
         <FieldGroup>
+          {/* Preview */}
+          <Field>
+            <FieldLabel>Preview</FieldLabel>
+            <Item
+              variant="outline"
+              className="flex w-fit flex-col items-start gap-2 border-none px-6"
+              style={{
+                backgroundColor: `${selectedColor}30`,
+              }}
+            >
+              <ItemMedia
+                variant="icon"
+                className="size-9 rounded-full text-lg"
+                style={{ backgroundColor: selectedColor }}
+              >
+                {selectedIcon}
+              </ItemMedia>
+
+              <ItemContent className="gap-0">
+                <ItemTitle className="text-sm font-light">
+                  {walletName || t("name_placeholder")}
+                </ItemTitle>
+                <ItemDescription className="text-lg font-semibold text-foreground">
+                  {formatCurrency(balance || 0, currency)}
+                </ItemDescription>
+              </ItemContent>
+            </Item>
+          </Field>
+          
           {/* Icon + Nama */}
           <Field>
             <FieldLabel>{t("name_icon")}</FieldLabel>
@@ -106,7 +135,7 @@ export default function WalletForm({
                       <Button
                         variant="outline"
                         aria-invalid={fieldState.invalid}
-                        className="p-6 rounded-xl"
+                        className="rounded-xl p-6"
                       >
                         {field.value}
                       </Button>
@@ -132,7 +161,7 @@ export default function WalletForm({
                 render={({ field, fieldState }) => (
                   <Input
                     {...field}
-                    className="flex-1 py-6 rounded-xl"
+                    className="flex-1 rounded-xl py-6"
                     placeholder={t("name_placeholder")}
                     aria-invalid={fieldState.invalid}
                   />
@@ -157,7 +186,7 @@ export default function WalletForm({
                   <Input
                     id="wallet-balance"
                     inputMode="numeric"
-                    className="pl-14 py-6 rounded-xl"
+                    className="rounded-xl py-6 pl-14"
                     value={field.value}
                     onChange={(e) =>
                       field.onChange(Number(e.target.value) || 0)
@@ -203,36 +232,7 @@ export default function WalletForm({
             )}
           />
 
-          {/* Preview */}
-          <Field>
-            <FieldLabel>Preview</FieldLabel>
-            <Item
-              variant="outline"
-              className="flex w-fit border-none flex-col items-start gap-2 px-6"
-              style={{
-                backgroundColor: `${selectedColor}30`,
-              }}
-            >
-              <ItemMedia
-                variant="icon"
-                className="size-9 rounded-full text-lg"
-                style={{ backgroundColor: selectedColor }}
-              >
-                {selectedIcon}
-              </ItemMedia>
-
-              <ItemContent className="gap-0">
-                <ItemTitle className="text-sm font-light">
-                  {walletName || t("name_placeholder")}
-                </ItemTitle>
-                <ItemDescription className="text-lg font-semibold text-foreground">
-                  {formatCurrency(balance || 0, currency)}
-                </ItemDescription>
-              </ItemContent>
-            </Item>
-          </Field>
-
-          <Button type="submit" disabled={isPending} className="w-full h-12">
+          <Button type="submit" disabled={isPending} className="h-12 w-full">
             {isPending ? (
               <Spinner />
             ) : mode === "create" ? (

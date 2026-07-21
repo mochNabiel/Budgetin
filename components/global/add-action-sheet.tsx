@@ -32,7 +32,7 @@ export default function AddActionSheet({ walletCount, children }: Props) {
           <SheetTitle>{t("title")}</SheetTitle>
         </SheetHeader>
 
-        <div className="flex flex-col gap-3 p-4 pt-0">
+        <div className="flex flex-col gap-3 p-4 pt-0 pb-8">
           <Link
             href="/transaction/new"
             onClick={() => setOpen(false)}

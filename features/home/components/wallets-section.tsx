@@ -16,9 +16,11 @@ import { getWallets } from "@/features/wallet/lib/queries"
 
 
 export default async function WalletsSection() {
-  const wallets = await getWallets()
-  const t = await getTranslations("home")
-  const { currency } = await getUserData()
+  const [wallets, t, { currency }] = await Promise.all([
+    getWallets(),
+    getTranslations("home"),
+    getUserData(),
+  ])
 
   return (
     <section>

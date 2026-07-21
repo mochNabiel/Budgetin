@@ -11,10 +11,12 @@ import { ChevronRight, Receipt } from "lucide-react"
 import { getLocale, getTranslations } from "next-intl/server"
 
 export default async function RecentTransactionsSection() {
-  const t = await getTranslations("home")
-  const locale = await getLocale()
-  const { currency } = await getUserData()
-  const recentTransactions = await getRecentTransactions()
+  const [t, locale, { currency }, recentTransactions] = await Promise.all([
+    getTranslations("home"),
+    getLocale(),
+    getUserData(),
+    getRecentTransactions(),
+  ])
 
   return (
     <section>
@@ -61,7 +63,7 @@ export default async function RecentTransactionsSection() {
                   </span>
 
                   <div className="min-w-0 flex-1">
-                    <p className="truncate text-sm font-semibold">
+                    <p className="truncate text-sm font-medium">
                       {transaction.notes}
                     </p>
 

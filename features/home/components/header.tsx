@@ -5,10 +5,10 @@ import { getTranslations } from "next-intl/server"
 import ThemeToggle from "@/components/global/theme-toggle"
 import LocaleToggle from "@/components/global/locale-toggle"
 import { getUserData } from "@/features/auth/lib/queries"
+import { User } from "lucide-react"
 
 export async function Header() {
-  const user = await getUserData()
-  const t = await getTranslations("home.header")
+  const [user, t] = await Promise.all([getUserData(), getTranslations("home.header")])
 
   return (
     <HeaderClient>
@@ -17,7 +17,7 @@ export async function Header() {
         <div className="flex min-w-0 items-center gap-3">
           <Avatar className="size-9">
             <AvatarImage src={user?.avatar_url} alt={user?.full_name} />
-            <AvatarFallback>User</AvatarFallback>
+            <AvatarFallback><User /></AvatarFallback>
           </Avatar>
 
           <div className="min-w-0">

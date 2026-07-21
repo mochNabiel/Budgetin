@@ -15,7 +15,7 @@ export default function PageHeader({
   right,
 }: Props) {
   return (
-    <header className="relative flex h-14 items-center px-2">
+    <header className="sticky top-0 z-50 bg-background flex h-14 items-center px-2">
       <Button variant="ghost" size="icon" className="absolute left-2" asChild>
         <Link href={backHref}>
           <ChevronLeft className="size-6" />
