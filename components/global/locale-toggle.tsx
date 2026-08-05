@@ -1,6 +1,6 @@
 "use client"
 
-import { useLocale } from "next-intl"
+import { useLocale, useTranslations } from "next-intl"
 
 import { Button } from "@/components/ui/button"
 import {
@@ -23,6 +23,7 @@ export default function LocaleToggle() {
   const locale = useLocale()
   const router = useRouter()
   const pathname = usePathname()
+  const t = useTranslations("language")
 
   return (
     <Tooltip>
@@ -33,11 +34,11 @@ export default function LocaleToggle() {
               <span className="text-sm leading-none">
                 {locales.find((item) => item.value === locale)?.flag ?? "🌐"}
               </span>
-              <span className="sr-only">Toggle language</span>
+              <span className="sr-only">{t("toggle")}</span>
             </Button>
           </DropdownMenuTrigger>
         </TooltipTrigger>
-        <TooltipContent>Change language</TooltipContent>
+        <TooltipContent>{t("change")}</TooltipContent>
         <DropdownMenuContent align="end">
           <DropdownMenuRadioGroup
             value={locale}

@@ -6,7 +6,7 @@ import formatCurrency from "@/shared/helper/format-currency"
 import formatDate from "@/shared/helper/format-date"
 import { cn } from "@/shared/utils"
 import { ITransaction } from "@/features/transaction/lib/queries/get-transactions"
-import { Inbox } from "lucide-react"
+import { ChevronRight, Inbox } from "lucide-react"
 
 interface Props {
   transactions: ITransaction[]
@@ -50,8 +50,8 @@ export default async function TransactionList({ transactions }: Props) {
                   {transaction.notes || transaction.category.name}
                 </p>
                 <p className="text-xs text-muted-foreground">
-                  {transaction.wallet.name} ·{" "}
-                  {formatDate(transaction.transaction_date, locale)}
+                  {formatDate(transaction.transaction_date, locale)} ·{" "}
+                  {transaction.wallet.name}
                 </p>
               </div>
 
@@ -64,6 +64,8 @@ export default async function TransactionList({ transactions }: Props) {
                 {isIncome ? "+" : "-"}
                 {formatCurrency(transaction.amount, currency)}
               </p>
+
+              <ChevronRight className="size-4 shrink-0 text-muted-foreground" />
             </Link>
           )
         })}

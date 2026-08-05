@@ -28,14 +28,13 @@ interface Props {
 
 export default async function RootLayout({ children, params }: Props) {
   const { locale } = await params
-  
+
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   if (!routing.locales.includes(locale as any)) {
     notFound()
   }
 
   setRequestLocale(locale)
-  
   const messages = await getMessages()
 
   return (
@@ -51,11 +50,11 @@ export default async function RootLayout({ children, params }: Props) {
     >
       <body className={cn("antialiased", figtree.className, "font-sans")}>
         <Toaster position="top-center" richColors />
-        <NextIntlClientProvider messages={messages} locale={locale}>
-          <ThemeProvider>
-            <TooltipProvider>{children}</TooltipProvider>
-          </ThemeProvider>
-        </NextIntlClientProvider>
+          <NextIntlClientProvider messages={messages} locale={locale}>
+            <ThemeProvider>
+              <TooltipProvider>{children}</TooltipProvider>
+            </ThemeProvider>
+          </NextIntlClientProvider>
       </body>
     </html>
   )

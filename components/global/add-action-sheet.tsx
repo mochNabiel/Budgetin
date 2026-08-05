@@ -27,7 +27,10 @@ export default function AddActionSheet({ walletCount, children }: Props) {
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>{children}</SheetTrigger>
 
-      <SheetContent side="bottom" className="rounded-t-3xl w-full max-w-lg mx-auto">
+      <SheetContent
+        side="bottom"
+        className="mx-auto w-full max-w-lg rounded-t-3xl"
+      >
         <SheetHeader>
           <SheetTitle>{t("title")}</SheetTitle>
         </SheetHeader>
@@ -51,7 +54,7 @@ export default function AddActionSheet({ walletCount, children }: Props) {
 
           {canTransfer ? (
             <Link
-              href="/transfer/new"
+              href={canTransfer ? "/transfer/new" : "#"}
               onClick={() => setOpen(false)}
               className="flex items-center gap-4 rounded-2xl border p-4 transition-colors hover:bg-muted/50"
             >

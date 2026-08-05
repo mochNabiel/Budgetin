@@ -163,11 +163,11 @@
       "header_title": "Edit Kategori"
     }
   },
-  "wallet": {
-    "add_wallet": "Tambah Dompet",
-    "name_icon": "Nama dan Ikon Dompet",
-    "name_placeholder": "Dompet Utama",
-    "initial_balance": "Saldo Awal",
+    "wallet": {
+      "add_wallet": "Tambah Dompet",
+      "name_icon": "Nama dan Ikon Dompet",
+      "name_placeholder": "Dompet Utama",
+      "initial_balance": "Saldo Awal",
     "balance": "Saldo",
     "color": "Warna Dompet",
     "save": "Simpan",
@@ -178,17 +178,83 @@
     "list": {
       "header_title": "Daftar Dompet"
     },
-    "detail": {
-      "header_title": "Detail Dompet",
-      "created": "Dibuat",
-      "updated": "Diperbarui",
-      "transactions": "Transaksi"
-    },
+      "detail": {
+        "header_title": "Detail Dompet",
+        "initial_balance": "Saldo Awal",
+        "created": "Dibuat",
+        "updated": "Diperbarui",
+        "transactions": "Transaksi"
+      },
     "new": {
       "header_title": "Tambah Dompet"
     },
     "edit": {
       "header_title": "Edit Dompet"
+    }
+  },
+  "settings": {
+    "title": "Pengaturan",
+    "account_plan": {
+      "title": "Akun & Plan",
+      "edit_dialog_title": "Edit Profil",
+      "edit_dialog_description": "Anda dapat memperbarui informasi profil Anda di sini.",
+      "edit_dialog_save": "Simpan",
+      "avatar_title": "Avatar",
+      "avatar_empty": "Tidak ada avatar",
+      "avatar_change": "Ubah Avatar",
+      "avatar_description": "File PNG, JPG, atau WEBP. Max ukuran 5MB.",
+      "name_title": "Nama Lengkap",
+      "plan": "Plan Saat Ini",
+      "plan_free_description": "Upgrade ke plan pro untuk mengakses fitur luar biasa.",
+      "plan_pro_description": "Anda menggunakan plan pro. Nikmati semua fitur.",
+      "upgrade": "Upgrade ke Pro",
+      "manage_subscription": "Kelola Langganan",
+      "messages": {
+        "saved": "Profil disimpan"
+      },
+      "errors": {
+        "save_failed": "Gagal menyimpan profil"
+      }
+    },
+    "preferences": {
+      "title": "Preferensi",
+      "language": "Bahasa",
+      "currency": "Mata Uang",
+      "theme": "Tema",
+      "select_language": "Pilih bahasa",
+      "select_currency": "Pilih mata uang",
+      "customize_category": "Atur Kategori",
+      "customize_category_description": "Edit, tambahkan, atau hapus kategori",
+      "customize_wallet": "Atur Dompet",
+      "customize_wallet_description": "Kelola dompetmu",
+      "messages": {
+        "currency_updated": "Mata uang diperbarui"
+      },
+      "errors": {
+        "update_currency_failed": "Gagal memperbarui mata uang"
+      }
+    },
+    "danger_zone": {
+      "title": "Tindakan Kritis",
+      "logout_title": "Keluar",
+      "logout_description": "Keluar dari akunmu",
+      "logout_confirm_title": "Keluar dari perangkat ini?",
+      "logout_confirm_description": "Kamu perlu masuk lagi untuk mengakses akunmu.",
+      "logout_action": "Keluar",
+      "delete_title": "Hapus Akun",
+      "delete_description": "Hapus akun dan semua data secara permanen",
+      "delete_confirm_title": "Hapus akunmu?",
+      "delete_confirm_description": "Aksi ini tidak dapat dibatalkan. Profil, dompet, kategori, transaksi, transfer, dan data terkait lainnya akan dihapus.",
+      "delete_instruction": "Ketik <kbd>{phrase}</kbd> untuk melanjutkan",
+      "delete_action": "Hapus Akun",
+      "cancel": "Batal",
+      "messages": {
+        "deleted": "Akun dihapus"
+      },
+      "errors": {
+        "logout_failed": "Gagal keluar",
+        "delete_failed": "Gagal menghapus akun"
+      }
     }
   },
   "validation": {
@@ -232,5 +298,16 @@
       "initial_balance": "Saldo Awal",
       "start": "Mulai Pakai Budgetin"
     }
+  },
+  "theme": {
+    "system": "Sistem",
+    "light": "Terang",
+    "dark": "Gelap",
+    "toggle": "Toggle tema",
+    "change": "Ganti tema"
+  },
+  "language": {
+    "toggle": "Toggle bahasa",
+    "change": "Ganti bahasa"
   }
 }

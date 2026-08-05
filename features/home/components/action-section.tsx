@@ -1,4 +1,5 @@
 import { SectionHeader } from "@/components/global/section-header"
+import { Card } from "@/components/ui/card"
 import { actionItems } from "@/constants/action-items"
 import { Link } from "@/i18n/navigation"
 import { cn } from "@/shared/utils"
@@ -17,10 +18,9 @@ export default async function ActionSection() {
 
           return (
             <Link key={item.key} href={item.link} className="block">
-              <div
-                className={cn(
-                  "flex h-24 items-center gap-3 rounded-2xl border p-4 text-left transition-all hover:bg-muted hover:shadow-sm active:scale-[0.98]"
-                )}
+              <Card
+                size="sm"
+                className="flex flex-col items-center justify-center"
               >
                 <div
                   className={cn(
@@ -40,7 +40,7 @@ export default async function ActionSection() {
                 >
                   {t(item.key)}
                 </span>
-              </div>
+              </Card>
             </Link>
           )
         })}

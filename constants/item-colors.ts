@@ -1,9 +1,9 @@
-interface IWalletColor {
+interface IItemColor {
   label: string
   value: string
 }
 
-export const WALLET_COLORS: IWalletColor[] = [
+export const ITEM_COLORS: IItemColor[] = [
   { label: "Sky", value: "#7DD3FC" },
   { label: "Mint", value: "#86EFAC" },
   { label: "Amber", value: "#FCD34D" },

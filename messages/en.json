@@ -163,11 +163,11 @@
       "header_title": "Edit Category"
     }
   },
-  "wallet": {
-    "add_wallet": "Add Wallet",
-    "name_icon": "Wallet Name and Icon",
-    "name_placeholder": "Main Wallet",
-    "initial_balance": "Initial Balance",
+    "wallet": {
+      "add_wallet": "Add Wallet",
+      "name_icon": "Wallet Name and Icon",
+      "name_placeholder": "Main Wallet",
+      "initial_balance": "Initial Balance",
     "balance": "Balance",
     "color": "Wallet Color",
     "save": "Save",
@@ -178,17 +178,83 @@
     "list": {
       "header_title": "Wallet List"
     },
-    "detail": {
-      "header_title": "Wallet Detail",
-      "created": "Created",
-      "updated": "Updated",
-      "transactions": "Transactions"
-    },
+      "detail": {
+        "header_title": "Wallet Detail",
+        "initial_balance": "Initial Balance",
+        "created": "Created",
+        "updated": "Updated",
+        "transactions": "Transactions"
+      },
     "new": {
       "header_title": "Add Wallet"
     },
     "edit": {
       "header_title": "Edit Wallet"
+    }
+  },
+  "settings": {
+    "title": "Settings",
+    "account_plan": {
+      "title": "Account & Plan",
+      "edit_dialog_title": "Edit Profile",
+      "edit_dialog_description": "You can update your profile information here.",
+      "edit_dialog_save": "Save Changes",
+      "avatar_title": "Avatar",
+      "avatar_empty": "No avatar",
+      "avatar_change": "Change Avatar",
+      "avatar_description": "PNG, JPG, or WEBP files. Max size 5MB.",
+      "name_title": "Full Name",
+      "plan": "Current Plan",
+      "plan_free_description": "Upgrade to a pro plan to unlock advanced features.",
+      "plan_pro_description": "You are using the pro plan. Enjoy all the features.",
+      "upgrade": "Upgrade to Pro",
+      "manage_subscription": "Manage Subscription",
+      "messages": {
+        "saved": "Profile saved"
+      },
+      "errors": {
+        "save_failed": "Failed to save profile"
+      }
+    },
+    "preferences": {
+      "title": "Preferences",
+      "language": "Language",
+      "currency": "Currency",
+      "theme": "Theme",
+      "select_language": "Select language",
+      "select_currency": "Select currency",
+      "customize_category": "Customize Category",
+      "customize_category_description": "Edit, add, or remove categories",
+      "customize_wallet": "Customize Wallet",
+      "customize_wallet_description": "Manage your wallets",
+      "messages": {
+        "currency_updated": "Currency updated"
+      },
+      "errors": {
+        "update_currency_failed": "Failed to update currency"
+      }
+    },
+    "danger_zone": {
+      "title": "Danger Zone",
+      "logout_title": "Logout",
+      "logout_description": "Sign out from your account",
+      "logout_confirm_title": "Logout from this device?",
+      "logout_confirm_description": "You will need to sign in again to access your account.",
+      "logout_action": "Logout",
+      "delete_title": "Delete Account",
+      "delete_description": "Permanently delete your account and data",
+      "delete_confirm_title": "Delete your account?",
+      "delete_confirm_description": "This action cannot be undone. Your profile, wallets, categories, transactions, transfers, and other related data will be removed.",
+      "delete_instruction": "Type <kbd>{phrase}</kbd> to continue",
+      "delete_action": "Delete Account",
+      "cancel": "Cancel",
+      "messages": {
+        "deleted": "Account deleted"
+      },
+      "errors": {
+        "logout_failed": "Failed to log out",
+        "delete_failed": "Failed to delete account"
+      }
     }
   },
   "validation": {
@@ -232,5 +298,16 @@
       "initial_balance": "Initial Balance",
       "start": "Start With Budgetin"
     }
+  },
+  "theme": {
+    "system": "System",
+    "light": "Light",
+    "dark": "Dark",
+    "toggle": "Toggle theme",
+    "change": "Change theme"
+  },
+  "language": {
+    "toggle": "Toggle language",
+    "change": "Change language"
   }
 }

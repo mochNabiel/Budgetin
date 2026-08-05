@@ -1,6 +1,7 @@
 "use client"
 
-import { useState } from "react"
+import { useCallback, useState } from "react"
+import { Activity } from "react"
 import { StepProfile } from "./step-profile"
 import { StepWallet } from "./step-wallet"
 import { cn } from "@/shared/utils"
@@ -9,6 +10,10 @@ interface OnboardingShellProps {
   defaultName?: string
   defaultAvatar?: string
 }
+
+type OnboardingStep = 0 | 1
+
+const TOTAL_STEPS = 2
 
 function StepIndicator({ current, total }: { current: number; total: number }) {
   return (
@@ -30,21 +35,33 @@ export function OnboardingShell({
   defaultName,
   defaultAvatar,
 }: OnboardingShellProps) {
-  const [step, setStep] = useState<0 | 1>(0)
+  const [step, setStep] = useState<OnboardingStep>(0)
+  const [currencyCode, setCurrencyCode] = useState<string>("USD")
+
+  const handleProfileDone = useCallback((selectedCurrencyCode: string) => {
+    setCurrencyCode(selectedCurrencyCode)
+    setStep(1)
+  }, [])
+
+  const handleBackToProfile = useCallback(() => {
+    setStep(0)
+  }, [])
 
   return (
     <div className="flex flex-col gap-6">
-      <StepIndicator current={step} total={2} />
+      <StepIndicator current={step} total={TOTAL_STEPS} />
 
-      {step === 0 && (
+      <Activity mode={step === 0 ? "visible" : "hidden"}>
         <StepProfile
           defaultName={defaultName}
           defaultAvatar={defaultAvatar}
-          onDone={() => setStep(1)}
+          onDone={handleProfileDone}
         />
-      )}
+      </Activity>
 
-      {step === 1 && <StepWallet />}
+      <Activity mode={step === 1 ? "visible" : "hidden"}>
+        <StepWallet currencyCode={currencyCode} onBack={handleBackToProfile} />
+      </Activity>
     </div>
   )
 }

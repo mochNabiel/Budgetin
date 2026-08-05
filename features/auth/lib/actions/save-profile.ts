@@ -16,8 +16,16 @@ export async function saveProfile(formData: FormData): Promise<ActionState> {
     return { success: false, message: "You must be signed in" }
   }
 
+  const avatarEntry = formData.get("avatar")
+  const avatar =
+    avatarEntry instanceof File && avatarEntry.size > 0
+      ? avatarEntry
+      : undefined
+
   const parsed = profileSchema.safeParse({
     full_name: formData.get("full_name")?.toString().trim(),
+    avatar,
+    currency: formData.get("currency")?.toString(),
   })
 
   if (!parsed.success) {
@@ -27,17 +35,16 @@ export async function saveProfile(formData: FormData): Promise<ActionState> {
     }
   }
 
-  const { full_name } = parsed.data
-  const avatar = formData.get("avatar") as File | null
+  const { full_name, avatar: validatedAvatar, currency } = parsed.data
   let avatarUrl = user.user_metadata?.avatar_url ?? null
 
-  if (avatar && avatar.size > 0) {
-    const fileExt = avatar.name.split(".").pop()
+  if (validatedAvatar) {
+    const fileExt = validatedAvatar.name.split(".").pop()
     const filePath = `${user.id}/avatar.${fileExt}`
 
     const { error: uploadError } = await supabase.storage
       .from("avatars")
-      .upload(filePath, avatar, { upsert: true })
+      .upload(filePath, validatedAvatar, { upsert: true })
 
     if (uploadError) {
       return { success: false, message: "Failed to upload avatar" }
@@ -60,7 +67,7 @@ export async function saveProfile(formData: FormData): Promise<ActionState> {
 
   const { error: dbError } = await supabase
     .from("profiles")
-    .update({ full_name, avatar_url: avatarUrl })
+    .update({ full_name, avatar_url: avatarUrl, currency })
     .eq("id", user.id)
 
   if (dbError) {

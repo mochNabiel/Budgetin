@@ -1,18 +1,15 @@
 import { UserProvider } from "@/components/global/user-provider"
-import { getUserData } from "@/features/auth/lib/queries/get-user-data"
+import { getUserData } from "@/features/auth/lib/queries"
 
-export default async function ProtectedLayout({
-  children,
-}: {
+interface Props {
   children: React.ReactNode
-}) {
-  const user = await getUserData()
+}
 
+export default async function ProtectedLayout({ children }: Props) {
+  const user = await getUserData()
   return (
     <UserProvider user={user}>
-      <div className="mx-auto max-w-lg">
-        {children}
-      </div>
+      <div className="mx-auto max-w-lg">{children}</div>
     </UserProvider>
   )
 }

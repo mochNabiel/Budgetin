@@ -34,10 +34,6 @@ export default async function TransferList({ transfers }: Props) {
             href={`/transfer/${transfer.id}`}
             className="flex w-full items-center gap-3 py-3 text-left transition-colors hover:bg-muted/40"
           >
-            <span className="flex size-11 shrink-0 items-center justify-center rounded-full bg-muted text-muted-foreground">
-              <ArrowRight className="size-5" />
-            </span>
-
             <div className="min-w-0 flex-1">
               <p className="flex items-center gap-1 truncate text-sm font-semibold">
                 <span

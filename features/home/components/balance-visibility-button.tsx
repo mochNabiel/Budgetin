@@ -8,7 +8,12 @@ export default function BalanceVisibilityButton() {
   const { hidden, toggle } = useBalanceVisibility()
 
   return (
-    <Button variant="ghost" size="icon" onClick={toggle}>
+    <Button
+      variant="ghost"
+      size="icon"
+      onClick={toggle}
+      aria-label={hidden ? "Show balance" : "Hide balance"}
+    >
       {hidden ? (
         <EyeOff className="text-primary-foreground" />
       ) : (

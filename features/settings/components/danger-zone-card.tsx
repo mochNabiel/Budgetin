@@ -2,7 +2,9 @@
 
 import { useState, useTransition } from "react"
 import { ChevronRight, LogOut, Trash2 } from "lucide-react"
+import { useRouter } from "@/i18n/navigation"
 import { toast } from "sonner"
+import { useTranslations } from "next-intl"
 
 import { Button } from "@/components/ui/button"
 import {
@@ -20,23 +22,47 @@ import { Field, FieldLabel } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
 import { logout } from "@/features/auth/lib/actions/logout"
 import { deleteAccount } from "@/features/auth/lib/actions/delete-account"
+import { handleActionResult } from "@/shared/lib/handle-action-result"
+import { Kbd } from "@/components/ui/kbd"
 
 export default function DangerZoneCard() {
+  const t = useTranslations("settings.danger_zone")
+  const router = useRouter()
   const [isPending, startTransition] = useTransition()
   const [deleteConfirm, setDeleteConfirm] = useState("")
 
   function handleLogout() {
     startTransition(async () => {
-      await logout()
+      const result = await logout()
+      const handled = await handleActionResult(result, {
+        errorMessage: t("errors.logout_failed"),
+        onError: (message) => {
+          toast.error(message)
+        },
+        onSuccess: () => router.refresh(),
+      })
+
+      if (!handled.success) {
+        return
+      }
     })
   }
 
   function handleDeleteAccount() {
     startTransition(async () => {
       const result = await deleteAccount()
+      const handled = await handleActionResult(result, {
+        errorMessage: t("errors.delete_failed"),
+        onError: (message) => {
+          toast.error(message)
+        },
+        onSuccess: () => {
+          toast.success(t("messages.deleted"))
+        },
+      })
 
-      if (!result?.success) {
-        toast.error(result?.message ?? "Failed to delete account")
+      if (!handled.success) {
+        return
       }
     })
   }
@@ -53,9 +79,9 @@ export default function DangerZoneCard() {
               <LogOut className="size-5" />
             </span>
             <div className="min-w-0 flex-1">
-              <p className="font-medium">Logout</p>
+              <p className="font-medium">{t("logout_title")}</p>
               <p className="text-sm text-muted-foreground">
-                Sign out from your account
+                {t("logout_description")}
               </p>
             </div>
             <ChevronRight className="size-4 text-muted-foreground" />
@@ -63,19 +89,21 @@ export default function DangerZoneCard() {
         </AlertDialogTrigger>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Logout from this device?</AlertDialogTitle>
+            <AlertDialogTitle>{t("logout_confirm_title")}</AlertDialogTitle>
             <AlertDialogDescription>
-              You will need to sign in again to access your account.
+              {t("logout_confirm_description")}
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel disabled={isPending}>Cancel</AlertDialogCancel>
+            <AlertDialogCancel disabled={isPending}>
+              {t("cancel")}
+            </AlertDialogCancel>
             <AlertDialogAction
               onClick={handleLogout}
               disabled={isPending}
               className="bg-primary text-primary-foreground hover:bg-primary/90"
             >
-              Logout
+              {t("logout_action")}
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
@@ -91,9 +119,11 @@ export default function DangerZoneCard() {
               <Trash2 className="size-5" />
             </span>
             <div className="min-w-0 flex-1">
-              <p className="font-medium text-destructive">Delete Account</p>
+              <p className="font-medium text-destructive">
+                {t("delete_title")}
+              </p>
               <p className="text-sm text-muted-foreground">
-                Permanently delete your account and data
+                {t("delete_description")}
               </p>
             </div>
             <ChevronRight className="size-4 text-destructive" />
@@ -101,17 +131,18 @@ export default function DangerZoneCard() {
         </AlertDialogTrigger>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Delete your account?</AlertDialogTitle>
+            <AlertDialogTitle>{t("delete_confirm_title")}</AlertDialogTitle>
             <AlertDialogDescription>
-              This action cannot be undone. Your profile, wallets, categories,
-              transactions, transfers, and other related data will be removed.
+              {t("delete_confirm_description")}
             </AlertDialogDescription>
           </AlertDialogHeader>
 
           <Field>
             <FieldLabel className="text-sm">
-              Type <span className="font-semibold">delete my account</span> to
-              continue
+              {t.rich("delete_instruction", {
+                phrase: "delete my account",
+                kbd: (chunks) => <Kbd>{chunks}</Kbd>,
+              })}
             </FieldLabel>
             <Input
               value={deleteConfirm}
@@ -121,13 +152,17 @@ export default function DangerZoneCard() {
           </Field>
 
           <AlertDialogFooter>
-            <AlertDialogCancel disabled={isPending}>Cancel</AlertDialogCancel>
+            <AlertDialogCancel disabled={isPending}>
+              {t("cancel")}
+            </AlertDialogCancel>
             <Button
               variant="destructive"
-              disabled={isPending || deleteConfirm.trim() !== "delete my account"}
+              disabled={
+                isPending || deleteConfirm.trim() !== "delete my account"
+              }
               onClick={handleDeleteAccount}
             >
-              Delete Account
+              {t("delete_action")}
             </Button>
           </AlertDialogFooter>
         </AlertDialogContent>

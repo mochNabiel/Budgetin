@@ -3,6 +3,8 @@ import { Metadata } from "next"
 import { createClient } from "@/shared/supabase/server"
 import { LogoutButton } from "@/components/global/logout-button"
 import Image from "next/image"
+import { Button } from "@/components/ui/button"
+import { Link } from "@/i18n/navigation"
 
 export const metadata: Metadata = {
   title: "Budgetin - Smart Money Tracking",
@@ -44,6 +46,9 @@ export default async function Page() {
               <p className="text-xs text-muted-foreground">
                 You’re logged in. Stay tuned 👀
               </p>
+              <Button asChild>
+                <Link href="/home" className="w-full">Go to your Home</Link>
+              </Button>
               <LogoutButton />
             </div>
           ) : (

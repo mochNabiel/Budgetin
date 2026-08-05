@@ -48,7 +48,7 @@ export function BottomNavBar({
           <button
             type="button"
             aria-label="add-btn"
-            className="relative flex size-14 shrink-0 items-center justify-center"
+            className="relative cursor-pointer flex size-14 shrink-0 items-center justify-center"
           >
             <motion.span
               whileTap={{ scale: 0.92 }}
@@ -89,6 +89,7 @@ function NavLink({
     <Link
       href={item.href}
       aria-current={isActive ? "page" : undefined}
+      aria-label={item.key}
       className="relative flex size-12 shrink-0 items-center justify-center"
     >
       {isActive && (

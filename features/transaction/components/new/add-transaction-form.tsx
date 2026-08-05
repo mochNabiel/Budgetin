@@ -19,7 +19,7 @@ import {
   transactionSchema,
   TransactionFormValues,
 } from "@/shared/schemas/transaction.schema"
-import { saveTransaction } from "@/features/transaction/lib/actions/save-transaction"
+import { createTransaction } from "@/features/transaction/lib/actions/create-transaction"
 import { toast } from "sonner"
 import { useRouter } from "@/i18n/navigation"
 import { Spinner } from "@/components/ui/spinner"
@@ -72,7 +72,7 @@ export default function AddTransactionForm({
         }
       })
 
-      const result = await saveTransaction(formData)
+      const result = await createTransaction(formData)
 
       if (!result.success) {
         toast.error(result.message)

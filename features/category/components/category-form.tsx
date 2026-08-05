@@ -29,7 +29,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover"
 import { cn } from "@/shared/utils"
-import { WALLET_COLORS } from "@/constants/wallet-colors"
+import { ITEM_COLORS } from "@/constants/item-colors"
 import {
   categorySchema,
   CategoryFormValues,
@@ -61,7 +61,7 @@ export default function CategoryForm({
       type: defaultValues?.type ?? "expense",
       name: defaultValues?.name ?? "",
       icon: defaultValues?.icon ?? "🏷️",
-      color: defaultValues?.color ?? WALLET_COLORS[0].value,
+      color: defaultValues?.color ?? ITEM_COLORS[0].value,
     },
   })
 
@@ -207,7 +207,7 @@ export default function CategoryForm({
             <Field>
               <FieldLabel>{t("color")}</FieldLabel>
               <div className="grid grid-cols-6 gap-3">
-                {WALLET_COLORS.map((c) => (
+                {ITEM_COLORS.map((c) => (
                   <button
                     key={c.value}
                     type="button"
@@ -228,9 +228,13 @@ export default function CategoryForm({
         />
       </FieldGroup>
 
-      <Button type="submit" disabled={isPending} className="h-12 w-full">
+      <Button
+        type="submit"
+        disabled={isPending}
+        className="h-12 w-full text-primary-foreground"
+      >
         {isPending ? (
-          <Spinner  className="text-primary-foreground"/>
+          <Spinner />
         ) : mode === "create" ? (
           t("create")
         ) : (

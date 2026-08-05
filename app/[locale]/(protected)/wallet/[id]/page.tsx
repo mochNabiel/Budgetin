@@ -72,6 +72,17 @@ export default async function WalletDetailPage({ params }: PageProps) {
             {formatCurrency(wallet.balance, currency)}
           </p>
 
+          {/* <div className="flex items-center gap-3 rounded-full border bg-background/80 px-4 py-2 text-sm">
+            <div className="flex flex-col items-center">
+              <p className="text-[11px] uppercase tracking-wide text-muted-foreground">
+                {t("initial_balance")}
+              </p>
+              <p className="font-semibold">
+                {formatCurrency(wallet.initial_balance, currency)}
+              </p>
+            </div>
+          </div> */}
+
           <div className="flex flex-col items-center">
             <p className="text-xs text-muted-foreground">
               {t("created")} {formatDate(wallet.created_at, locale)}

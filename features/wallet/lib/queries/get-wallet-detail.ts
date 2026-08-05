@@ -7,6 +7,7 @@ export interface IWalletDetail {
   name: string
   icon: string
   color: string
+  initial_balance: number
   balance: number
   created_at: string
   updated_at: string
@@ -19,7 +20,9 @@ export const getWalletDetail = cache(
 
     const { data, error } = await supabase
       .from("wallets")
-      .select("id, name, icon, color, balance, created_at, updated_at")
+      .select(
+        "id, name, icon, color, initial_balance, balance, created_at, updated_at"
+      )
       .eq("id", id)
       .eq("user_id", user.id)
       .single()

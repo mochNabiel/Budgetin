@@ -39,6 +39,8 @@ create table public.wallets (
 
   color text not null,
 
+  initial_balance bigint not null default 0,
+
   balance bigint not null default 0,
 
   created_at timestamptz not null default now(),

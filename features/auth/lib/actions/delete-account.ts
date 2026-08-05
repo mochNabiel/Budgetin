@@ -2,15 +2,15 @@
 
 import { revalidatePath } from "next/cache"
 
+import { redirect } from "@/i18n/navigation"
 import { createAdminClient } from "@/shared/supabase/admin"
 import { createClient } from "@/shared/supabase/server"
 import { getLocaleFromRequest } from "@/shared/get-locale-from-request"
-import { redirect } from "@/i18n/navigation"
+import { ActionState } from "@/types"
 
-export async function deleteAccount() {
+export async function deleteAccount(): Promise<ActionState> {
   const supabase = await createClient()
   const locale = await getLocaleFromRequest()
-
   const {
     data: { user },
     error: authError,
@@ -20,6 +20,14 @@ export async function deleteAccount() {
     return { success: false, message: "You must be signed in" }
   }
 
+  const { error: signOutError } = await supabase.auth.signOut({
+    scope: "local",
+  })
+
+  if (signOutError) {
+    return { success: false, message: signOutError.message }
+  }
+
   const admin = createAdminClient()
   const { error } = await admin.auth.admin.deleteUser(user.id)
 
@@ -27,12 +35,11 @@ export async function deleteAccount() {
     return { success: false, message: error.message }
   }
 
-  await supabase.auth.signOut()
-
   revalidatePath("/settings")
-
   redirect({
     href: "/auth/login",
     locale,
   })
+
+  return { success: true, message: "Account deleted" }
 }

@@ -1,17 +1,15 @@
 "use server"
 
-import { getLocaleFromRequest } from "@/shared/get-locale-from-request"
 import { createClient } from "@/shared/supabase/server"
-import { redirect } from "@/i18n/navigation"
+import { ActionState } from "@/types"
 
-export const logout = async () => {
+export const logout = async (): Promise<ActionState> => {
   const supabase = await createClient()
-  const locale = await getLocaleFromRequest()
+  const { error } = await supabase.auth.signOut()
 
-  await supabase.auth.signOut()
+  if (error) {
+    return { success: false, message: error.message }
+  }
 
-  redirect({
-    href: "/auth/login",
-    locale,
-  })
+  return { success: true, message: "Logged out" }
 }

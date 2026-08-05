@@ -28,7 +28,7 @@ import {
   ItemTitle,
 } from "@/components/ui/item"
 import { cn } from "@/shared/utils"
-import { WALLET_COLORS } from "@/constants/wallet-colors"
+import { ITEM_COLORS } from "@/constants/item-colors"
 import { useUser } from "@/components/global/user-provider"
 import formatCurrency, {
   getCurrencySymbol,
@@ -63,7 +63,7 @@ export default function WalletForm({
       name: defaultValues?.name ?? "",
       balance: defaultValues?.balance ?? 0,
       icon: defaultValues?.icon ?? "💰",
-      color: defaultValues?.color ?? WALLET_COLORS[0].value,
+      color: defaultValues?.color ?? ITEM_COLORS[0].value,
     },
   })
 
@@ -121,7 +121,7 @@ export default function WalletForm({
               </ItemContent>
             </Item>
           </Field>
-          
+
           {/* Icon + Nama */}
           <Field>
             <FieldLabel>{t("name_icon")}</FieldLabel>
@@ -209,7 +209,7 @@ export default function WalletForm({
               <Field>
                 <FieldLabel>{t("color")}</FieldLabel>
                 <div className="flex flex-wrap gap-3">
-                  {WALLET_COLORS.map((c) => (
+                  {ITEM_COLORS.map((c) => (
                     <button
                       key={c.value}
                       type="button"

@@ -4,9 +4,18 @@ import Image from "next/image"
 import { useMemo, useState, useTransition } from "react"
 import { ChevronRight, Crown, Pencil } from "lucide-react"
 import { toast } from "sonner"
+import { useForm, Controller } from "react-hook-form"
+import { zodResolver } from "@hookform/resolvers/zod"
 
 import { Button } from "@/components/ui/button"
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog"
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
 import {
   Field,
   FieldError,
@@ -19,16 +28,20 @@ import { Separator } from "@/components/ui/separator"
 import { useUser } from "@/components/global/user-provider"
 import { saveProfile } from "@/features/auth/lib/actions/save-profile"
 import { useRouter } from "@/i18n/navigation"
+import {
+  ProfileFormValues,
+  profileSchema,
+} from "@/shared/schemas/profile.schema"
+import { useTranslations } from "next-intl"
+import { handleActionResult } from "@/shared/lib/handle-action-result"
 
 export default function AccountPlanCard() {
+  const t = useTranslations("settings.account_plan")
   const user = useUser()
   const router = useRouter()
   const [open, setOpen] = useState(false)
   const [isPending, startTransition] = useTransition()
   const [preview, setPreview] = useState<string | null>(user.avatar_url ?? null)
-  const [avatarFile, setAvatarFile] = useState<File | null>(null)
-  const [fullName, setFullName] = useState(user.full_name ?? "")
-  const [error, setError] = useState<string | null>(null)
 
   const initials = useMemo(() => {
     const parts = (user.full_name || user.email).split(" ")
@@ -38,33 +51,46 @@ export default function AccountPlanCard() {
       .join("")
   }, [user.email, user.full_name])
 
-  function handleFileChange(file: File | null) {
-    setAvatarFile(file)
-    setError(null)
-    if (file) {
-      setPreview(URL.createObjectURL(file))
+  const { control, handleSubmit, reset } = useForm<ProfileFormValues>({
+    resolver: zodResolver(profileSchema),
+    defaultValues: {
+      full_name: user.full_name ?? "",
+      avatar: null,
+    },
+  })
+
+  function handleDialogOpenChange(nextOpen: boolean) {
+    setOpen(nextOpen)
+    if (!nextOpen) {
+      setPreview(user.avatar_url ?? null)
+      reset({ full_name: user.full_name ?? "", avatar: null })
     }
   }
 
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault()
-
+  const onSubmit = (values: ProfileFormValues) => {
     startTransition(async () => {
       const formData = new FormData()
-      formData.set("full_name", fullName)
-      if (avatarFile) {
-        formData.set("avatar", avatarFile)
+      formData.set("full_name", values.full_name)
+      if (values.avatar) {
+        formData.set("avatar", values.avatar)
       }
 
       const result = await saveProfile(formData)
-      if (!result.success) {
-        setError(result.message ?? "Failed to save profile")
+      const handled = await handleActionResult(result, {
+        errorMessage: t("errors.save_failed"),
+        onError: (message) => {
+          toast.error(message)
+        },
+        onSuccess: () => {
+          toast.success(t("messages.saved"))
+          setOpen(false)
+          router.refresh()
+        },
+      })
+
+      if (!handled.success) {
         return
       }
-
-      toast.success(result.message ?? "Profile saved")
-      setOpen(false)
-      router.refresh()
     })
   }
 
@@ -91,7 +117,7 @@ export default function AccountPlanCard() {
               )}
             </div>
 
-            <Dialog open={open} onOpenChange={setOpen}>
+            <Dialog open={open} onOpenChange={handleDialogOpenChange}>
               <DialogTrigger asChild>
                 <Button
                   type="button"
@@ -102,61 +128,94 @@ export default function AccountPlanCard() {
                 </Button>
               </DialogTrigger>
               <DialogContent className="sm:max-w-md">
-                <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+                <DialogHeader>
+                  <DialogTitle>{t("edit_dialog_title")}</DialogTitle>
+                  <DialogDescription>
+                    {t("edit_dialog_description")}
+                  </DialogDescription>
+                </DialogHeader>
+                <form
+                  onSubmit={handleSubmit(onSubmit)}
+                  className="flex flex-col gap-4"
+                  noValidate
+                >
                   <FieldGroup className="gap-4">
-                    <Field>
-                      <FieldLabel>Avatar</FieldLabel>
-                      <label className="flex cursor-pointer items-center gap-3 rounded-2xl border border-dashed p-3">
-                        <div className="relative size-14 overflow-hidden rounded-full bg-muted">
-                          {preview ? (
-                            <Image
-                              src={preview}
-                              alt="Avatar preview"
-                              fill
-                              unoptimized
-                              className="object-cover"
-                            />
-                          ) : (
-                            <div className="flex h-full items-center justify-center text-xs text-muted-foreground">
-                              No avatar
+                    <Controller
+                      name="avatar"
+                      control={control}
+                      render={({ field, fieldState }) => (
+                        <Field>
+                          <FieldLabel>{t("avatar_title")}</FieldLabel>
+                          <label className="flex cursor-pointer items-center gap-3 rounded-2xl border border-dashed p-3">
+                            <div className="relative size-14 overflow-hidden rounded-full bg-muted">
+                              {preview ? (
+                                <Image
+                                  src={preview}
+                                  alt="Avatar preview"
+                                  fill
+                                  unoptimized
+                                  className="object-cover"
+                                />
+                              ) : (
+                                <div className="flex h-full items-center justify-center text-xs text-muted-foreground">
+                                  {t("avatar_empty")}
+                                </div>
+                              )}
                             </div>
+                            <div className="min-w-0 flex-1">
+                              <p className="text-sm font-medium">
+                                {t("avatar_change")}
+                              </p>
+                              <p className="text-xs text-muted-foreground">
+                                {t("avatar_description")}
+                              </p>
+                            </div>
+                            <Input
+                              ref={field.ref}
+                              type="file"
+                              accept="image/*"
+                              className="sr-only"
+                              onChange={(e) => {
+                                const file = e.target.files?.[0] ?? null
+                                field.onChange(file)
+                                if (file) {
+                                  setPreview(URL.createObjectURL(file))
+                                }
+                              }}
+                            />
+                          </label>
+                          {fieldState.invalid && (
+                            <FieldError errors={[fieldState.error]} />
                           )}
-                        </div>
-                        <div className="min-w-0 flex-1">
-                          <p className="text-sm font-medium">Change avatar</p>
-                          <p className="text-xs text-muted-foreground">
-                            PNG, JPG, or WEBP
-                          </p>
-                        </div>
-                        <Input
-                          type="file"
-                          accept="image/*"
-                          className="sr-only"
-                          onChange={(e) =>
-                            handleFileChange(e.target.files?.[0] ?? null)
-                          }
-                        />
-                      </label>
-                    </Field>
+                        </Field>
+                      )}
+                    />
 
-                    <Field>
-                      <FieldLabel htmlFor="full_name">Full name</FieldLabel>
-                      <Input
-                        id="full_name"
-                        value={fullName}
-                        onChange={(e) => setFullName(e.target.value)}
-                      />
-                    </Field>
+                    <Controller
+                      name="full_name"
+                      control={control}
+                      render={({ field, fieldState }) => (
+                        <Field>
+                          <FieldLabel htmlFor="full_name">{t("name_title")}</FieldLabel>
+                          <Input
+                            id="full_name"
+                            className="h-12 rounded-xl"
+                            {...field}
+                          />
+                          {fieldState.invalid && (
+                            <FieldError errors={[fieldState.error]} />
+                          )}
+                        </Field>
+                      )}
+                    />
                   </FieldGroup>
-
-                  {error && <FieldError>{error}</FieldError>}
 
                   <Button
                     type="submit"
                     disabled={isPending}
                     className="h-12 w-full"
                   >
-                    {isPending ? <Spinner /> : "Save changes"}
+                    {isPending ? <Spinner /> : t("edit_dialog_save")}
                   </Button>
                 </form>
               </DialogContent>
@@ -178,23 +237,23 @@ export default function AccountPlanCard() {
 
       <div className="p-4">
         <p className="text-sm font-medium text-muted-foreground">
-          Current Plan
+          {t("plan")}
         </p>
         <h3 className="mt-1 text-2xl font-semibold capitalize">{plan}</h3>
         <p className="mt-1 text-sm text-muted-foreground">
           {plan === "pro"
-            ? "You are using the full version."
-            : "Upgrade to unlock the full version."}
+            ? t("plan_pro_description")
+            : t("plan_free_description")}
         </p>
       </div>
 
       <div className="p-4 pt-0">
         <Button
-          className="rounded-xl h-12 w-full gap-2 bg-linear-to-r from-primary via-primary to-chart-2 text-primary-foreground hover:opacity-95"
+          className="h-12 w-full gap-2 rounded-xl bg-linear-to-r from-primary via-primary to-chart-2 text-primary-foreground hover:opacity-95"
           onClick={() => router.push("/subscription")}
         >
           <Crown className="size-4" />
-          Upgrade to Pro
+          {t("upgrade")}
           <ChevronRight className="ml-auto size-4" />
         </Button>
       </div>
