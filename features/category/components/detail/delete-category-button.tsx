@@ -52,7 +52,7 @@ export default function DeleteCategoryButton({ categoryId }: Props) {
           className="flex-1 h-12 border-destructive text-destructive hover:bg-destructive/10 hover:text-destructive"
         >
           <Trash2 className="size-4" />
-          {t("delete_btn")}
+          {t("delete")}
         </Button>
       </AlertDialogTrigger>
 

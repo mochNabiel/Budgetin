@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation"
 import PageHeader from "@/components/global/page-header"
 import { getWallets } from "@/features/wallet/lib/queries"
-import AddTransferForm from "@/features/transfer/components/add-transfer-form"
+import AddTransferForm from "@/features/transfer/components/new/add-transfer-form"
 import { getTranslations } from "next-intl/server"
 
 export default async function NewTransferPage() {

@@ -1,29 +1,33 @@
 import { getUserData } from "@/features/auth/lib/queries"
 import { createClient } from "@/shared/supabase/server"
+import { ICategory } from "@/types/category"
 import { cache } from "react"
 
-export interface ICategory {
-  id: string
-  user_id: string
-  type: string
-  name: string
-  icon: string
-  color: string
-}
+export type { ICategory } from "@/types/category"
 
-export const getCategories = cache(async (): Promise<ICategory[]> => {
-  const supabase = await createClient()
-  const user = await getUserData()
+type CategoryFilter = "all" | "income" | "expense"
 
-  const { data, error } = await supabase
-    .from("categories")
-    .select(`id, user_id, type, name, icon, color`)
-    .eq("user_id", user.id)
-    .order("created_at", { ascending: false })
+export const getCategories = cache(
+  async (filter: CategoryFilter = "all"): Promise<ICategory[]> => {
+    const supabase = await createClient()
+    const user = await getUserData()
 
-  if (error) {
-    throw new Error(error.message)
+    let query = supabase
+      .from("categories")
+      .select("id, user_id, type, name, icon, color")
+      .eq("user_id", user.id)
+      .order("created_at", { ascending: false })
+
+    if (filter !== "all") {
+      query = query.eq("type", filter)
+    }
+
+    const { data, error } = await query
+
+    if (error) {
+      throw new Error(error.message)
+    }
+
+    return data as ICategory[]
   }
-
-  return data as ICategory[]
-})
+)

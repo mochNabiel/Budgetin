@@ -142,7 +142,6 @@
     "update": "Perbarui",
     "cancel": "Batal",
     "delete": "Hapus",
-    "delete_btn": "Hapus Kategori",
     "delete_alert_title": "Hapus kategori ini?",
     "delete_alert_msg": "Aksi ini tidak dapat dibatalkan. Kategori yang dipakai transaksi tidak bisa dihapus.",
     "transactions": "Transaksi",
@@ -163,11 +162,11 @@
       "header_title": "Edit Kategori"
     }
   },
-    "wallet": {
-      "add_wallet": "Tambah Dompet",
-      "name_icon": "Nama dan Ikon Dompet",
-      "name_placeholder": "Dompet Utama",
-      "initial_balance": "Saldo Awal",
+  "wallet": {
+    "add_wallet": "Tambah Dompet",
+    "name_icon": "Nama dan Ikon Dompet",
+    "name_placeholder": "Dompet Utama",
+    "initial_balance": "Saldo Awal",
     "balance": "Saldo",
     "color": "Warna Dompet",
     "save": "Simpan",
@@ -178,13 +177,20 @@
     "list": {
       "header_title": "Daftar Dompet"
     },
-      "detail": {
-        "header_title": "Detail Dompet",
-        "initial_balance": "Saldo Awal",
-        "created": "Dibuat",
-        "updated": "Diperbarui",
-        "transactions": "Transaksi"
-      },
+    "detail": {
+      "header_title": "Detail Dompet",
+      "initial_balance": "Saldo Awal",
+      "current_balance": "Saldo Saat Ini",
+      "balance_note": "Ini adalah jumlah setelah transaksi dan transfer.",
+      "all": "Semua",
+      "transaction": "Transaksi",
+      "transfer": "Transfer",
+      "no_activity": "Tidak ada aktivitas",
+      "created": "Dibuat",
+      "updated": "Diperbarui",
+      "transactions": "Transaksi",
+      "edit": "Edit"
+    },
     "new": {
       "header_title": "Tambah Dompet"
     },

@@ -63,7 +63,7 @@ export default async function RecentTransactionsSection() {
                   </span>
 
                   <div className="min-w-0 flex-1">
-                    <p className="truncate text-sm font-medium">
+                    <p className="truncate font-medium">
                       {transaction.notes}
                     </p>
 

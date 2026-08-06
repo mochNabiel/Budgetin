@@ -21,7 +21,7 @@ export default async function TransactionDetail({
   const isIncome = transaction.type === "income"
 
   return (
-    <main className="flex flex-col gap-4 p-4">
+    <main className="flex flex-col gap-4 p-2">
       {/* Amount hero */}
       <section className="flex flex-col items-center gap-3 rounded-2xl border bg-muted/30 py-8">
         <span

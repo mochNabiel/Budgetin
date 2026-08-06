@@ -4,9 +4,9 @@ import { Trash2 } from "lucide-react"
 import { toast } from "sonner"
 import { useTransition } from "react"
 
-import WalletForm from "./wallet-form"
-import { updateWallet } from "../lib/actions/update-wallet"
-import { deleteWallet } from "../lib/actions/delete-wallet"
+import WalletForm from "../wallet-form"
+import { updateWallet } from "../../lib/actions/update-wallet"
+import { deleteWallet } from "../../lib/actions/delete-wallet"
 import { useRouter } from "@/i18n/navigation"
 import {
   AlertDialog,
@@ -21,7 +21,7 @@ import {
 } from "@/components/ui/alert-dialog"
 import { Button } from "@/components/ui/button"
 import { Spinner } from "@/components/ui/spinner"
-import { IWalletDetail } from "../lib/queries/get-wallet-detail"
+import { IWalletDetail } from "../../lib/queries/get-wallet-detail"
 import { useTranslations } from "next-intl"
 
 interface Props {
@@ -76,12 +76,14 @@ export default function EditWalletClient({ wallet }: Props) {
             <AlertDialogTitle>
               {t("delete")} &quot;{wallet.name}&quot;?
             </AlertDialogTitle>
-            <AlertDialogDescription>s
-              {t("delete_dialog_description")}
+            <AlertDialogDescription>
+              s{t("delete_dialog_description")}
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel disabled={isPending}>{t("cancel")}</AlertDialogCancel>
+            <AlertDialogCancel disabled={isPending}>
+              {t("cancel")}
+            </AlertDialogCancel>
             <AlertDialogAction
               onClick={handleDelete}
               disabled={isPending}

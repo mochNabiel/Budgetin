@@ -2,8 +2,8 @@ import { Metadata } from "next"
 import { getTranslations } from "next-intl/server"
 
 import PageHeader from "@/components/global/page-header"
-import TransferFilterDialog from "@/features/transfer/components/history/transfer-filter-dialog"
-import TransferList from "@/features/transfer/components/history/transfer-list"
+import TransferFilterDialog from "@/features/transfer/components/list/transfer-filter-dialog"
+import TransferList from "@/features/transfer/components/list/transfer-list"
 import { getTransfers } from "@/features/transfer/lib/queries/get-transfers"
 
 interface PageProps {

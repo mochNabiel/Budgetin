@@ -1,16 +1,9 @@
 import { createClient } from "@/shared/supabase/server"
 import { cache } from "react"
 import { getAuth } from "./get-auth"
+import { IUser } from "@/types/user"
 
-export interface IUser {
-  id: string
-  email: string
-  full_name: string
-  avatar_url: string
-  plan: string
-  onboarding_completed: boolean
-  currency: string
-}
+export type { IUser } from "@/types/user"
 
 export const getUserData = cache(async () => {
   const supabase = await createClient()

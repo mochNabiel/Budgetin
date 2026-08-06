@@ -13,7 +13,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-import { ICategory } from "@/features/category/lib/queries/get-categories"
+import { ICategory } from "@/types/category"
 import { useTranslations } from "next-intl"
 import type {
   ControllerFieldState,

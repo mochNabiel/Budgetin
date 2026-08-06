@@ -56,7 +56,7 @@ export default async function RecentTransfersSection() {
                 <div className="min-w-0 flex-1 space-y-1">
                   <p className="flex items-center gap-1 truncate text-sm font-medium">
                     <span
-                      className="flex size-4 shrink-0 items-center justify-center rounded-full"
+                      className="flex size-6 shrink-0 items-center justify-center rounded-full"
                       style={{ backgroundColor: transfer.from_wallet.color }}
                     >
                       {transfer.from_wallet.icon}
@@ -68,7 +68,7 @@ export default async function RecentTransfersSection() {
 
                     <ArrowRight className="size-3 shrink-0 text-muted-foreground" />
                     <span
-                      className="flex size-4 shrink-0 items-center justify-center rounded-full"
+                      className="flex size-6 shrink-0 items-center justify-center rounded-full"
                       style={{ backgroundColor: transfer.to_wallet.color }}
                     >
                       {transfer.to_wallet.icon}

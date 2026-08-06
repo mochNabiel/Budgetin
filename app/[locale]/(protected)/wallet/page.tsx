@@ -1,6 +1,6 @@
 import PageHeader from "@/components/global/page-header"
 import { Button } from "@/components/ui/button"
-import WalletList from "@/features/wallet/components/wallet-list"
+import WalletList from "@/features/wallet/components/list/wallet-list"
 import { Link } from "@/i18n/navigation"
 import { Plus } from "lucide-react"
 import { Metadata } from "next"
@@ -17,7 +17,7 @@ export default async function WalletPage() {
     <div>
       <PageHeader title={t("list.header_title")} backHref="/home" />
 
-      <main className="flex flex-col gap-4 p-4">
+      <main className="flex flex-col gap-4 p-2">
         <Button className="h-12 w-full" asChild>
           <Link href={"/wallet/new"} className="flex items-center gap-2">
             <Plus />

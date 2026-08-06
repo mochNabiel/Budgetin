@@ -21,14 +21,14 @@ interface PageProps {
 export default async function CategoryPage({ searchParams }: PageProps) {
   const t = await getTranslations("category")
   const sp = await searchParams
-  const categories = await getCategories()
   const filter = sp.type ?? "all"
+  const categories = await getCategories(filter)
 
   return (
     <div>
       <PageHeader title={t("list.header_title")} backHref="/home" />
 
-      <main className="flex flex-col gap-4 p-4">
+      <main className="flex flex-col gap-4 p-2">
         <Button className="h-12 w-full" asChild>
           <Link href="/category/new" className="flex items-center gap-2">
             <Plus />
@@ -37,7 +37,7 @@ export default async function CategoryPage({ searchParams }: PageProps) {
         </Button>
 
         <CategoryFilterTabs currentFilter={filter} />
-        <CategoryList categories={categories} filter={filter} />
+        <CategoryList categories={categories} />
       </main>
     </div>
   )

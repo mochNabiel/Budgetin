@@ -1,15 +1,9 @@
 import { cache } from "react"
 import { createClient } from "@/shared/supabase/server"
 import { getUserData } from "@/features/auth/lib/queries"
+import { IRecentTransfer } from "@/types/recent-transfer"
 
-export interface IRecentTransfer {
-  id: string
-  amount: number
-  notes: string | null
-  transfer_date: string
-  from_wallet: { id: string; name: string; icon: string; color: string }
-  to_wallet: { id: string; name: string; icon: string; color: string }
-}
+export type { IRecentTransfer } from "@/types/recent-transfer"
 
 const LIMIT = 5
 

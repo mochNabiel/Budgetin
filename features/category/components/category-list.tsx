@@ -1,27 +1,18 @@
 import { Card, CardContent } from "@/components/ui/card"
 import { Link } from "@/i18n/navigation"
-import { getTranslations } from "next-intl/server"
-import { Inbox, ChevronRight } from "lucide-react"
-
-import { ICategory } from "@/features/category/lib/queries/get-categories"
 import { cn } from "@/shared/utils"
+import { ICategory } from "@/types/category"
+import { ChevronRight, Inbox } from "lucide-react"
+import { getTranslations } from "next-intl/server"
 
 interface Props {
   categories: ICategory[]
-  filter?: "all" | "income" | "expense"
 }
 
-export default async function CategoryList({
-  categories,
-  filter = "all",
-}: Props) {
+export default async function CategoryList({ categories }: Props) {
   const t = await getTranslations("category")
-  const visibleCategories =
-    filter === "all"
-      ? categories
-      : categories.filter((category) => category.type === filter)
 
-  if (visibleCategories.length === 0) {
+  if (categories.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center gap-2 py-16 text-center text-muted-foreground">
         <Inbox className="size-8" />
@@ -33,7 +24,7 @@ export default async function CategoryList({
   return (
     <Card size="sm" className="data-[size=sm]:py-0">
       <CardContent className="divide-y divide-border/60">
-        {visibleCategories.map((category) => (
+        {categories.map((category) => (
           <Link
             key={category.id}
             href={`/category/${category.id}`}
@@ -51,9 +42,7 @@ export default async function CategoryList({
               <p
                 className={cn(
                   "text-xs font-medium capitalize",
-                  category.type === "income"
-                    ? "text-chart-2"
-                    : "text-primary"
+                  category.type === "income" ? "text-chart-2" : "text-primary"
                 )}
               >
                 {category.type}

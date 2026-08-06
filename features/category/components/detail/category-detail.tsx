@@ -4,14 +4,14 @@ import { Pencil } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Link } from "@/i18n/navigation"
 import { getTransactions } from "@/features/transaction/lib/queries/get-transactions"
-import { ICategoryDetail } from "@/features/category/lib/queries/get-category-detail"
 import formatDate from "@/shared/helper/format-date"
 import DetailRow from "./detail-row"
 import DeleteCategoryButton from "./delete-category-button"
-import TransactionList from "@/features/transaction/components/history/transaction-list"
+import TransactionList from "@/features/transaction/components/list/transaction-list"
+import { ICategory } from "@/types/category"
 
 interface Props {
-  category: ICategoryDetail
+  category: ICategory
 }
 
 export default async function CategoryDetail({ category }: Props) {
@@ -50,7 +50,9 @@ export default async function CategoryDetail({ category }: Props) {
 
       <section className="flex flex-col divide-y divide-border rounded-2xl border">
         <DetailRow label={t("type")}>
-          <span className="text-sm font-medium capitalize">{category.type}</span>
+          <span className="text-sm font-medium capitalize">
+            {category.type}
+          </span>
         </DetailRow>
         <DetailRow label={t("name")}>
           <span className="text-sm font-medium">{category.name}</span>

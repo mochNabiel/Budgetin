@@ -2,19 +2,12 @@ import { cache } from "react"
 
 import { getUserData } from "@/features/auth/lib/queries"
 import { createClient } from "@/shared/supabase/server"
+import { ICategory } from "@/types/category"
 
-export interface ICategoryDetail {
-  id: number
-  user_id: string | null
-  type: "income" | "expense"
-  name: string
-  icon: string
-  color: string
-  created_at: string
-}
+export type { ICategory } from "@/types/category"
 
 export const getCategoryDetail = cache(
-  async (id: number): Promise<ICategoryDetail> => {
+  async (id: number): Promise<ICategory> => {
     const supabase = await createClient()
     const user = await getUserData()
 
@@ -27,6 +20,6 @@ export const getCategoryDetail = cache(
 
     if (error) throw new Error(error.message)
 
-    return data as ICategoryDetail
+    return data as ICategory
   }
 )

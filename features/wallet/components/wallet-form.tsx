@@ -57,7 +57,11 @@ export default function WalletForm({
   const { currency } = useUser()
   const router = useRouter()
 
-  const { handleSubmit, control } = useForm<WalletFormValues>({
+  const {
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm<WalletFormValues>({
     resolver: zodResolver(walletSchema),
     defaultValues: {
       name: defaultValues?.name ?? "",
@@ -134,6 +138,7 @@ export default function WalletForm({
                     <PopoverTrigger asChild>
                       <Button
                         variant="outline"
+                        type="button"
                         aria-invalid={fieldState.invalid}
                         className="rounded-xl p-6"
                       >
@@ -168,6 +173,12 @@ export default function WalletForm({
                 )}
               />
             </div>
+
+            {(errors.icon || errors.name) && (
+              <FieldError>
+                {errors.icon?.message ?? errors.name?.message}
+              </FieldError>
+            )}
           </Field>
 
           {/* Balance */}

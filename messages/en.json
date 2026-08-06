@@ -139,10 +139,9 @@
     "color": "Color",
     "save": "Save",
     "create": "Create",
-    "update": "Update",
+    "update": "Edit",
     "cancel": "Cancel",
     "delete": "Delete",
-    "delete_btn": "Delete Category",
     "delete_alert_title": "Delete this category?",
     "delete_alert_msg": "This action cannot be undone. Categories that are used by transactions cannot be deleted.",
     "transactions": "Transactions",
@@ -163,11 +162,11 @@
       "header_title": "Edit Category"
     }
   },
-    "wallet": {
-      "add_wallet": "Add Wallet",
-      "name_icon": "Wallet Name and Icon",
-      "name_placeholder": "Main Wallet",
-      "initial_balance": "Initial Balance",
+  "wallet": {
+    "add_wallet": "Add Wallet",
+    "name_icon": "Wallet Name and Icon",
+    "name_placeholder": "Main Wallet",
+    "initial_balance": "Initial Balance",
     "balance": "Balance",
     "color": "Wallet Color",
     "save": "Save",
@@ -178,13 +177,20 @@
     "list": {
       "header_title": "Wallet List"
     },
-      "detail": {
-        "header_title": "Wallet Detail",
-        "initial_balance": "Initial Balance",
-        "created": "Created",
-        "updated": "Updated",
-        "transactions": "Transactions"
-      },
+    "detail": {
+      "header_title": "Wallet Detail",
+      "initial_balance": "Initial Balance",
+      "current_balance": "Current Balance",
+      "balance_note": "This is the amount after transactions and transfers.",
+      "all": "All",
+      "transaction": "Transactions",
+      "transfer": "Transfers",
+      "no_activity": "No activity found",
+      "created": "Created",
+      "updated": "Updated",
+      "transactions": "Transactions",
+      "edit": "Edit"
+    },
     "new": {
       "header_title": "Add Wallet"
     },

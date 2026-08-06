@@ -15,7 +15,6 @@ import {
 import { CURRENCIES } from "@/constants/currencies"
 import { updateCurrency } from "@/features/settings/lib/actions/update-currency"
 import { getCurrencySymbol } from "@/shared/helper/format-currency"
-import { handleActionResult } from "@/shared/lib/handle-action-result"
 import { cn } from "@/shared/utils"
 import { useRouter } from "@/i18n/navigation"
 import { useUser } from "@/components/global/user-provider"
@@ -41,21 +40,14 @@ export default function PreferencesCurrencyDialog({
   function handleSelect(currencyCode: string) {
     startTransition(async () => {
       const result = await updateCurrency(currencyCode)
-      const handled = await handleActionResult(result, {
-        errorMessage: t("errors.update_currency_failed"),
-        onError: (message) => {
-          toast.error(message)
-        },
-        onSuccess: async () => {
-          toast.success(t("messages.currency_updated"))
-          onOpenChange(false)
-          router.refresh()
-        },
-      })
-
-      if (!handled.success) {
+      if (!result.success) {
+        toast.error(result.message ?? t("errors.update_currency_failed"))
         return
       }
+
+      toast.success(result.message ?? t("messages.currency_updated"))
+      onOpenChange(false)
+      router.refresh()
     })
   }
 

@@ -206,7 +206,7 @@ export default function CategoryForm({
           render={({ field }) => (
             <Field>
               <FieldLabel>{t("color")}</FieldLabel>
-              <div className="grid grid-cols-6 gap-3">
+              <div className="flex flex-wrap gap-3">
                 {ITEM_COLORS.map((c) => (
                   <button
                     key={c.value}

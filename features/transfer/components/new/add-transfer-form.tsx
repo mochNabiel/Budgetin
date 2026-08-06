@@ -18,13 +18,13 @@ import { Button } from "@/components/ui/button"
 import { Spinner } from "@/components/ui/spinner"
 import { Textarea } from "@/components/ui/textarea"
 import AmountField from "@/features/transaction/components/new/amount-field"
-import DateField from "@/features/transaction/components/new/date-field"
+import DateField from "@/components/global/date-field"
 import TransferWalletSelect from "./transfer-wallet-select"
 import {
   transferSchema,
   TransferFormValues,
 } from "@/shared/schemas/transfer.schema"
-import { createTransfer } from "../lib/actions/create-transfer"
+import { createTransfer } from "../../lib/actions/create-transfer"
 import { IWallet } from "@/types/wallet"
 import { useRouter } from "@/i18n/navigation"
 import { useUser } from "@/components/global/user-provider"

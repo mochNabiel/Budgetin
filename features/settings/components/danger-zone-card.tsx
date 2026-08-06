@@ -22,7 +22,6 @@ import { Field, FieldLabel } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
 import { logout } from "@/features/auth/lib/actions/logout"
 import { deleteAccount } from "@/features/auth/lib/actions/delete-account"
-import { handleActionResult } from "@/shared/lib/handle-action-result"
 import { Kbd } from "@/components/ui/kbd"
 
 export default function DangerZoneCard() {
@@ -34,36 +33,25 @@ export default function DangerZoneCard() {
   function handleLogout() {
     startTransition(async () => {
       const result = await logout()
-      const handled = await handleActionResult(result, {
-        errorMessage: t("errors.logout_failed"),
-        onError: (message) => {
-          toast.error(message)
-        },
-        onSuccess: () => router.refresh(),
-      })
-
-      if (!handled.success) {
+      if (!result.success) {
+        toast.error(result.message ?? t("errors.logout_failed"))
         return
       }
+
+      toast.success(result.message ?? t("logout_action"))
+      router.refresh()
     })
   }
 
   function handleDeleteAccount() {
     startTransition(async () => {
       const result = await deleteAccount()
-      const handled = await handleActionResult(result, {
-        errorMessage: t("errors.delete_failed"),
-        onError: (message) => {
-          toast.error(message)
-        },
-        onSuccess: () => {
-          toast.success(t("messages.deleted"))
-        },
-      })
-
-      if (!handled.success) {
+      if (!result.success) {
+        toast.error(result.message ?? t("errors.delete_failed"))
         return
       }
+
+      toast.success(result.message ?? t("messages.deleted"))
     })
   }
 

@@ -1,17 +1,9 @@
 import { cache } from "react"
 import { createClient } from "@/shared/supabase/server"
 import { getUserData } from "@/features/auth/lib/queries"
+import { IWalletDetail } from "@/types/wallet-detail"
 
-export interface IWalletDetail {
-  id: string
-  name: string
-  icon: string
-  color: string
-  initial_balance: number
-  balance: number
-  created_at: string
-  updated_at: string
-}
+export type { IWalletDetail } from "@/types/wallet-detail"
 
 export const getWalletDetail = cache(
   async (id: string): Promise<IWalletDetail> => {

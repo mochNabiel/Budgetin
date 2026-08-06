@@ -1,12 +1,9 @@
 import { cache } from "react"
 import { createClient } from "@/shared/supabase/server"
 import { getUserData } from "@/features/auth/lib/queries"
+import { IBalanceSummary } from "@/types/balance-summary"
 
-export interface IBalanceSummary {
-  totalBalance: number
-  totalIncome: number
-  totalExpense: number
-}
+export type { IBalanceSummary } from "@/types/balance-summary"
 
 interface GetBalanceSummaryParams {
   from?: string // ISO date, default awal bulan ini

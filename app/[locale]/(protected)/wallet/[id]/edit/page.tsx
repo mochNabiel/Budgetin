@@ -2,7 +2,7 @@
 import { notFound } from "next/navigation"
 import PageHeader from "@/components/global/page-header"
 import { getWalletDetail } from "@/features/wallet/lib/queries/get-wallet-detail"
-import EditWalletClient from "@/features/wallet/components/edit-wallet-client"
+import EditWalletClient from "@/features/wallet/components/edit/edit-wallet-client"
 import { getTranslations } from "next-intl/server"
 import { Metadata } from "next"
 

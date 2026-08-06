@@ -33,7 +33,6 @@ import {
   profileSchema,
 } from "@/shared/schemas/profile.schema"
 import { useTranslations } from "next-intl"
-import { handleActionResult } from "@/shared/lib/handle-action-result"
 
 export default function AccountPlanCard() {
   const t = useTranslations("settings.account_plan")
@@ -47,7 +46,7 @@ export default function AccountPlanCard() {
     const parts = (user.full_name || user.email).split(" ")
     return parts
       .slice(0, 2)
-      .map((part) => part[0]?.toUpperCase())
+      .map((part: string) => part[0]?.toUpperCase())
       .join("")
   }, [user.email, user.full_name])
 
@@ -76,21 +75,14 @@ export default function AccountPlanCard() {
       }
 
       const result = await saveProfile(formData)
-      const handled = await handleActionResult(result, {
-        errorMessage: t("errors.save_failed"),
-        onError: (message) => {
-          toast.error(message)
-        },
-        onSuccess: () => {
-          toast.success(t("messages.saved"))
-          setOpen(false)
-          router.refresh()
-        },
-      })
-
-      if (!handled.success) {
+      if (!result.success) {
+        toast.error(result.message ?? t("errors.save_failed"))
         return
       }
+
+      toast.success(result.message ?? t("messages.saved"))
+      setOpen(false)
+      router.refresh()
     })
   }
 

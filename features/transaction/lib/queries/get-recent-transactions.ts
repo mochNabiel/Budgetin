@@ -2,22 +2,11 @@ import { cache } from "react"
 
 import { getUserData } from "@/features/auth/lib/queries"
 import { createClient } from "@/shared/supabase/server"
+import { IRecentTransaction } from "@/types/recent-transaction"
+
+export type { IRecentTransaction } from "@/types/recent-transaction"
 
 const LIMIT = 5
-
-export interface IRecentTransaction {
-  id: string
-  notes: string | null
-  type: "income" | "expense"
-  amount: number
-  transaction_date: string
-  category: {
-    id: number
-    name: string
-    icon: string
-    color: string
-  }
-}
 
 export const getRecentTransactions = cache(
   async (limit = LIMIT): Promise<IRecentTransaction[]> => {
