@@ -32,12 +32,11 @@ export default async function WalletsSection() {
           </Button>
         }
       />
-      <div className="flex scrollbar-none gap-3 overflow-x-auto [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
+      <div className="flex scrollbar-none gap-3 pb-1 overflow-x-auto [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
         {wallets.map((wallet) => (
           <Link key={wallet.id} href={`/wallet/${wallet.id}`}>
             <Item
-              variant="outline"
-              className="flex w-fit border-none flex-col items-start gap-2 px-6 transition-opacity hover:opacity-80"
+              className="flex w-fit shadow-sm border-none flex-col items-start gap-2 px-6 transition-opacity hover:opacity-80"
               style={{
                 backgroundColor: `${wallet.color}30`,
               }}

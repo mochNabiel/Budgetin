@@ -1,5 +1,5 @@
 import { SectionHeader } from "@/components/global/section-header"
-import { Card } from "@/components/ui/card"
+import { Item } from "@/components/ui/item"
 import { actionItems } from "@/constants/action-items"
 import { Link } from "@/i18n/navigation"
 import { cn } from "@/shared/utils"
@@ -18,9 +18,9 @@ export default async function ActionSection() {
 
           return (
             <Link key={item.key} href={item.link} className="block">
-              <Card
+              <Item
                 size="sm"
-                className="flex flex-col items-center justify-center"
+                className="flex flex-col border-none items-center justify-center py-4 shadow-sm bg-card"
               >
                 <div
                   className={cn(
@@ -35,12 +35,12 @@ export default async function ActionSection() {
 
                 <span
                   className={cn(
-                    "text-sm leading-tight font-semibold text-foreground"
+                    "font-medium text-base text-foreground"
                   )}
                 >
                   {t(item.key)}
                 </span>
-              </Card>
+              </Item>
             </Link>
           )
         })}

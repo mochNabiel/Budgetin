@@ -21,7 +21,7 @@ export default async function Page() {
       <Suspense fallback={<HeaderSkeleton />}>
         <Header />
       </Suspense>
-      <div className="space-y-4">
+      <div className="space-y-5">
         <Suspense fallback={<BalanceSkeleton />}>
           <StatsSection />
         </Suspense>

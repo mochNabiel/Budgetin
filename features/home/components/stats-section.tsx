@@ -33,7 +33,7 @@ export default async function StatsSection() {
   return (
     <Card
       size="sm"
-      className="relative overflow-hidden border-0 bg-primary ring-0"
+      className="relative overflow-hidden border-0 bg-primary ring-0 shadow-sm"
     >
       {/* blurred light glow, top right */}
       <div className="pointer-events-none absolute -top-16 -right-10 size-56 rounded-full bg-white/25 blur-3xl" />

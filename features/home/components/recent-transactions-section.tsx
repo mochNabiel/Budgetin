@@ -42,8 +42,8 @@ export default async function RecentTransactionsSection() {
           </CardContent>
         </Card>
       ) : (
-        <Card size="sm" className="data-[size=sm]:py-0">
-          <CardContent className="divide-y divide-border/60">
+        <Card size="sm" className="data-[size=sm]:py-0 ring-0 shadow-sm">
+          <CardContent>
             {recentTransactions.map((transaction) => {
               const isIncome = transaction.type === "income"
 
@@ -51,10 +51,10 @@ export default async function RecentTransactionsSection() {
                 <Link
                   key={transaction.id}
                   href={`/transaction/${transaction.id}`}
-                  className="flex w-full items-center gap-3 py-3 text-left transition-colors hover:bg-muted/40"
+                  className="flex w-full items-center gap-4 py-4 text-left transition-colors hover:bg-muted/40"
                 >
                   <span
-                    className="flex size-11 shrink-0 items-center justify-center rounded-full text-xl"
+                    className="flex size-10 shrink-0 items-center justify-center rounded-full text-xl"
                     style={{
                       backgroundColor: `${transaction.category.color}`,
                     }}
@@ -63,7 +63,7 @@ export default async function RecentTransactionsSection() {
                   </span>
 
                   <div className="min-w-0 flex-1">
-                    <p className="truncate font-medium">
+                    <p className="truncate font-medium text-base">
                       {transaction.notes}
                     </p>
 
@@ -74,7 +74,7 @@ export default async function RecentTransactionsSection() {
 
                   <p
                     className={cn(
-                      "text-sm font-semibold",
+                      "text-base font-semibold",
                       isIncome ? "text-chart-2" : "text-destructive"
                     )}
                   >

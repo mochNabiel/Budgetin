@@ -6,8 +6,9 @@ import { getRecentTransfers } from "@/features/transfer/lib/queries/get-recent-t
 import { Link } from "@/i18n/navigation"
 import formatCurrency from "@/shared/helper/format-currency"
 import formatDate from "@/shared/helper/format-date"
-import { ArrowRight, ChevronRight, Repeat } from "lucide-react"
+import { ChevronRight, Repeat } from "lucide-react"
 import { getLocale, getTranslations } from "next-intl/server"
+
 
 export default async function RecentTransfersSection() {
   const [t, locale, { currency }, recentTransfers] = await Promise.all([
@@ -45,36 +46,34 @@ export default async function RecentTransfersSection() {
           </CardContent>
         </Card>
       ) : (
-        <Card size="sm" className="data-[size=sm]:py-0">
-          <CardContent className="divide-y divide-border/60">
+        <Card size="sm" className="data-[size=sm]:py-0 ring-0 shadow-sm">
+          <CardContent>
             {recentTransfers.map((transfer) => (
               <Link
                 key={transfer.id}
                 href={`/transfer/${transfer.id}`}
-                className="flex w-full items-center gap-3 py-3"
+                className="flex w-full items-center gap-4 py-4 text-left transition-colors hover:bg-muted/40"
               >
-                <div className="min-w-0 flex-1 space-y-1">
-                  <p className="flex items-center gap-1 truncate text-sm font-medium">
-                    <span
-                      className="flex size-6 shrink-0 items-center justify-center rounded-full"
-                      style={{ backgroundColor: transfer.from_wallet.color }}
-                    >
-                      {transfer.from_wallet.icon}
-                    </span>
+                <div className="flex shrink-0 items-center">
+                  <span
+                    className="relative z-10 flex size-10 items-center justify-center rounded-full text-base ring-3 ring-card"
+                    style={{ backgroundColor: transfer.from_wallet.color }}
+                  >
+                    {transfer.from_wallet.icon}
+                  </span>
+                  <span
+                    className="relative -ml-4 flex size-10 items-center justify-center rounded-full text-base ring-3 ring-card"
+                    style={{ backgroundColor: transfer.to_wallet.color }}
+                  >
+                    {transfer.to_wallet.icon}
+                  </span>
+                </div>
 
-                    <span className="truncate">
-                      {transfer.from_wallet.name}
-                    </span>
-
-                    <ArrowRight className="size-3 shrink-0 text-muted-foreground" />
-                    <span
-                      className="flex size-6 shrink-0 items-center justify-center rounded-full"
-                      style={{ backgroundColor: transfer.to_wallet.color }}
-                    >
-                      {transfer.to_wallet.icon}
-                    </span>
-
-                    <span className="truncate">{transfer.to_wallet.name}</span>
+                <div className="min-w-0 flex-1">
+                  <p className="truncate font-medium flex items-center gap-1 text-base">
+                    {transfer.from_wallet.name}
+                    <ChevronRight className="size-4 text-muted-foreground" />
+                    {transfer.to_wallet.name}
                   </p>
 
                   <p className="text-xs text-muted-foreground">
@@ -82,7 +81,7 @@ export default async function RecentTransfersSection() {
                   </p>
                 </div>
 
-                <p className="text-sm font-semibold">
+                <p className="text-base font-semibold">
                   {formatCurrency(transfer.amount, currency)}
                 </p>
 
