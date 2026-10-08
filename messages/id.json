@@ -305,6 +305,18 @@
       "start": "Mulai Pakai Budgetin"
     }
   },
+  "statistics": {
+    "title": "Statistik",
+    "loading": "Memuat statistik",
+    "error": "Statistik tidak dapat dimuat. Silakan coba lagi.",
+    "period": { "label": "Periode statistik", "thisMonth": "Bulan ini", "lastMonth": "Bulan lalu", "last3Months": "3 bulan terakhir", "custom": "Rentang khusus", "startDate": "Tanggal mulai", "endDate": "Tanggal akhir" },
+    "overview": { "title": "Ringkasan keuangan", "income": "Pemasukan", "expense": "Pengeluaran", "netCashFlow": "Arus kas bersih" },
+    "incomeVsExpense": { "title": "Pemasukan vs. pengeluaran", "description": "Pemasukan dan pengeluaran selama periode yang dipilih" },
+    "spendingByCategory": { "title": "Pengeluaran berdasarkan kategori", "description": "Distribusi pengeluaran berdasarkan kategori", "others": "Lainnya", "total": "Total pengeluaran" },
+    "topSpending": { "title": "Kategori pengeluaran tertinggi" },
+    "previousPeriod": { "title": "Perbandingan periode sebelumnya", "previousValue": "Sebelumnya: {amount}", "increased": "Pengeluaran {percent}% lebih banyak dari sebelumnya", "decreased": "Pengeluaran {percent}% lebih sedikit dari sebelumnya" },
+    "empty": { "noTransactions": "Tidak ada transaksi pada periode ini.", "noExpenses": "Tidak ada pengeluaran pada periode ini.", "noPreviousData": "Tidak ada data dari periode sebelumnya." }
+  },
   "theme": {
     "system": "Sistem",
     "light": "Terang",

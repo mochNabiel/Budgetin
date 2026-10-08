@@ -305,6 +305,18 @@
       "start": "Start With Budgetin"
     }
   },
+  "statistics": {
+    "title": "Statistics",
+    "loading": "Loading statistics",
+    "error": "Statistics could not be loaded. Please try again.",
+    "period": { "label": "Statistics period", "thisMonth": "This month", "lastMonth": "Last month", "last3Months": "Last 3 months", "custom": "Custom range", "startDate": "Start date", "endDate": "End date" },
+    "overview": { "title": "Financial overview", "income": "Income", "expense": "Expense", "netCashFlow": "Net cash flow" },
+    "incomeVsExpense": { "title": "Income vs. expense", "description": "Income and expense over the selected period" },
+    "spendingByCategory": { "title": "Spending by category", "description": "Expense distribution by category", "others": "Others", "total": "Total spent" },
+    "topSpending": { "title": "Top spending categories" },
+    "previousPeriod": { "title": "Previous period comparison", "previousValue": "Previous: {amount}", "increased": "Spent {percent}% more than before", "decreased": "Spent {percent}% less than before" },
+    "empty": { "noTransactions": "No transactions for this period.", "noExpenses": "No expenses for this period.", "noPreviousData": "No data from the previous period." }
+  },
   "theme": {
     "system": "System",
     "light": "Light",
