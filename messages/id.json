@@ -16,7 +16,10 @@
       "total_balance": "Total Saldo",
       "income": "Income",
       "expense": "Expense",
-      "wallet_period": "Seluruh dompet • {period}"
+      "wallet_period": "{period}",
+      "all_time": "Semua waktu",
+      "period_label": "Periode statistik",
+      "loading": "Memuat statistik"
     },
     "actions": {
       "title": "Aksi Cepat",
@@ -304,6 +307,19 @@
       "initial_balance": "Saldo Awal",
       "start": "Mulai Pakai Budgetin"
     }
+  },
+  "statistics": {
+    "title": "Statistics",
+    "description": "Lihat pemasukan, pengeluaran, dan tren keuanganmu dalam satu tempat.",
+    "loading": "Memperbarui statistik",
+    "error": "Statistik tidak dapat dimuat.",
+    "retry": "Coba lagi",
+    "filters": { "label": "Filter statistik", "period": "Periode", "wallet": "Dompet", "oneMonth": "1 Bulan", "sixMonths": "6 Bulan", "twelveMonths": "12 Bulan", "allTime": "Semua Waktu", "allWallets": "Semua Dompet" },
+    "series": { "income": "Pemasukan", "expense": "Pengeluaran", "netCashFlow": "Arus Kas Bersih" },
+    "incomeExpense": { "title": "Income vs Expense", "description": "Perbandingan pemasukan dan pengeluaran dalam periode terpilih." },
+    "category": { "titleExpense": "Pengeluaran berdasarkan Kategori", "titleIncome": "Pemasukan berdasarkan Kategori", "descriptionExpense": "Rincian pengeluaran berdasarkan kategori.", "descriptionIncome": "Rincian pemasukan berdasarkan kategori.", "totalExpense": "Total Pengeluaran", "totalIncome": "Total Pemasukan", "filterLabel": "Jenis transaksi kategori", "others": "Lainnya", "uncategorized": "Tanpa Kategori", "emptyExpense": "Tidak ada pengeluaran pada periode ini.", "emptyIncome": "Tidak ada pemasukan pada periode ini." },
+    "cashFlow": { "title": "Cash Flow Trend", "description": "Perubahan arus kas bersih dari waktu ke waktu.", "tooltip": "Pemasukan {income} · Pengeluaran {expense} · Bersih {net}" },
+    "empty": { "title": "Tidak ada transaksi pada periode ini", "description": "Transaksi yang sesuai filter akan muncul di sini." }
   },
   "theme": {
     "system": "Sistem",

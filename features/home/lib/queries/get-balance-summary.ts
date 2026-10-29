@@ -9,6 +9,7 @@ interface GetBalanceSummaryParams {
   from?: string // ISO date, default awal bulan ini
   to?: string // ISO date, default hari ini
   walletBalance?: number // reuse dari getWallets() kalau sudah ada
+  allTime?: boolean
 }
 
 export const getBalanceSummary = cache(
@@ -22,26 +23,30 @@ export const getBalanceSummary = cache(
       new Date(now.getFullYear(), now.getMonth(), 1).toISOString().split("T")[0]
     const to = params?.to ?? now.toISOString().split("T")[0]
 
-    // Parallel: total saldo wallet + semua transaksi bulan ini
+    // Parallel: total saldo wallet + transaksi sesuai periode yang dipilih
     const [walletsResult, transactionsResult] = await Promise.all([
       // 1. Total saldo semua wallet (skip kalau sudah di-pass dari luar)
       params?.walletBalance !== undefined
         ? { data: null, error: null }
-        : supabase
-            .from("wallets")
-            .select("balance")
-            .eq("user_id", user.id),
+        : supabase.from("wallets").select("balance").eq("user_id", user.id),
       // 2. Semua transaksi bulan ini (1 query, filter income/expense di JS)
-      supabase
-        .from("transactions")
-        .select("amount, type")
-        .eq("user_id", user.id)
-        .gte("transaction_date", from)
-        .lte("transaction_date", to),
+      (() => {
+        let query = supabase
+          .from("transactions")
+          .select("amount, type")
+          .eq("user_id", user.id)
+        if (!params?.allTime) {
+          query = query
+            .gte("transaction_date", from)
+            .lte("transaction_date", to)
+        }
+        return query
+      })(),
     ])
 
     if (walletsResult.error) throw new Error(walletsResult.error.message)
-    if (transactionsResult.error) throw new Error(transactionsResult.error.message)
+    if (transactionsResult.error)
+      throw new Error(transactionsResult.error.message)
 
     const totalBalance =
       params?.walletBalance ??

@@ -16,7 +16,10 @@
       "total_balance": "Total Balance",
       "income": "Income",
       "expense": "Expense",
-      "wallet_period": "From all wallets • {period}"
+      "wallet_period": "{period}",
+      "all_time": "All time",
+      "period_label": "Stats period",
+      "loading": "Loading stats"
     },
     "actions": {
       "title": "Quick Actions",
@@ -304,6 +307,19 @@
       "initial_balance": "Initial Balance",
       "start": "Start With Budgetin"
     }
+  },
+  "statistics": {
+    "title": "Statistics",
+    "description": "See your income, expenses, and financial trends in one place.",
+    "loading": "Updating statistics",
+    "error": "Statistics could not be loaded.",
+    "retry": "Try again",
+    "filters": { "label": "Statistics filters", "period": "Period", "wallet": "Wallet", "oneMonth": "1 Month", "sixMonths": "6 Months", "twelveMonths": "12 Months", "allTime": "All Time", "allWallets": "All Wallets" },
+    "series": { "income": "Income", "expense": "Expense", "netCashFlow": "Net Cash Flow" },
+    "incomeExpense": { "title": "Income vs Expense", "description": "Compare income and expenses over the selected period." },
+    "category": { "titleExpense": "Expense by Category", "titleIncome": "Income by Category", "descriptionExpense": "Spending breakdown by category.", "descriptionIncome": "Income breakdown by category.", "totalExpense": "Total Expense", "totalIncome": "Total Income", "filterLabel": "Category transaction type", "others": "Others", "uncategorized": "Uncategorized", "emptyExpense": "No expenses for this period.", "emptyIncome": "No income for this period." },
+    "cashFlow": { "title": "Cash Flow Trend", "description": "Changes in net cash flow over time.", "tooltip": "Income {income} · Expense {expense} · Net {net}" },
+    "empty": { "title": "No transactions for this period", "description": "Transactions that match these filters will appear here." }
   },
   "theme": {
     "system": "System",
